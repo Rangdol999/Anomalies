@@ -9,6 +9,16 @@
 
 <!-- body content -->
 {%block Content%}
+<div>
+  {% for i in dico %}
+  <div>
+    <h5>
+      {% csrf_token %}
+      {{dico.New_ID}} -- {{dico.arrondissement}}
+    </h5>
+    {% endfor %}
+  </div>
+</div>
   <div class="main">
     <div class="row">
       <div class="col mx-2 my-5 px-2 py-4 rounded">
