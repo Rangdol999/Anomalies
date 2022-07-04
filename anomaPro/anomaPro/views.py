@@ -56,3 +56,8 @@ def main(request, pk):
 
   return render(request, 'main.html')
 
+<<<<<<< HEAD
+=======
+def oneParis(request):
+  return render(request, 'oneParis.html')
+>>>>>>> 3aefb70638f7de1773decd6b63fbccad8cb9a1e6

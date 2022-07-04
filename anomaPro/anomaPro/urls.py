@@ -23,5 +23,12 @@ urlpatterns = [
     #path("main/", views.main, name="main"),
     path("main/<int:pk>", views.main, name="main"),
     path("home/", views.home, name="home"),
+<<<<<<< HEAD
+=======
+    path("main/", views.main, name="main"),
+    path("oneParis/", views.oneParis, name="oneParis"),
+>>>>>>> 3aefb70638f7de1773decd6b63fbccad8cb9a1e6
     path('admin/', admin.site.urls),
 ]
+
+
