@@ -56,9 +56,37 @@ h1{
   
 }
 .mainContent .col1{
-  background-color: grey;
+  background-color: rgba(0,0,0,0.50);
 }
 
 .col2 {
   background-color: green ;
+}
+ul {
+  list-style: none;
+}
+
+thead {
+  color: white;
+}
+
+tbody tr th {
+  color: white;
+  position: relative;
+  top:30px;
+}
+td ul li {
+  color: white;
+  padding: 5px;
+  margin: 5px 0px 0px 0px;
+}
+
+.sideCol1 {
+  background-color:rgb(161, 161, 170);
+  height: 200px;
+}
+
+.sideCol2 {
+  background-color:rgb(218, 16, 185);
+  height: 200px;
 }
