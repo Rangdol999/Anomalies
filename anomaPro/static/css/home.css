@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  z-index: auto;
+}
+.container {
+  text-align: center;
+  z-index: 999;
+
+}
+/* background image */
+.bgImage {
+  background: url("https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGJhY2tncm91bmQlMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60") no-repeat center center/cover;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+h1{
+  color:#fff;
+  font-family: 'Abril Fatface', cursive;
+  text-decoration: underline;
+}
+
+.col {
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, -5px 2px 9px 2px rgba(0,0,0,0.23); 
+  box-shadow: 0px 10px 13px -7px #000000, -5px 2px 9px 2px rgba(0,0,0,0.23);
+  background-color: rgba(0,0,0,0.40);
+  color: rgb(190, 187, 187);
+}
+
+.col p {
+  font-weight: 300;
+}
+.col .btn {
+  font-weight: 400;
+}
+
+
+
+/* main css */
+.mainContent {
+  /* background-color:blueviolet; */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  font-weight: 300;
+  
+}
+.mainContent .col1{
+  background-color: grey;
+}
+
+.col2 {
+  background-color: green ;
+}
