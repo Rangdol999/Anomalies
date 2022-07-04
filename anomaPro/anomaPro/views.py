@@ -6,3 +6,6 @@ def home(request):
   
 def main(request):
   return render(request, 'main.html')
+
+def oneParis(request):
+  return render(request, 'oneParis.html')
