@@ -9,7 +9,21 @@
 
 <!-- body content -->
 {%block Content%}
+<<<<<<< HEAD
+<div>
+  {% for i in dico %}
+  <div>
+    <h5>
+      {% csrf_token %}
+      {{dico.New_ID}} -- {{dico.arrondissement}}
+    </h5>
+    {% endfor %}
+  </div>
+</div>
+  <div class="main">
+=======
   <div class="container">
+>>>>>>> 3aefb70638f7de1773decd6b63fbccad8cb9a1e6
     <div class="row">
       <div class="col mx-2 my-5 px-2 py-4 rounded">
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae iure id magnam facere commodi labore soluta exercitationem facilis inventore, nesciunt recusandae atque quisquam accusamus quae? Unde cupiditate necessitatibus tempora asperiores.</p>

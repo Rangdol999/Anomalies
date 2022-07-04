@@ -20,8 +20,8 @@ from . import views
 
 urlpatterns = [
     path("", views.home, name="home"),
+    path("main/<int:pk>", views.main, name="main"),
     path("home/", views.home, name="home"),
-    path("main/", views.main, name="main"),
     path("oneParis/", views.oneParis, name="oneParis"),
     path('admin/', admin.site.urls),
 ]
