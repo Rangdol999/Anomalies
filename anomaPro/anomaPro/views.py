@@ -12,7 +12,6 @@ import numpy
 # df = pandas.read_csv(r"static/dans-ma-rue.csv", sep=';',header = 0,encoding="unicode_escape")
 df = pandas.read_csv(r"dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8-sig") # gestion caractères spéciaux
 
-
 # on retire les colonnes inutiles :
 df2 = df.drop(['ID DECLARATION','SOUS TYPE DECLARATION','ADRESSE','CODE POSTAL', 'VILLE',
     'CONSEIL DE QUARTIER','DATE DECLARATION', 'MOIS DECLARATION','OUTIL SOURCE','INTERVENANT','ID_DMR','geo_shape'], axis=1)
@@ -23,7 +22,6 @@ df2.columns = df2.columns.str.lower()
 # remplacer espaces par _ dans les noms de colonnes :
 df2.columns = df2.columns.str.replace(" ","_")
 #############################################################################"
-
 
 #reset index
 df2 = df2.reset_index()
@@ -46,18 +44,13 @@ def home(request):
       'home.html', context)
 
 def main(request, pk):
-
   """
   for i in dico:
     if i['New_ID'] == int(pk):
       dico = i
   context = {"dico" : dico}
   """
-
   return render(request, 'main.html')
 
-<<<<<<< HEAD
-=======
 def oneParis(request):
   return render(request, 'oneParis.html')
->>>>>>> 3aefb70638f7de1773decd6b63fbccad8cb9a1e6
