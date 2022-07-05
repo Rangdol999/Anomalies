@@ -4,17 +4,20 @@
 
 {% block headerContent%}
 <div class="container bg-light my-4 p-2">
-  <div class="navbar navbar-expand-lg bg-light">
+  <div class="navbar navbar-expand-lg bg-transparent rounded">
     <div class="container-fluid">
-      <div class="collapse navbar-collapse">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <!-- drop down one -->
-        <ul class="navbar-nav my-2 navbar-nav-scroll">
+        <ul class="navbar-nav my-2 navbar-nav-scroll mx-auto">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Anomalie
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" href="#">Objets abondonnes</a></li>
+              <li><a class="dropdown-item" href="/anomalie">Objets abondonnes</a></li>
               <li><a class="dropdown-item" href="#">Graffitis</a></li>
               <li><a class="dropdown-item" href="#">Affiches et Autocollants</a></li>
               <li><a class="dropdown-item" href="#">Autos</a></li>
@@ -31,12 +34,12 @@
             </ul>
           </li>
           <!-- dropdown two -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <li class="nav-item dropdown mx-5">
+            <a class="nav-link dropdown-toggle active" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Arrondissement
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" href="#">1 Arrondissement</a></li>
+              <li><a class="dropdown-item active" href="#">1 Arrondissement</a></li>
               <li><a class="dropdown-item" href="#">2 Arrondissement</a></li>
               <li><a class="dropdown-item" href="#">3 Arrondissement</a></li>
               <li><a class="dropdown-item" href="#">4 Arrondissement</a></li>
