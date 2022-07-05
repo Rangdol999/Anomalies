@@ -1,30 +1,51 @@
+# -*- coding: utf-8 -*-
 import pandas
 import csv
 import numpy
+import numpy as np
+
+
+
+
+
+
 # df = pandas.read_csv(r"static/dans-ma-rue.csv", sep=';',header = 0,encoding="unicode_escape")
 df = pandas.read_csv(r"dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8-sig") # gestion caractères spéciaux
 
 # on retire les colonnes inutiles :
 df2 = df.drop(['ID DECLARATION','SOUS TYPE DECLARATION','ADRESSE','CODE POSTAL', 'VILLE',
     'CONSEIL DE QUARTIER','DATE DECLARATION', 'MOIS DECLARATION','OUTIL SOURCE','INTERVENANT','ID_DMR','geo_shape'], axis=1)
-
 # transformer noms de col en minuscules :
 df2.columns = df2.columns.str.lower()
+# remplacer espaces par _ :
+df2.columns = df2.columns.str.replace(" ","_") # remplacer espaces dans les noms de colonnes par _
 
-# remplacer espaces par _ dans les noms de colonnes :
-df2.columns = df2.columns.str.replace(" ","_")
-#############################################################################"
 
-#reset index
-df2 = df2.reset_index()
+#print(df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count())
+df3 = df2.loc[df2['arrondissement']==1,:].loc[df2['type_declaration']=='Voirie et espace public',:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie()
+df4 = df3.to_dict('list')
+print(df4)
+#html = df3.to_html(index=False)
 
-#rename column
-df2= df2.rename(columns={"index":"New_ID"})
-#df2['New_ID'] = df2.index
+#print(html)
+
+#print(df3)
+#for index, row in df3.iterrows():
+
+
+"""
+df3 = df2.iloc[: , 2:4]
+
+df4 = df3.to_html()
+lis = []
+for rows in df3:
+    for lines in df3:
+        lis[rows] = lines
+
+    print(lis)
 df3 = df2.iloc[:, 2:3]
 newdf2 = df3.to_dict(orient = 'index')
 print(newdf2)
-"""
 df3 = df2.iloc[:, 0:3:2]
 trans = df3.T
 """
