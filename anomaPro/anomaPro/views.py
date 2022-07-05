@@ -3,6 +3,7 @@ from re import I
 from django.http import HttpResponse
 from django.shortcuts import render
 
+import anomaPro.fileManager as FM
 
 import pandas
 import csv
@@ -34,6 +35,8 @@ df3 = df2.iloc[:, 0:3:2]
 trans = df3.T
 dico = trans.to_dict()
 
+# all the data
+a = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count()
 
 # all type of anomalies
 data2 = df2['type_declaration'].unique()
@@ -44,9 +47,9 @@ from django.shortcuts import render
 def home(request):
 
   context = {"dico" : dico}
-  print("context : ", context)
-  return render(request,
-      'home.html', context)
+  # print("context : ", context)
+
+  return render(request,'home.html',context)
 
 def main(request, pk):
   """
@@ -55,6 +58,8 @@ def main(request, pk):
       dico = i
   context = {"dico" : dico}
   """
+  a = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count()
+  
   return render(request, 'main.html')
 
 def oneParis(request):
