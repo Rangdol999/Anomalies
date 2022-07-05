@@ -3,12 +3,12 @@ from re import I
 from django.http import HttpResponse
 from django.shortcuts import render
 
+"""
+
 
 import pandas
 import csv
 import numpy
-
-
 # df = pandas.read_csv(r"static/dans-ma-rue.csv", sep=';',header = 0,encoding="unicode_escape")
 df = pandas.read_csv(r"dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8-sig") # gestion caractères spéciaux
 
@@ -32,25 +32,38 @@ df2= df2.rename(columns={"index":"New_ID"})
 df2['New_ID'] = df2.index 
 df3 = df2.iloc[:, 0:3:2]
 trans = df3.T
-dico = trans.to_dict()
+dicos = trans.to_dict()
+""" 
+dicos = [{'New_ID': 0, 'arrondissement': 18},
+{'New_ID': 1, 'arrondissement': 19},
+{'New_ID': 2, 'arrondissement': 20}]
 
-from django.http import HttpResponse
-from django.shortcuts import render
+
+
+
+
 
 def home(request):
 
-  context = {"dico" : dico}
-  return render(request,
-      'home.html', context)
+  context = {"dicos" : dicos}
+  return render(request, 'home.html', context )
 
-def main(request, pk):
-  """
-  for i in dico:
+def main(request):
+  context = {"dicos" : dicos}
+  return render(request, 'main.html', context )
+
+def question(request, pk):
+  
+  
+  dico = None
+  for i in dicos:
     if i['New_ID'] == int(pk):
       dico = i
-  context = {"dico" : dico}
-  """
-  return render(request, 'main.html')
+  
+  #context = {"dico" : dico}
+  return render(request, 'question.html', context)
+
+
 
 def oneParis(request):
   return render(request, 'oneParis.html')

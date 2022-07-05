@@ -9,39 +9,25 @@
 
 <!-- body content -->
 {%block Content%}
-<<<<<<< HEAD
-<div>
-  {% for i in dico %}
-  <div>
-    <h5>
-      {% csrf_token %}
-      {{dico.New_ID}} -- {{dico.arrondissement}}
-    </h5>
-    {% endfor %}
-  </div>
-</div>
-  <div class="main">
-=======
   <div class="container">
->>>>>>> 3aefb70638f7de1773decd6b63fbccad8cb9a1e6
     <div class="row">
       <div class="col mx-2 my-5 px-2 py-4 rounded">
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae iure id magnam facere commodi labore soluta exercitationem facilis inventore, nesciunt recusandae atque quisquam accusamus quae? Unde cupiditate necessitatibus tempora asperiores.</p>
-        <a href="/main" class="btn btn-outline-light" role="button">One</a>
+        <p>{{dico.New_ID}}</p>
+        <a href="/question" class="btn btn-outline-light" role="button">One</a>
       </div>
 
       <div class="col mx-2 my-5 px-2 py-4 rounded">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus perspiciatis nostrum hic impedit adipisci tenetur esse iure molestiae! Voluptatibus fugit adipisci totam illo, iste recusandae ad modi labore rerum praesentium?
+          Lorem {{dico.arrondissement}}?
         </p>
-        <a href="/main" class="btn btn-outline-light" role="button">Two</a>
+        <a href="/question" class="btn btn-outline-light" role="button">Two</a>
       </div>
 
       <div class="col  mx-2 my-5 px-2 py-4 rounded">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus architecto delectus deserunt eum aspernatur fugit vitae voluptate officia optio. Error sit cumque enim officiis molestias delectus deserunt, corporis suscipit voluptatem?
         </p>
-        <a href="/main" class="btn btn-outline-light" role="button">Three</a>
+        <a href="/question" class="btn btn-outline-light" role="button">Three</a>
       </div>
     </div>
   </div>
