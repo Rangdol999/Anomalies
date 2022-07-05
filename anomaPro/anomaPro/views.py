@@ -3,8 +3,12 @@ from re import I
 from django.http import HttpResponse
 from django.shortcuts import render
 
+<<<<<<< HEAD
 """
 
+=======
+import anomaPro.fileManager as FM
+>>>>>>> a27aea8c6d62dc236e8e33b3416cef21026154e1
 
 import pandas
 import csv
@@ -42,11 +46,29 @@ dicos = [{'New_ID': 0, 'arrondissement': 18},
 
 
 
+<<<<<<< HEAD
 
 def home(request):
 
   context = {"dicos" : dicos}
   return render(request, 'home.html', context )
+=======
+# all the data
+a = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count()
+
+# all type of anomalies
+data2 = df2['type_declaration'].unique()
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+def home(request):
+
+  context = {"dico" : dico}
+  # print("context : ", context)
+
+  return render(request,'home.html',context)
+>>>>>>> a27aea8c6d62dc236e8e33b3416cef21026154e1
 
 def main(request):
   context = {"dicos" : dicos}
@@ -59,11 +81,22 @@ def question(request, pk):
   for i in dicos:
     if i['New_ID'] == int(pk):
       dico = i
+<<<<<<< HEAD
   
   #context = {"dico" : dico}
   return render(request, 'question.html', context)
 
 
+=======
+  context = {"dico" : dico}
+  """
+  a = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count()
+  
+  return render(request, 'main.html')
+>>>>>>> a27aea8c6d62dc236e8e33b3416cef21026154e1
 
 def oneParis(request):
   return render(request, 'oneParis.html')
+
+def anomalie(request):
+  return render(request, 'anomali.html')

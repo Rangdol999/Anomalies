@@ -20,10 +20,15 @@ from . import views
 
 urlpatterns = [
     path("", views.home, name="home"),
+<<<<<<< HEAD
     path("question/", views.main, name="main"),
     path("question/<int:pk>/", views.question, name="question"),
+=======
+    path("main/<int:pk>", views.main, name="main"),
+>>>>>>> a27aea8c6d62dc236e8e33b3416cef21026154e1
     path("home/", views.home, name="home"),
     path("oneParis/", views.oneParis, name="oneParis"),
+    path("anomalie/", views.anomalie, name="anomalie"),
     path('admin/', admin.site.urls),
 ]
 
