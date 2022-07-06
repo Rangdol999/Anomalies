@@ -34,3 +34,5 @@ print("nombre d'anomalies par annee et par arrondissement")
 ax.set(aspect="equal", title='Anomalies par année et arrondissement')
 plt.savefig('anomalies_par_annee_et_arr.png')
 plt.show()
+
+"""

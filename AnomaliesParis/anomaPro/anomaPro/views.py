@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 
-<<<<<<< HEAD
-=======
 import anomaPro.fileManager as FM
 
->>>>>>> refs/remotes/origin/main
 import pandas
 import csv
 import numpy
@@ -15,6 +12,9 @@ import json
 import matplotlib.pyplot
 import matplotlib.pyplot as plt
 import numpy
+
+import matplotlib
+matplotlib.use('Agg')
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -99,3 +99,6 @@ def oneParis(request):
   context = {'img': [e2]} #'graph'
 
   return render(request, 'oneParis.html', context)
+
+def anomalie(request):
+  return render(request, 'anomalie.html')
