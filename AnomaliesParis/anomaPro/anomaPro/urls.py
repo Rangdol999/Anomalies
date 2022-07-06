@@ -21,8 +21,10 @@ from . import views
 urlpatterns = [
     path("", views.home, name="home"),
     path("home/", views.home, name="home"),
-    path("question/", views.main, name="main1"), #question1, question2 ,question3 page to be done
-    path("question/<int:pk>/", views.question, name="question"),
+    path("question1/", views.question1, name="question1"),
+    path("question2/", views.question2, name="question2"),
+    path("question3/", views.question3, name="question3"),
+    path("question1/<int:pk>/", views.question, name="question"),
     #path("home/", views.home, name="home"),
     path("oneParis/", views.oneParis, name="oneParis"),
     #path("question/int:pk/", views.anomalie, name="anomalie"),

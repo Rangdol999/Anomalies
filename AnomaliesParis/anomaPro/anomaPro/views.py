@@ -44,13 +44,26 @@ class FilePath():
         
 
 def home(request):
-
-  
+  #first page where client can choose which question he wants
+  #he has 3 choices, each choice redirect him to question1, 2 or 3 respectively
   return render(request, 'home.html' )
 
-def main(request):
+def question1(request):
   
+  #func question1 permet d'afficher la vue global des data pour la 1er question :
+  # Quelles sont les année pour lesquelles il y a + ou - d'anom par arrondissement
   return render(request, 'main.html')
+
+def question2(request):
+
+   ##func question1 permet d'afficher la vue global des data pour la 2e question :
+    #Quels sont les mois pour lesquels il y a le plus / le moins d’anomalie signalées,par type d’anomalie ?
+  return render(request, 'main2.html')
+
+def question3(request):
+  ###func question1 permet d'afficher la vue global des data pour la 3e question :
+  
+  return render(request, 'main3.html')
 
 def question(request, pk):
     
