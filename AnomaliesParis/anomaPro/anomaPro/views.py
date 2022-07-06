@@ -44,18 +44,59 @@ class FilePath():
         
 
 def home(request):
-
-  
-  return render(request, 'home.html' )
+    return render(request, 'home.html' )
 
 def main(request):
   
-  return render(request, 'main.html')
+  # commande pour crée l'histogramme par arr et type anomalies
+  df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].value_counts().unstack().plot.bar(stacked=True)
+  path_bar = './static/img/anomalies_par_annee_et_arr.png'
+  path_bar2 ='/static/img/anomalies_par_annee_et_arr.png'
+  plt.savefig(str(path_bar))
+
+  # commande pour crée le diag circulaire
+  path_circ = "./static/img/anomalies_par_annee_et_arr_circ.png"
+  path_circ2 = "/static/img/anomalies_par_annee_et_arr_circ.png"
+  
+  fig, ax = plt.subplots()
+  cmap = plt.get_cmap("tab20c")
+  outer_colors = cmap(np.arange(2)*4)
+  inner_colors = plt.get_cmap('Greys')(np.array([i*3 for i in range(10,30)]))
+  # inner_colors = cmap(np.array([i for i in range(1,21)]))
+
+  ax.pie(df2.groupby(['annee_declaration'])['annee_declaration'].value_counts(),
+        labels=df2['annee_declaration'].unique(),
+        radius=1, wedgeprops=dict(width=1, edgecolor='w'),
+        colors = outer_colors,
+        labeldistance = 0.5)
+          # , explode=[0.3,0])
+          # , autopct='%1.1f%%'
+
+  ax.pie(df2.groupby(['annee_declaration','arrondissement'])['arrondissement'].value_counts(),
+        labels=df2.groupby(['annee_declaration','arrondissement'])['arrondissement'].unique(),
+        radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
+        colors = inner_colors,
+        labeldistance = 0.9)
+          # , autopct='%1.1f%%'
+
+  print("nombre d'anomalies par annee et par arrondissement")
+  ax.set(aspect="equal")
+  plt.savefig(path_circ)
+
+  #commande pour générer la tableau de données (global)
+
+  df3 = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count()
+  json_records = df3.reset_index().to_json(orient ='records')
+
+  data = []
+  data = json.loads(json_records)
+  
+  context = {'img': [path_bar2, path_circ2], 'data': data}
+  return render(request, 'main.html', context)
+
 
 def question(request, pk):
     
-
-
   df3 = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count()
   json_records = df3.reset_index().to_json(orient ='records')
 
@@ -121,6 +162,9 @@ def oneParis(request):
   context = {'img': [path_bar2, path_circ2], 'data': data} 
 
   return render(request, 'oneParis.html', context)
+
+
+
 
 def anomalie(request):
   return render(request, 'anomalie.html')
