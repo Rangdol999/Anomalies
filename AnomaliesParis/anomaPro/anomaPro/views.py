@@ -94,10 +94,10 @@ def question1(request):
 
   df3 = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count()
   json_records = df3.reset_index().to_json(orient ='records')
-
+  print("df3", df3)
   data = []
   data = json.loads(json_records)
-  
+  print("js", json_records)
   context = {'img': [path_bar2, path_circ2], 'data': data} 
 
   return render(request, 'question1.html', context)
@@ -115,26 +115,26 @@ def question3(request):
 
 def Q1_ParArrondissement(request, pk):
 
-  """
-  df2.loc[df2['arrondissement']==1,:].loc[df2['type_declaration']=='Voirie et espace public',:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie()    
-  path_Q1_ParArrondissement = './static/img/Q1_ParArrondissement.png'
-  path_Q1_ParArrondissement2 ='/static/img/Q1_ParArrondissement.png'
+  
+  df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']=='Voirie et espace public',:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie()    
+  path_Q1_ParArrondissement = './static/img/Q1_Arrondissement{}.png'.format(pk)
+  path_Q1_ParArrondissement2 ='/static/img/Q1_Arrondissement{}.png'.format(pk)
   plt.savefig(str(path_Q1_ParArrondissement))
-  """
+  
 
   #commande pour générer le camembert de données / arr 
   #df2.loc[df2['arrondissement']==1,:].groupby(['annee_declaration'])['annee_declaration'].value_counts().plot.pie()
    
 
   #commande pour générer la tableau de données (global par arrondissement)  
-  df3 = df2.loc[df2['arrondissement']==1,:].groupby(['annee_declaration'])['annee_declaration'].value_counts()
+  df3 = df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'], as_index=False)['annee_declaration'].value_counts()
   print("df3:", df3)
   json_records = df3.reset_index().to_json(orient ='records')
   print("js", json_records)
   data = []
   data = json.loads(json_records)
 
-  context = {'Q1_ParArrondissement': [data]} 
+  context = {'img' : [path_Q1_ParArrondissement2], 'data': data} 
   return render(request, 'Q1_ParArrondissement.html', context)
 
 

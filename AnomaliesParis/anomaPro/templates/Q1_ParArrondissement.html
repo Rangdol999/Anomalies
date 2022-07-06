@@ -1,39 +1,10 @@
-{% extends 'base.html' %}
-<!-- page title -->
-{%block pageTitle%} Information {%endblock%}
+{% if data %}
+{% for i in data %}
+{{ i.annee_declaration }}
+ {{ i.count }}
 
-<!-- page header title -->
-{%block headerTitle%} {%endblock%}
+{% endfor %}           
+{% endif %}           
 
-<!-- page header content -->
-{%block headerContent%}
 
-{% endblock %}
-  
-{%block Content%}
-<div class="container">
-  <h2 class="text-center"><u>Anomalies par arrondissement</u></h2><br>            
-  <table class="table table-dark table-striped">
-    <thead>
-      <tr>
-        <th>arrondissement</th>
-        <th>annee_declaration</th>
-        <th>nombre d'anomalies</th>
-      </tr>
-    </thead>
-    <tbody>
-    
-    {% if Q1_ParArrondissement %}  
-    {% for i in Q1_ParArrondissement %}
-      <tr>
-        <td>{{i.arrondissement}}</td>
-        <td>{{i.annee_declaration}}</td>
-        <td>{{i.type_declaration}}</td>
-      </tr>
-    {% endfor %}
-    {% endif %}
-    </tbody>
-  </table>
-</div>
-  
-{% endblock %}
+  <img src = '{{ img.0 | safe }}' alt=raté>
