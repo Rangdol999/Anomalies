@@ -16,13 +16,16 @@ df = pandas.read_csv(r"dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8-sig"
 df2 = df.drop(['ID DECLARATION','SOUS TYPE DECLARATION','ADRESSE','CODE POSTAL', 'VILLE',
     'CONSEIL DE QUARTIER','DATE DECLARATION', 'MOIS DECLARATION','OUTIL SOURCE','INTERVENANT','ID_DMR','geo_shape'], axis=1)
 
-print("shape:", df2.shape)
-# transformer noms de col en minuscules :
+print(df2.loc[df2['arrondissement']==1,:].loc[df2['type_declaration']=='Voirie et espace public',:].groupby(['annee_declaration'])['type_declaration'].value_counts())
+#print(df2.loc[df2['arrondissement']==1,:].loc[df2['type_declaration']=='Voirie et espace public',:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie())
+
+# transformer noms de col en1 minuscules :
 df2.columns = df2.columns.str.lower()
 # remplacer espaces par _ :
 df2.columns = df2.columns.str.replace(" ","_") # remplacer espaces dans les noms de colonnes par _
 
 
+"""
 #print(df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count())
 df3 = df2.loc[df2['arrondissement']==1,:].loc[df2['type_declaration']=='Voirie et espace public',:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie()
 df4 = df3.to_dict('list')
@@ -35,7 +38,6 @@ print(df4)
 #for index, row in df3.iterrows():
 
 
-"""
 df3 = df2.iloc[: , 2:4]
 
 df4 = df3.to_html()
@@ -50,9 +52,7 @@ newdf2 = df3.to_dict(orient = 'index')
 print(newdf2)
 df3 = df2.iloc[:, 0:3:2]
 trans = df3.T
-"""
 
-"""
 print(newdf2)
 print(df3)
 print(dicos)
