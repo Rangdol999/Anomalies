@@ -67,8 +67,6 @@ def question3(request):
 
 def question(request, pk):
     
-
-
   df3 = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count()
   json_records = df3.reset_index().to_json(orient ='records')
 
@@ -134,6 +132,9 @@ def oneParis(request):
   context = {'img': [path_bar2, path_circ2], 'data': data} 
 
   return render(request, 'oneParis.html', context)
+
+
+
 
 def anomalie(request):
   return render(request, 'anomalie.html')
