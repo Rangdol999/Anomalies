@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 
+<<<<<<< HEAD
+=======
+import anomaPro.fileManager as FM
+
+>>>>>>> refs/remotes/origin/main
 import pandas
 import csv
 import numpy

@@ -8,9 +8,8 @@ body {
   z-index: auto;
 }
 .container {
-  text-align: center;
+  text-align: left;
   z-index: 999;
-
 }
 /* background image */
 .bgImage {
@@ -44,19 +43,24 @@ h1{
   font-weight: 400;
 }
 
+.container .clickBtn {
+  width: 300px;
+  position: relative;
+  left: 50%;
+  margin-top: 25px;
+}
 
 
 /* main css */
 .mainContent {
-  /* background-color:blueviolet; */
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   font-weight: 300;
-  
 }
+
 .mainContent .col1{
   background-color: rgba(0,0,0,0.50);
+  height: 500px;
+  overflow: auto;
+  display:block;
 }
 
 .col2 {
@@ -65,11 +69,15 @@ h1{
 ul {
   list-style: none;
 }
-
+.table {
+  height: 500px;
+}
 thead {
   color: white;
 }
-
+tr {
+  line-height: 1rem;
+}
 tbody tr th {
   color: white;
   position: relative;
@@ -81,7 +89,7 @@ td ul li {
   margin: 5px 0px 0px 0px;
 }
 
-.sideCol1 {
+/* .sideCol1 {
   background-color:rgb(161, 161, 170);
   height: 200px;
 }
@@ -89,8 +97,28 @@ td ul li {
 .sideCol2 {
   background-color:rgb(218, 16, 185);
   height: 200px;
-}
+} */
 
 
 
 /* Individual page */
+li .active{
+  background-color: rgb(40, 186, 40);
+  opacity: 0.8;
+}
+
+
+
+/* Anomalie  */
+.containerHead {
+  margin-bottom: 20px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  color: #f4f4f4;
+}
+.containerHead h4 {
+  font-family: 'Abril Fatface', cursive;
+}
+.containerHead p {
+  margin: 20px;
+}

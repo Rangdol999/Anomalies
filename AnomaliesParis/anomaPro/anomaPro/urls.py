@@ -24,6 +24,7 @@ urlpatterns = [
     path("question/<int:pk>/", views.question, name="question"),
     #path("home/", views.home, name="home"),
     path("oneParis/", views.oneParis, name="oneParis"),
+    path("anomalie/", views.anomalie, name="anomalie"),
     path('admin/', admin.site.urls),
 ]
 
