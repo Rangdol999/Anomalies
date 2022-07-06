@@ -14,12 +14,6 @@ import numpy
 
 import matplotlib
 matplotlib.use('Agg')
-<<<<<<< HEAD
-
-import matplotlib
-import matplotlib.pyplot as plt
-=======
->>>>>>> origin
 
 
 import os
@@ -124,7 +118,7 @@ def oneParis(request):
   data = []
   data = json.loads(json_records)
   
-  context = {'img': [path_bar2, path_circ2], 'data': data} #'graph'
+  context = {'img': [path_bar2, path_circ2], 'data': data} 
 
   return render(request, 'oneParis.html', context)
 

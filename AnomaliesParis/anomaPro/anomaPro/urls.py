@@ -20,12 +20,8 @@ from . import views
 
 urlpatterns = [
     path("", views.home, name="home"),
-<<<<<<< HEAD
     path("home/", views.home, name="home"),
-    path("question/", views.main, name="main"),
-=======
     path("question/", views.main, name="main1"), #question1, question2 ,question3 page to be done
->>>>>>> origin
     path("question/<int:pk>/", views.question, name="question"),
     #path("home/", views.home, name="home"),
     path("oneParis/", views.oneParis, name="oneParis"),

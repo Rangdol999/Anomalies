@@ -10,16 +10,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-</head>
-<body>
 
-  <div>
-    {% for image in img %}
-    </br>
-    <img src = '{{ image }}' alt=raté>
-    {% endfor %}
-  
-  <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/style.css">
     <link href="images/favicon.ico" rel="shortcut icon">
@@ -31,20 +22,12 @@
   </head>
   
   <body>
-    
-    <div id="{{single_chart.id}}">
+    <div>
+      {% for image in img %}
+      </br>
+      <img src = '{{ image }}' alt=raté>
+      {% endfor %}
     </div>
-    
-    <script type="text/javascript">
-      var figureId = "{{single_chart.id}}";
-      var json01 = {{single_chart.json|safe}};
-      mpld3.draw_figure(figureId, json01);
-    </script>
-    
-  </body>
-  
-</html>
--->
 
 
 {% block pageTitle%}Paris Anomalies{%endblock%}
@@ -122,7 +105,8 @@
       </div>
     </div>
   </div>
-
+  {%endblock%}
+{%block Content %}
 <div class="container">
   <div class="containerHead">
     <h4>DATA</h4>
@@ -150,7 +134,12 @@
         </table>
       </div>
       <div class="col mx-2 rounded">
-  
+        <div>
+          {% for image in img %}
+          </br>
+          <img src = '{{ image }}' alt=raté>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
@@ -185,3 +174,4 @@
   
 </body>
 </html>
+{%endblock%}
