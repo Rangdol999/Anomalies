@@ -88,56 +88,52 @@
 <div class="container">
   <div class="mainContent">
     <div class="row">
-      <div class="col1 col-md-7 my-2 py-3">
+      <div class="col1 col-md-7 my-2 py-3 rounded">
         <table class="table fs-6 fw-lighter">
           <thead>
             <th>Arrondissement</th>
             <th>Annee_decleration</th>
             <th>Type_anomalies</th>
           </thead>
-          <tbody>
+          <tbody class="bg-ligth">
             {% if data %}
             {% for i in data %}
-            <tr>
-              <th>{{ i.arrondissement }}</th>
-              <td >
-                <ul>
-                  <li>{{ i.annee_declaration }}</li>
-                  <li></li>
-                </ul>
-              </th>
-              <td >
-                <ul>
-                  <li>{{ i.type_declaration}}</li>
-                  <li></li>
-                </ul>
-              </th>
+            <tr class="text-center text-white">
+              <td class="p-3 "> {{ i.arrondissement }}</td>
+              <td class="p-3">{{ i.annee_declaration }}</th>
+              <td class="p-3">{{ i.type_declaration}}</th>
             </tr>
             {% endfor %}           
             {% endif %}           
           </tbody>
         </table>
       </div>
-      <div class="col2 col-md-5 my-2 py-3">
-        <div class="row">
-          <div class="col-12 sideCol1 h-50 bg-info">
-            <h4>Graph(pie) </h4>
-            <div>
-              <img src = '{{ img.0 }}' class="img-thumbnail" alt=raté>
+      <div class="col2 col-md-5 my-2 py-3 text-center">
+        <h4 class="mb-4">Graph(pie) </h4>
+            <div class="imageContent">
+              <img src = '{{ img.0 }}' alt=raté>
             </div>
-          </div>
-          <div class="col sideCol2 my-4 h-50 bg-light">
-            <h4>Graph(hist)</h4>
-            <div>
-              <img src="{{ img.1 }}" class="img-thumbnail" alt="rate">
-            </div>
-          </div>
-        </div>
       </div>
     </div>
-  
-      
+    
+     <!-- second row -->
+    <div class="row my-5">
+      <div class="col1 col-md-7 my-2 py-3 rounded">
+        <h1>Cart</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sunt
+            possimus porro dolore perferendis sint necessitatibus quisquam fugit,
+            facere unde dolor incidunt odit, odio tenetur fuga iusto reprehenderit 
+            minus id.
+        </p>
+      </div>
+      <div class="col2 col-md-5 my-2 py-3 text-center">
+        <h4 class="mb-4">Graph(hist)</h4>
+          <div class="imageContent">
+            <img src="{{ img.1 }}" alt="rate">
+          </div>
+      </div>
     </div>
+  </div>
 </div>
 
 
