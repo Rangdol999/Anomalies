@@ -107,18 +107,11 @@
       </div>
       <div class="col mx-2 rounded">
         <div>
-<<<<<<< HEAD
-          </br>
-          <img src = '{{ img.0 }}' alt=raté>
-          <img src = '{{ img.1 }}' alt=raté>
-        </div>
-=======
           
           <img src = '{{ img.0 }}' alt=raté>
           </br>
           <img src = '{{ img.1 }}' alt=raté>
 
->>>>>>> refs/remotes/origin/main
       </div>
     </div>
   </div>
@@ -127,6 +120,28 @@
     <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
   </div>
   
+  <h2 class="text-center"><u>20 - Startups Table</u></h2><br>            
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>arrondissement</th>
+        <th>annee_declaration</th>
+        <th>nombre d'anomalies</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    {% if data %}  
+    {% for i in data %}
+      <tr>
+        <td>{{i.arrondissement}}</td>
+        <td>{{i.annee_declaration}}</td>
+        <td>{{i.type_declaration}}</td>
+      </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+  </table>
 </div>
   
 {%endblock%}

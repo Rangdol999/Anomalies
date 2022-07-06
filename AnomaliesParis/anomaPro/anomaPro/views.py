@@ -52,41 +52,10 @@ def question1(request):
   
   #func question1 permet d'afficher la vue global des data pour la 1er question :
   # Quelles sont les année pour lesquelles il y a + ou - d'anom par arrondissement
-  return render(request, 'main.html')
-
-def question2(request):
-
-   ##func question1 permet d'afficher la vue global des data pour la 2e question :
-    #Quels sont les mois pour lesquels il y a le plus / le moins d’anomalie signalées,par type d’anomalie ?
-  return render(request, 'main2.html')
-
-def question3(request):
-  ###func question1 permet d'afficher la vue global des data pour la 3e question :
-  
-  return render(request, 'main3.html')
-
-def question(request, pk):
-    
-  df3 = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count()
-  json_records = df3.reset_index().to_json(orient ='records')
 
 
 
-  print(df3)
-
-  data = []
-  data = json.loads(json_records)
-  context = {'d': data}
-  print(context)
-
-  return render(request, 'question.html', context)
-
-
-
-def oneParis(request):
-  
-
-  # commande pour crée l'histogramme par arr et type anomalies
+    # commande pour crée l'histogramme par arr et type anomalies
   df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].value_counts().unstack().plot.bar(stacked=True)
   path_bar = './static/img/anomalies_par_annee_et_arr.png'
   path_bar2 ='/static/img/anomalies_par_annee_et_arr.png'
@@ -131,7 +100,50 @@ def oneParis(request):
   
   context = {'img': [path_bar2, path_circ2], 'data': data} 
 
-  return render(request, 'oneParis.html', context)
+  return render(request, 'question1.html', context)
+
+def question2(request):
+
+   ##func question1 permet d'afficher la vue global des data pour la 2e question :
+    #Quels sont les mois pour lesquels il y a le plus / le moins d’anomalie signalées,par type d’anomalie ?
+  return render(request, 'question2.html')
+
+def question3(request):
+  ###func question1 permet d'afficher la vue global des data pour la 3e question :
+  
+  return render(request, 'question3.html')
+
+def Q1_ParArrondissement(request, pk):
+
+  """
+  df2.loc[df2['arrondissement']==1,:].loc[df2['type_declaration']=='Voirie et espace public',:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie()    
+  path_Q1_ParArrondissement = './static/img/Q1_ParArrondissement.png'
+  path_Q1_ParArrondissement2 ='/static/img/Q1_ParArrondissement.png'
+  plt.savefig(str(path_Q1_ParArrondissement))
+  """
+
+  #commande pour générer le camembert de données / arr 
+  #df2.loc[df2['arrondissement']==1,:].groupby(['annee_declaration'])['annee_declaration'].value_counts().plot.pie()
+   
+
+  #commande pour générer la tableau de données (global par arrondissement)  
+  df3 = df2.loc[df2['arrondissement']==1,:].groupby(['annee_declaration'])['annee_declaration'].value_counts()
+  print("df3:", df3)
+  json_records = df3.reset_index().to_json(orient ='records')
+  print("js", json_records)
+  data = []
+  data = json.loads(json_records)
+
+  context = {'Q1_ParArrondissement': [data]} 
+  return render(request, 'Q1_ParArrondissement.html', context)
+
+
+
+
+def oneParis(request):
+  
+
+  return render(request, 'oneParis.html')
 
 
 
