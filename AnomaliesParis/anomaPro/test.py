@@ -15,6 +15,8 @@ df = pandas.read_csv(r"dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8-sig"
 # on retire les colonnes inutiles :
 df2 = df.drop(['ID DECLARATION','SOUS TYPE DECLARATION','ADRESSE','CODE POSTAL', 'VILLE',
     'CONSEIL DE QUARTIER','DATE DECLARATION', 'MOIS DECLARATION','OUTIL SOURCE','INTERVENANT','ID_DMR','geo_shape'], axis=1)
+
+print("shape:", df2.shape)
 # transformer noms de col en minuscules :
 df2.columns = df2.columns.str.lower()
 # remplacer espaces par _ :

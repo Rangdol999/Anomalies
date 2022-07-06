@@ -2,24 +2,21 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <title>TableView - Startup</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</head>
 <body>
-  
-  
-    
-    <div>
-      {% for image in img %}
-      {{ image }} </br>
-      <img src = '{{ image }}' alt=raté>
-      {% endfor %}
-    </div>
-  </body>
-  
-</html>
-  
-  <!--
-    
-    {% for elem in img %}
-     {{elem|safe}}
+
+  <div>
+    {% for image in img %}
+    </br>
+    <img src = '{{ image }}' alt=raté>
     {% endfor %}
   
   <head>
@@ -125,10 +122,7 @@
       </div>
     </div>
   </div>
-</div>
-{%endblock%}
 
-{% block Content %}
 <div class="container">
   <div class="containerHead">
     <h4>DATA</h4>
@@ -165,6 +159,29 @@
     <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
   </div>
 
+  <h2 class="text-center"><u>20 - Startups Table</u></h2><br>            
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>arrondissement</th>
+        <th>annee_declaration</th>
+        <th>nombre d'anomalies</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    {% if data %}  
+    {% for i in data %}
+      <tr>
+        <td>{{i.arrondissement}}</td>
+        <td>{{i.annee_declaration}}</td>
+        <td>{{i.type_declaration}}</td>
+      </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+  </table>
 </div>
-
-{%endblock%}
+  
+</body>
+</html>
