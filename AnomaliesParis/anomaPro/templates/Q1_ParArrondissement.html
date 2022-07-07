@@ -57,12 +57,22 @@
 
 <!-- {% if data %}
 {% for i in data %}
+
+<!-- annee de declaration =  au nombre d'anomalies-->
 {{ i.annee_declaration }}
- {{ i.count }}
+
+<!-- index = annee de declaration // 0 = 2021 et 1 = 2022 -->
+{{ i.index }}
+{{ i.1 }}
 
 {% endfor %}           
 {% endif %}            -->
 
 
+<<<<<<< HEAD
   <!-- <img src = '{{ img.0 | safe }}' alt=raté> -->
 
+=======
+  <img src = '{{ img.0 | safe }}' alt=raté>
+  <img src = '{{ img.1 | safe }}' alt=raté>
+>>>>>>> 95959675584577bbab493b80c744ed2e410b395a
