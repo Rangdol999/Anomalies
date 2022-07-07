@@ -25,7 +25,7 @@ urlpatterns = [
     path("question2/", views.question2, name="question2"),
     path("question3/", views.question3, name="question3"),
     path("question1/<int:pk>/", views.Q1_ParArrondissement, name="Q1_ParArrondissement"),
-    #path("home/", views.home, name="home"),
+    #path("question1/<int:pk>/Q1_ParType", views.Q1_ParType, name="Q1_ParType"),
     path("oneParis/", views.oneParis, name="oneParis"),
     #path("question/int:pk/", views.anomalie, name="anomalie"),
     path('admin/', admin.site.urls),
