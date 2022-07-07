@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
@@ -25,8 +25,8 @@ urlpatterns = [
     path("question2/", views.question2, name="question2"),
     path("question3/", views.question3, name="question3"),
     path("question1/<int:pk>/", views.Q1_ParArrondissement, name="Q1_ParArrondissement"),
-    #path("question1/<int:pk>/Q1_ParType", views.Q1_ParType, name="Q1_ParType"),
-    path("oneParis/", views.oneParis, name="oneParis"),
+    path("question1/<int:pk>/<str:type>/", views.Q1_ParType, name="Q1_ParType"),
+    #re_path(r"^question1/?P<int:pk>[0-9]{4}/(?:anomalie-(?P<anomalie_number>\d+)/)?$", views.Q1_ParType, name="Q1_ParType"),
     #path("question/int:pk/", views.anomalie, name="anomalie"),
     path('admin/', admin.site.urls),
 ]
