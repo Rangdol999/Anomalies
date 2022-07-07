@@ -116,25 +116,32 @@ def question3(request):
 def Q1_ParArrondissement(request, pk):
 
   
-  df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']=='Voirie et espace public',:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie()    
-  path_Q1_ParArrondissement = './static/img/Q1_Arrondissement{}.png'.format(pk)
-  path_Q1_ParArrondissement2 ='/static/img/Q1_Arrondissement{}.png'.format(pk)
+  df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].value_counts().unstack().plot.barh(stacked=True)
+  plt.legend(bbox_to_anchor =(-0.2, 1))    
+  path_Q1_ParArrondissement = './static/img/Q1_Arr{}_Hist.png'.format(pk)
+  path_Q1_ParArrondissement2 ='/static/img/Q1_Arr{}_Hist.png'.format(pk)
   plt.savefig(str(path_Q1_ParArrondissement))
   
 
   #commande pour générer le camembert de données / arr 
-  #df2.loc[df2['arrondissement']==1,:].groupby(['annee_declaration'])['annee_declaration'].value_counts().plot.pie()
-   
+  path_Q1_Pie = "./static/img/anomalies_par_arr{}_pie.png".format(pk)
+  path_Q1_Pie2 = "/static/img/anomalies_par_arr{}_pie.png".format(pk)
+  df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['annee_declaration'].value_counts().plot.pie()
+  plt.savefig(str(path_Q1_Pie))
 
-  #commande pour générer la tableau de données (global par arrondissement)  
-  df3 = df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'], as_index=False)['annee_declaration'].value_counts()
+  #commande pour générer la tableau de données (global par arrondissement) 
+  
+  
+  # <!-- annee de declaration =  au nombre d'anomalies-->
+  #<!-- index = annee de declaration // 0 = 2021 et 1 = 2022 --> 
+  df3 = df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'], as_index=False)['annee_declaration'].count()
   print("df3:", df3)
   json_records = df3.reset_index().to_json(orient ='records')
   print("js", json_records)
   data = []
   data = json.loads(json_records)
 
-  context = {'img' : [path_Q1_ParArrondissement2], 'data': data} 
+  context = {'img' : [path_Q1_ParArrondissement2, path_Q1_Pie2], 'data': data} 
   return render(request, 'Q1_ParArrondissement.html', context)
 
 
