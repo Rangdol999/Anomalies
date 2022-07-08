@@ -3,11 +3,30 @@
 {%block pageTitle%} Information {%endblock%}
 
 <!-- page header title -->
-{%block headerTitle%} {%endblock%}
+{%block headerTitle%} 
+<div class="logoTab">
+  <div class="container d-flex justify-content-center flex-row">
+
+    <div class="img1">
+      <img src="../static/image/pngegg (1).png" alt="">
+    </div>
+
+    <div class="logo">
+      <a href="/">
+        <img src="../static/image/paris.png"  alt="">
+      </a>
+    </div>
+
+    <div class="img2">
+      <img src="../static/image/pngegg (1).png" alt="">
+    </div>
+  </div>
+</div>
+{%endblock%}
 
 <!-- page header content -->
 {%block headerContent%}
-  <div class="container bg-light my-4 p-2 bounce-in-top bg-opacity-75">
+  <div class="container bg-secondary mb-4 p-2 bounce-in-top bg-opacity-75">
     <div class="navbar navbar-expand-lg rounded">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,7 +62,7 @@
                 Arrondissement
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item active" href="/question1/1">1 Arrondissement</a></li>
+                <li><a class="dropdown-item active" href="/question1/1"></a></li>
                 <li><a class="dropdown-item" href="/question1/2">2 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/3">3 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/4">4 Arrondissement</a></li>
@@ -110,7 +129,7 @@
       </div>
       <div class="col2 col-md-5 my-2 py-3 text-center">
         <h4 class="mb-4">Graph(pie) </h4>
-            <div class="imageContent">
+            <div class="imageContent shadow-lg">
               <img src = '{{ img.0 }}' alt=raté>
             </div>
       </div>
@@ -118,20 +137,16 @@
     
      <!-- second row -->
     <div class="row my-5">
-      <div class="col1 col-md-7 my-2 py-3 rounded">
-        <h1>Cart</h1>
-        <div id="map" data-my_data="myData">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sunt
-            possimus porro dolore perferendis sint necessitatibus quisquam fugit,
-            facere unde dolor incidunt odit, odio tenetur fuga iusto reprehenderit 
-            minus id.
-        </p>
+      <div class="col-md-7 my-2 py-3 rounded text-center">
+        <h4>Cart</h4>
+        <div id="map" data-my_data="" class="imageContent border-1 my-3">
+          <!-- displaying map -->
         </div>
       </div>
       <div class="col2 col-md-5 my-2 py-3 text-center">
         <h4 class="mb-4">Graph(hist)</h4>
-          <div class="imageContent">
-            <img src="{{ img.1 }}" alt="rate">
+          <div class="imageContent shadow-lg">
+            <img src="{{ img.1 }}" class="sshadow-lg border-3 border-success" alt="rate">
           </div>
       </div>
     </div>
@@ -144,5 +159,10 @@
   </div>
 
 </div>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6lyRej85oh6sIiC_xmwx9jjhLdXj9OEk&callback=initMap&v=weekly"
+      defer>
+    </script>
+<script src="../static/js/script_q1.js"></script>
 {%endblock%}
 
