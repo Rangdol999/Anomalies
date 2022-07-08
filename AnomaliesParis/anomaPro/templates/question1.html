@@ -1,4 +1,22 @@
 {% extends 'base.html' %}
+
+<style>
+  .gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    height:500px;
+    width:600px;
+  }
+  </style>
+<!-- <style>
+ .mapouter{
+  position:relative;
+  text-align:right;
+  height:500px;
+  width:600px;
+  }
+</style> -->
+
 <!-- page title -->
 {%block pageTitle%} Information {%endblock%}
 
@@ -26,8 +44,8 @@
 
 <!-- page header content -->
 {%block headerContent%}
-  <div class="container bg-secondary mb-4 p-2 bounce-in-top bg-opacity-75">
-    <div class="navbar navbar-expand-lg rounded">
+  <div class="container bg-secondary mb-4 p-2 bounce-in-top bg-light bg-opacity-75">
+    <div class="navbar navbar-expand-sm sticky-top rounded">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -62,7 +80,7 @@
                 Arrondissement
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item active" href="/question1/1"></a></li>
+                <li><a class="dropdown-item" href="/question1/1">1 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/2">2 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/3">3 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/4">4 Arrondissement</a></li>
@@ -105,14 +123,22 @@
 <!-- body content -->
 {%block Content%}
 <div class="container">
-  <div class="mainContent">
+  <div class="questionHead mt-5 fs-6 fw-semibold">
+    <div class="container">
+      <p>
+        ---Q1 niveau 0 : quantité d'anomalies par arrondissement et par année.
+      </p>
+    </div>
+  </div>
+
+  <div class="mainContent text-center">
     <div class="row">
-      <div class="col1 col-md-7 my-2 py-3 rounded">
+      <div class="col1 col-lg-6  mx-auto py-3 rounded text-center">
         <table class="table fs-6 fw-lighter">
-          <thead>
-            <th>Arrondissement</th>
-            <th>Annee_decleration</th>
-            <th>Nombre_anomalies</th>
+          <thead class="text-white fw-semibold">
+            <td>Arrondissement</td>
+            <td>Annee_decleration</td>
+            <td>Nombre_anomalies</td>
           </thead>
           <tbody class="bg-ligth">
             {% if data %}
@@ -127,8 +153,8 @@
           </tbody>
         </table>
       </div>
-      <div class="col2 col-md-5 my-2 py-3 text-center">
-        <h4 class="mb-4">Graph(pie) </h4>
+      <div class="col2 col-lg-5  mx-auto my-2 py-3 text-center ">
+        <h4 class="mb-4 text-dark">Graph(pie) </h4>
             <div class="imageContent shadow-lg">
               <img src = '{{ img.0 }}' alt=raté>
             </div>
@@ -137,13 +163,19 @@
     
      <!-- second row -->
     <div class="row my-5">
-      <div class="col-md-7 my-2 py-3 rounded text-center">
+      <div class="col-lg-6  mx-auto py-3 rounded text-center">
         <h4>Cart</h4>
-        <div id="map" data-my_data="" class="imageContent border-1 my-3">
-          <!-- displaying map -->
+        <!-- <div id="map" data-my_data="" class="imageContent border-1 my-3">
+          displaying map
+        </div> -->
+        <div class="mapouter imagContent">
+          <div class="gmap_canvas">
+            <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+            </iframe><a href="https://123movies-to.org"></a>
+          </div>
         </div>
       </div>
-      <div class="col2 col-md-5 my-2 py-3 text-center">
+      <div class="col-lg-5  mx-auto my-2 py-3 text-center text-white">
         <h4 class="mb-4">Graph(hist)</h4>
           <div class="imageContent shadow-lg">
             <img src="{{ img.1 }}" class="sshadow-lg border-3 border-success" alt="rate">
@@ -151,18 +183,153 @@
       </div>
     </div>
   </div>
-</div>
 
-
-  <div class="clickBtn">
-    <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
+  <div class="clickBtn text-">
+    <a href="/home" class="btn btn-secondary mb-5 btn-lg" role="button">Go Back</a>
   </div>
 
 </div>
-<script
+
+
+
+<!-- <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6lyRej85oh6sIiC_xmwx9jjhLdXj9OEk&callback=initMap&v=weekly"
       defer>
-    </script>
+</script> -->
+
+<script src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed"></script>
+
+
+
 <script src="../static/js/script_q1.js"></script>
+
+
 {%endblock%}
 
+
+
+{%block Footer %}
+{% load bootstrap_icons %}
+<footer class="text-center text-lg-start text-white" style="background: rgba(0, 0, 0, 0.2)" >
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Links -->
+    <section>
+      <!--Grid row-->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">
+            GRETA PROJECT
+          </h6>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus molestias et fuga aspernatur. Fuga officia ipsum accusamus.
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 text-white">
+          <h6 class="text-uppercase mb-4 font-weight-bold ">TASKS</h6>
+          <p>Extraction/nettoyage des donnees</p>
+          <p>Cartographie</p>
+          <p>Exploitation des donnees</p>
+          <p>Front(Django)</p>
+        </div>
+        <!-- Grid column -->
+
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">TEAM MEMBER</h6>
+          <p> Nicolas.C(chef de projet) <br> et Damien</p>
+          <p>Frantz et Djensen</p>
+          <p> Nicolas.T</p>
+          <br>
+          <p>Gabriel et Rangdol</p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+
+          <!-- Facebook -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #3b5998"
+              href="#!"
+              role="button"
+              ><i class="bi bi-facebook"></i
+            ></a>
+
+          <!-- Twitter -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #55acee"
+              href="#!"
+              role="button"
+              ><i class="bi bi-twitter"></i
+            ></a>
+
+          <!-- Google -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #dd4b39"
+              href="#!"
+              role="button"
+              ><i class="bi bi-google"></i
+            ></a>
+
+          <!-- Instagram -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #ac2bac"
+              href="#!"
+              role="button"
+              ><i class="bi bi-instagram"></i
+            ></a>
+
+          <!-- Linkedin -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #0082ca"
+              href="#!"
+              role="button"
+              ><i class="bi bi-linkedin"></i
+            ></a>
+          <!-- Github -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #333333"
+              href="#!"
+              role="button"
+              ><i class="bi bi-github"></i
+            ></a>
+        </div>
+      </div>
+      <!--Grid row-->
+    </section>
+    <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div
+        class="text-center p-3"
+        style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+    © 2022 Copyright:
+    <a class="text-white" href="/home"
+        >Projet Anomalie Paris </a
+      >
+  </div>
+  <!-- Copyright -->
+</footer>
+{%endblock%}

@@ -98,18 +98,12 @@ def question1(request):
 
   #commande pour générer la tableau de données (global)
 
-<<<<<<< HEAD
-  df3 = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count()
-  json_records = df3.reset_index().to_json(orient ='records')
-  # print("df3", df3)
-=======
   df3 = df2.groupby(['arrondissement','annee_declaration'])['type_declaration'].count().reset_index(name="count")
   json_records = df3.to_json(orient ='records')
-  print("df3", df3)
->>>>>>> d95e3c007e36431f73b0a58ee0234dce76e7e299
+  # print("df3", df3)
   data = []
   data = json.loads(json_records)
-  # print("js", json_records)
+  print("js", json_records)
   context = {'img': [path_bar2, path_circ2], 'data': data} 
 
   return render(request, 'question1.html', context)
@@ -136,15 +130,6 @@ def Q1_ParArrondissement(request, pk):
     print("decode", str(op.decode()))
     df4 = df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==op.decode(),:].groupby(['annee_declaration'])['type_declaration'].count().reset_index(name="count")
   
-<<<<<<< HEAD
-  df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].value_counts().unstack().plot.bar(stacked=True)
-
-  plt.legend(bbox_to_anchor =(-0.2, 1))    
-  path_Q1_ParArrondissement = './static/img/Q1_Arr{}_Hist.png'.format(pk)
-  path_Q1_ParArrondissement2 ='/static/img/Q1_Arr{}_Hist.png'.format(pk)
-  plt.savefig(str(path_Q1_ParArrondissement))
-  
-=======
     print("df4", df4)
     json_records2 = df4.to_json(orient = 'records')
     print("js in try", json_records2)
@@ -152,30 +137,15 @@ def Q1_ParArrondissement(request, pk):
     data_type = json.loads(json_records2)
     print("data in try", data_type)
     context = {'data_type': data_type , 'id':0} 
->>>>>>> d95e3c007e36431f73b0a58ee0234dce76e7e299
 
   else:
 
-<<<<<<< HEAD
-  #commande pour générer la tableau de données (global par arrondissement) 
-  
-  
-  # <!-- annee de declaration =  au nombre d'anomalies-->
-  #<!-- index = annee de declaration // 0 = 2021 et 1 = 2022 --> 
-  df3 = df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'], as_index=False)['annee_declaration'].count()
-  print("df3 : ", df3)
-  json_records = df3.reset_index().to_json(orient ='records')
-  # print("js", json_records)
-  data = []
-  data = json.loads(json_records)
-=======
     df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].value_counts().unstack().plot.bar(stacked=True)
     plt.legend(bbox_to_anchor =(-0.2, 1))    
     path_Q1_ParArrondissement = './static/img/Q1_Arr{}_Hist.png'.format(pk)
     path_Q1_ParArrondissement2 ='/static/img/Q1_Arr{}_Hist.png'.format(pk)
     plt.savefig(str(path_Q1_ParArrondissement))
     
->>>>>>> d95e3c007e36431f73b0a58ee0234dce76e7e299
 
     #commande pour générer le camembert de données / arr 
     path_Q1_Pie = "./static/img/anomalies_par_arr{}_pie.png".format(pk)
@@ -189,9 +159,9 @@ def Q1_ParArrondissement(request, pk):
     # <!-- annee de declaration =  au nombre d'anomalies-->
     #<!-- index = annee de declaration // 0 = 2021 et 1 = 2022 --> 
     df3 = df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].count().reset_index(name="count")
-    print("df3:", df3)
+    # print("df3:", df3)
     json_records = df3.reset_index().to_json(orient ='records')
-    print("js", json_records)
+    # print("js", json_records)
     data = []
     data = json.loads(json_records)
     print("print test", data)
