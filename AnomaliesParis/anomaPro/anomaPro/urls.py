@@ -22,18 +22,13 @@ urlpatterns = [
     path("", views.home, name="home"),
     path("home/", views.home, name="home"),
     path("question1/", views.question1, name="question1"),
+    path("question1/<int:pk>/", views.Q1_ParAnnée, name="Q1_ParAnnée"),
+    path("question1/<int:pk>/<str:type>/", views.Q1_ParAnnée, name="Q1_ParAnnée"),
     path("question2/", views.question2, name="question2"),
+    path("question2/<str:mois>/", views.Q2_ParMois, name="Q2_ParMois"),
+    #path("question2/<int:pk>/<str:type>/", views.Q1_ParArrondissement, name="Q1_ParArrondissement"),
     path("question3/", views.question3, name="question3"),
-    path("question1/<int:pk>/", views.Q1_ParArrondissement, name="Q1_ParArrondissement"),
-<<<<<<< HEAD
-    path("question1/<int:pk>/<type_anomalie>/", views.anomalie, name="anomalieParis"),
-    #path("question1/<int:pk>/Q1_ParType", views.Q1_ParType, name="Q1_ParType"),
-    path("oneParis/", views.oneParis, name="oneParis"),
-=======
-    path("question1/<int:pk>/<str:type>/", views.Q1_ParType, name="Q1_ParType"),
-    #re_path(r"^question1/?P<int:pk>[0-9]{4}/(?:anomalie-(?P<anomalie_number>\d+)/)?$", views.Q1_ParType, name="Q1_ParType"),
->>>>>>> d95e3c007e36431f73b0a58ee0234dce76e7e299
-    #path("question/int:pk/", views.anomalie, name="anomalie"),
+    path("question3/<int:arr>", views.Q3_ParArr, name="Q3_ParArr"),
     path('admin/', admin.site.urls),
 ]
 

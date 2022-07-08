@@ -111,18 +111,21 @@
         <table class="table fs-6 fw-lighter">
           <thead>
             <th>Arrondissement</th>
-            <th>Annee_decleration</th>
-            <th>Nombre_anomalies</th>
-          </thead>
-          <tbody class="bg-ligth">
-            {% if data %}
-            {% for i in data %}
-            <tr class="text-center text-white">
-              <td class="p-3 "> {{ i.arrondissement }}</td>
-              <td class="p-3">{{ i.annee_declaration }}</th>
-              <td class="p-3">{{ i.count}}</th>
-            </tr>
-            {% endfor %}           
+            <th>2021</th>
+            <th>2022</th>
+            <!-- <tr>Arrondissement</tr>
+              <tr>Nombre_anomalies</tr> -->
+            </thead>
+            <tbody class="bg-ligth">
+              {% if data %}
+              {% for key, value in data.items %} 
+              <tr class="text-center text-white">
+              <td class="p-3 ">{{key}}</td>
+              {% for year,qty in value.items %}
+              <td class="p-3">{{qty}}</td>
+                  {% endfor %}      
+                </tr>
+              {% endfor %}
             {% endif %}           
           </tbody>
         </table>
@@ -158,11 +161,11 @@
     <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
   </div>
 
-</div>
+<!-- </div>
 <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6lyRej85oh6sIiC_xmwx9jjhLdXj9OEk&callback=initMap&v=weekly"
       defer>
     </script>
-<script src="../static/js/script_q1.js"></script>
+<script src="../static/js/script_q1.js"></script> -->
 {%endblock%}
 
