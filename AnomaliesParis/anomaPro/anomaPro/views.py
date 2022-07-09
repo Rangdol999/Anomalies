@@ -49,14 +49,15 @@ list_anomalie= ['Objets abandonnés', 'Graffitis, tags, affiches et autocollants
 
 def home(request):
   #Première page vue par le client
-  #il a 3 choix : accèdeez à l'interface des Question 1 , 2 et 3
+  #il a 3 choix : accéder à l'interface des Question 1 , 2 et 3
   return render(request, 'home.html' )
 
+#Func question1 permet d'afficher une vue global des data et des graphs pour la 1ere question :
 def question1(request):
+  
   # Question 1 : Quelles sont les année pour lesquelles il y a + ou - d'anom par arrondissement
-  #Func question1 permet d'afficher une e global des data et des graphs pour la 1ere question :
 
-
+  ########################################################################
   #PIE GRAPH - commande pour crée le diag circulaire par année et par arr
   Q1_path_circ = "./static/img/par_annee_et_arr_circ.png"
   Q1_path_circ2 = "/static/img/par_annee_et_arr_circ.png"
@@ -87,6 +88,7 @@ def question1(request):
   plt.savefig(Q1_path_circ)
   plt.close()
 
+  ########################################################################
   #BAR GRAPH - commande pour crée l'histogramme par arr et type anomalies
   pandas.crosstab(df2['arrondissement'],df2['annee_declaration']).plot.bar()
   Q1_path_bar = './static/img/par_annee_et_arr_hist.png'
@@ -94,7 +96,7 @@ def question1(request):
   plt.savefig(str(Q1_path_bar))
   plt.close()
 
-
+  ########################################################################
   #DATA - commande pour générer la tableau de données (global)
   df3 = pandas.crosstab(df2['arrondissement'],df2['annee_declaration'])
   json_records = df3.to_json(orient ='index')
@@ -107,11 +109,13 @@ def question1(request):
 
   return render(request, 'question1.html', context)
 
+
+#Func question2 permet d'afficher une vue global des data et des graphs pour la 2e question :
 def question2(request):
 
   #Quels sont les mois pour lesquels il y a le plus / le moins d’anomalie signalées,par type d’anomalie ?
   
-  
+  ########################################################################
   ##PIE GRAPH - Nombre d'anomalies par mois et par années
   Q2_Path_Pie = "./static/img/par_mois_circ.png"
   Q2_Path_Pie2 = "/static/img/par_mois_circ.png"
@@ -136,33 +140,58 @@ def question2(request):
   plt.savefig(Q2_Path_Pie)
   plt.close()
 
+  ########################################################################
   #BAR GRAPH - Nombre d'anomalies par mois et par années
-  pandas.crosstab(df2['mois_declaration'],df2['annee_declaration']).plot.bar()
   Q2_Path_Bar = "./static/img/par_mois_bar.png"
   Q2_Path_Bar2 = "/static/img/par_mois_bar.png"
+  pandas.crosstab(df2['mois_declaration'],df2['annee_declaration']).plot.bar()
   plt.savefig(Q2_Path_Bar)
   plt.close()
 
+  ########################################################################
   #DATA - Nombre d'anomalies par mois et par années
   df3 = pandas.crosstab(df2['mois_declaration'],df2['annee_declaration'])
+  json_records = df3.to_json(orient ='index')
+  data = []
+  data = json.loads(json_records)
+  context = {'img': [Q2_Path_Pie2, Q2_Path_Bar2], 'data': data}
+
+  return render(request, 'question2.html', context)
+
+def question3(request):
+  ###Quel(s) arrondissement(s) comportent le plus / le moins d’anomalies signalées, par type d’anomalies ?
+  
+  ########################################################################
+  ##PIE GRAPH - Nombre d'anomalies par arr et par type
+ 
+ 
+  ####################################################################################
+  #BAR GRAPH - Nombre d'anomalies par arr et par type
+  Q3_Path_Bar = "./static/img/par_arr_bar.png"
+  Q3_Path_Bar2 = "/static/img/par_arr_bar.png"
+  pandas.crosstab(df2['arrondissement'],df2['annee_declaration']).plot.bar()
+  plt.savefig(Q3_Path_Bar)
+  plt.close()
+
+
+  ####################################################################################
+  #DATA - Nombre d'anomalies par arrondissement et par type d'anomalies
+  df3 = pandas.crosstab(df2['arrondissement'],df2['type_declaration'])
   json_records = df3.to_json(orient ='index')
   print("df3", df3)
   data = []
   data = json.loads(json_records)
   print("js", json_records)
-  context = {'img': [Q2_Path_Pie2, Q2_Path_Bar2], 'data': data}
-  return render(request, 'question2.html', context)
+  context = {'img' : [Q3_Path_Bar2], 'data': data}
 
-def question3(request):
-  ###func question1 permet d'afficher la vue global des data pour la 3e question :
-  
-  return render(request, 'question3.html')
+  return render(request, 'question3.html', context)
 
 def Q1_ParAnnée(request, pk):
 
   request_get = request.GET
 
-  #Niveau 2 de détails - Affiche le nombre d'anomalie et les graphs par le type d'anomalie sélectionné dans le menu déroulant
+  #Niveau 2 de détails pour la question 1
+  #Affiche le nombre d'anomalie et les graphs par le type d'anomalie sélectionné dans le menu déroulant
   
   #Si le client selectionne un type dans le menu déroulant :
   if request_get:
@@ -176,14 +205,15 @@ def Q1_ParAnnée(request, pk):
     print("op", op)
     print("decode", str(op.decode()))
 
-
+    ####################################################################################
     #PIE GRAPH - Nb d'Anomalies sur l'arrondissement et par type selectionné par le client 
     df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie()
     path_Pie_ParType = './static/img/Q1_{}_{}_Pie.png'.format(str(op.decode()),pk)
     path_Pie_ParType2 ='/static/img/Q1_{}_{}_Pie.png'.format(str(op.decode()),pk)
     plt.savefig(str(path_Pie_ParType))
     plt.close()
-    
+
+    ####################################################################################    
     #BAR GRAPH - Nb d'Anomalies sur l'arrondissement et par type selectionné par le client 
     df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.bar()
     path_Bar_ParType = './static/img/Q1_{}_{}_Hist.png'.format(str(op.decode()),pk)
@@ -191,6 +221,7 @@ def Q1_ParAnnée(request, pk):
     plt.savefig(str(path_Bar_ParType))
     plt.close()
 
+    ####################################################################################
     #DATAFRAME - Nb d'Anomalies sur l'arrondissement et par type selectionné par le client 
     df4 = df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:].groupby(['annee_declaration'])['type_declaration'].count().reset_index(name="count")
   
@@ -202,10 +233,11 @@ def Q1_ParAnnée(request, pk):
     print("data in try", data_type)
   
     #Dict à retourner si le client à selectionné le détails de niveau 2
-    context = {'img_type' : [path_Bar_ParType2, path_Pie_ParType2], 'data_type': data_type ,  'id':0} 
+    context = {'img_type' : [path_Bar_ParType2, path_Pie_ParType2], 'data_type': data_type , 'pk':pk, 'id':0} 
 
   else:
 
+    ####################################################################################
     #PIE CHART - Nb d'Anomalies par type dans l'arrondissement selectionné par le client  
     path_Q1_Pie = "./static/img/Q1_Arr{}_Pie.png".format(pk)
     path_Q1_Pie2 = "/static/img/Q1_Arr{}_Pie.png".format(pk)
@@ -213,6 +245,8 @@ def Q1_ParAnnée(request, pk):
     plt.savefig(str(path_Q1_Pie))
     plt.close()
 
+
+    ####################################################################################
     #BAR CHART -  Nb d'Anomalies par type dans l'arrondissement selectionné par le client
     df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].value_counts().unstack().plot.bar(stacked=True)
     plt.legend(bbox_to_anchor =(-0.2, 1))    
@@ -221,7 +255,7 @@ def Q1_ParAnnée(request, pk):
     plt.savefig(str(path_Bar_ParArr))
     plt.close()
     
-
+    ####################################################################################
     ##DATAFRAME - Nb d'Anomalies par type dans l'arrondissement selectionné par le client  
     df3 = df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].count().reset_index(name="count")
     print("df3:", df3)
@@ -232,13 +266,10 @@ def Q1_ParAnnée(request, pk):
     print("print test", data)
 
     #Dict à renvoyer 
-    context = {'img' : [path_Bar_ParArr2, path_Q1_Pie2], 'data': data, 'id': 1} 
+    context = {'img' : [path_Bar_ParArr2, path_Q1_Pie2], 'data': data,'pk':pk, 'id': 1} 
  
   
-  # print("context : ", data)
-  print("list_anomalie : ", list_anomalie)
-  print("context : ", context)
-  # print("pk :", pk)
+  print(context)
   return render(request, 'Q1_ParAnnée.html', {'context' : context, 'list_anomalie' : list_anomalie})
 
 
