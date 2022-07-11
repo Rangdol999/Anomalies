@@ -1,4 +1,3 @@
-console.log("hello ji")
 
 function initMap() {
   // carte centrÃ©e sur Paris : 
@@ -8,7 +7,7 @@ function initMap() {
   });
 
  
-  var ctx = document.getElementById('map')
+  const ctx = document.getElementById('map')
   const data_to_map = JSON.parse(ctx.dataset.my_data)
   //var data_to_map = ctx.dataset.my_data
   console.log(data_to_map)
@@ -29,3 +28,29 @@ function initMap() {
   }
 } 
  
+
+
+
+
+
+const imagesPie = document.querySelectorAll("#image_bg img")
+const model = document.querySelector(".modelImage")
+const fullImg = document.querySelector(".imgShow")
+
+imagesPie.forEach(image => {
+  image.addEventListener('click', ()=> {
+    model.classList.add("open");
+
+    fullImg.src = image.src
+  })
+})
+
+model.addEventListener("click", e=> {
+  if(e.target != this.target) {
+    model.classList.remove("open");
+  }
+})
+
+
+
+

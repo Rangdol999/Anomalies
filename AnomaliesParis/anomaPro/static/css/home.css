@@ -13,10 +13,11 @@ body {
   background-color: #0000;
   background: url('https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=1600')no-repeat center center/cover;
 }
-.container {
+/* .container {
   text-align: left;
-  z-index: 999;
-}
+  z-index: 3;
+} */
+
 /* background image */
 .bgImage {
   /* background: url("https://images.pexels.com/photos/1169754/pexels-photo-1169754.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat center center/cover; */
@@ -59,7 +60,7 @@ body {
   height: 50px;
   width: 300px;
 }
-.logoTab .img1 img, .logoTab .container .img2 img {
+.logoTab .img1 img, .logoTab .img2 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -166,3 +167,35 @@ li .active{
 }
 
 
+/* full Image */
+.modelImage {
+  position:fixed;
+  background-color: rgba(0, 0, 0, 0.90);
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+  pointer-events: none;
+  transition: all .5 ease;
+}
+.modelImage.open{
+  pointer-events: all;
+  opacity: 1;
+}
+.modelImage .fullImage {
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  padding: 20px;
+}
+.modelImage .fullImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

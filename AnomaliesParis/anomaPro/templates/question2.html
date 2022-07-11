@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+<style>
+  .gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    height:500px;
+    width:600px;
+  }
+</style>
 <!-- page title -->
 {%block pageTitle%} Information {%endblock%}
 
@@ -26,7 +34,7 @@
 
 <!-- page header content -->
 {%block headerContent%}
-  <div class="container bg-secondary mb-4 p-2 bounce-in-top bg-opacity-75">
+  <div class="container sticky-top bg-secondary mb-4 p-2 bounce-in-top bg-dark bg-opacity-50">
     <div class="navbar navbar-expand-lg rounded">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,13 +42,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <!-- drop down one -->
-          <ul class="navbar-nav my-2 navbar-nav-scroll mx-auto">
+          <ul class="navbar-nav my-2 navbar-nav-scroll text-center mx-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Anomalie
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item" href="/anomalie">Objets abondonnes</a></li>
+                <li><a class="dropdown-item" href="/anomalie">Object abandonnés</a></li>
                 <li><a class="dropdown-item" href="#">Graffitis</a></li>
                 <li><a class="dropdown-item" href="#">Affiches et Autocollants</a></li>
                 <li><a class="dropdown-item" href="#">Autos</a></li>
@@ -58,27 +66,27 @@
             </li>
             <!-- dropdown two -->
             <li class="nav-item dropdown mx-5">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Arrondissement
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item active" href="/question2/Janvier"> Janvier </a></li>
+                <li><a class="dropdown-item" href="/question2/Janvier"> Janvier </a></li>
                 <li><a class="dropdown-item" href="/question2/Février"> Février</a></li>
                 <li><a class="dropdown-item" href="/question2/Mars"> Mars </a></li>
                 <li><a class="dropdown-item" href="/question2/Avril"> Avril </a></li>
-                <li><a class="dropdown-item" href="/question1/Mai"> Mai </a></li>
-                <li><a class="dropdown-item" href="/question1/Juin"> Juin </a></li>
-                <li><a class="dropdown-item" href="/question1/Juillet"> Juillet </a></li>
-                <li><a class="dropdown-item" href="/question1/Août"> Août </a></li>
-                <li><a class="dropdown-item" href="/question1/Septembre"> Septembre </a></li>
-                <li><a class="dropdown-item" href="/question1/Octobre"> Octobre </a></li>
-                <li><a class="dropdown-item" href="/question1/Novembre"> Novembre </a></li>
-                <li><a class="dropdown-item" href="/question1/Décembre"> Décembre </a></li>
+                <li><a class="dropdown-item" href="/question2/Mai"> Mai </a></li>
+                <li><a class="dropdown-item" href="/question2/Juin"> Juin </a></li>
+                <li><a class="dropdown-item" href="/question2/Juillet"> Juillet </a></li>
+                <li><a class="dropdown-item" href="/question2/Août"> Août </a></li>
+                <li><a class="dropdown-item" href="/question2/Septembre"> Septembre </a></li>
+                <li><a class="dropdown-item" href="/question2/Octobre"> Octobre </a></li>
+                <li><a class="dropdown-item" href="/question2/Novembre"> Novembre </a></li>
+                <li><a class="dropdown-item" href="/question2/Décembre"> Décembre </a></li>
               </ul>
             </li>
             <!-- drop down three -->
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white"  href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Years
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
@@ -96,11 +104,19 @@
 
 <!-- body content -->
 {%block Content%}
+<div class="modelImage h-100" style="z-index: 999;">
+  <div class="container d-flex align-items-center justify-content-center">
+      <div class="fullImage text-white w-50 h-50 p-5">
+        <img src="" class="imgShow" alt="">
+      </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="mainContent">
     <div class="row">
-      <div class="col1 col-md-7 my-2 py-3 rounded">
-        <table class="table fs-6 fw-lighter">
+      <div class="col1 col-lg-6 my-5 py-3 rounded mx-auto" data-aos="fade-up-right" data-aos-duration="1000">
+        <table class="table fs-6 fw-lighter text-white">
           <thead>
             <th> Mois de déclaration </th>
             <!-- Si on veut avoir un tableau dynamique afin d'acutaliser et créer une colonne pour 2023, 2024 .. 
@@ -126,9 +142,9 @@
           </tbody>
         </table>
       </div>
-      <div class="col2 col-md-5 my-2 py-3 text-center">
+      <div class="col2 col-lg-4 my-2 py-3 text-center mx-auto" data-aos="fade-up-left" data-aos-duration="1000">
         <h4 class="mb-4">Graph(pie) </h4>
-            <div class="imageContent shadow-lg">
+            <div class="imageContent shadow-lg" id="image_bg">
               <img src = '{{ img.0 }}' alt=raté>
             </div>
       </div>
@@ -136,15 +152,15 @@
     
      <!-- second row -->
     <div class="row my-5">
-      <div class="col-md-7 my-2 py-3 rounded text-center">
+      <div class="col-lg-6 mb-4 py-3 rounded text-center mx-auto" data-aos="fade-down-right" data-aos-duration="1000">
         <h4>Cart</h4>
-        <div id="map" data-my_data="" class="imageContent border-1 my-3">
+        <div id="map" data-my_data="" class="imageContent border-1 my-3" >
           <!-- displaying map -->
         </div>
       </div>
-      <div class="col2 col-md-5 my-2 py-3 text-center">
+      <div class="col-lg-4 my-2 py-3 text-center mx-auto" data-aos="fade-down-left" data-aos-duration="1000">
         <h4 class="mb-4">Graph(hist)</h4>
-          <div class="imageContent shadow-lg">
+          <div class="imageContent shadow-lg" id="image_bg">
             <img src="{{ img.1 }}" class="sshadow-lg border-3 border-success" alt="rate">
           </div>
       </div>
@@ -153,7 +169,7 @@
 </div>
 
 
-  <div class="clickBtn">
+  <div class="clickBtn text-center my-5">
     <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
   </div>
 
@@ -161,7 +177,8 @@
 <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6lyRej85oh6sIiC_xmwx9jjhLdXj9OEk&callback=initMap&v=weekly"
       defer>
-    </script>
-<script src="../static/js/script_q1.js"></script> -->
+    </script>  -->
+  
+  <script src="../static/js/script_q1.js"></script>
 {%endblock%}
 

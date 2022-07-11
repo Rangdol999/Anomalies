@@ -101,7 +101,7 @@ def question1(request):
   df3 = pandas.crosstab(df2['arrondissement'],df2['annee_declaration'])
   json_records = df3.to_json(orient ='index')
   #print("json record q1", json_records)
-  #print("df3", df3)
+  #print("df3", df3)  
   data = []
   data = json.loads(json_records)
   # print("data q1", data)
@@ -154,6 +154,7 @@ def question2(request):
   json_records = df3.to_json(orient ='index')
   data = []
   data = json.loads(json_records)
+  # print("data :",data )
   context = {'img': [Q2_Path_Pie2, Q2_Path_Bar2], 'data': data}
 
   return render(request, 'question2.html', context)
@@ -181,7 +182,8 @@ def question3(request):
   print("df3", df3)
   data = []
   data = json.loads(json_records)
-  print("js", json_records)
+  # print("js", json_records)
+  print("data :", data)
   context = {'img' : [Q3_Path_Bar2], 'data': data}
 
   return render(request, 'question3.html', context)
@@ -249,7 +251,7 @@ def Q1_ParAnnée(request, pk):
     ####################################################################################
     #BAR CHART -  Nb d'Anomalies par type dans l'arrondissement selectionné par le client
     df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].value_counts().unstack().plot.bar(stacked=True)
-    plt.legend(bbox_to_anchor =(-0.2, 1))    
+    # plt.legend(bbox_to_anchor =(-0.2, 1))    
     path_Bar_ParArr = './static/img/Q1_Arr{}_Hist.png'.format(pk)
     path_Bar_ParArr2 ='/static/img/Q1_Arr{}_Hist.png'.format(pk)
     plt.savefig(str(path_Bar_ParArr))

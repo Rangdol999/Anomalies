@@ -9,17 +9,17 @@
   <div class="container d-flex justify-content-center flex-row">
 
     <div class="img1">
-      <img src="../static/image/pngegg (1).png" alt="">
+      <!-- <img src="./static/image/dic.png" alt=""> -->
     </div>
 
-    <div class="logo">
+    <div class="logo mx-3 border-5 border-white">
       <a href="/">
-        <img src="../static/image/paris.png"  alt="">
+        <img src="https://cdn.dribbble.com/users/2524031/screenshots/13961394/media/fe0cbee48954b7335a47e539c3e2579a.png?compress=1&resize=1000x750&vertical=top"  alt="">
       </a>
     </div>
 
-    <div class="img2">
-      <img src="../static/image/pngegg (1).png" alt="">
+    <div class="img2 ">
+      <!-- <img src="./static/image/img2/dic1.png" alt=""> -->
     </div>
   </div>
 </div>
@@ -28,7 +28,7 @@
 
 <!-- page header Content -->
 {%block headerContent%}
-  <div class="container bg-light my-4 p-2 bounce-in-top bg-opacity-75">
+  <div class="container bg-dark my-3 p-2 bounce-in-top bg-opacity-50  sticky-top">
     <div class="navbar navbar-expand-lg rounded">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
           <!-- drop down one -->
           <ul class="navbar-nav my-2 navbar-nav-scroll mx-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Anomalie
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
@@ -49,12 +49,15 @@
             </li>
             <!-- dropdown two -->
             <li class="nav-item dropdown mx-5">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Arrondissement
               </a>
               <ul class="dropdown-menu " aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item active" href="/question/1">Arrondissement {{pk}} </a></li>
-                <!-- <li><a class="dropdown-item" href="/question1/2">2 Arrondissement</a></li>
+                <!-- {%for key, value in context.items %}
+                <li><a class="dropdown-item active" href="/question1/1">{{ pk.key }} Arrondissement</a></li>
+                {% endfor %} -->
+                <li><a class="dropdown-item" href="/question1/2">1 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question1/2">2 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/3">3 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/4">4 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/5">5 Arrondissement</a></li>
@@ -72,12 +75,12 @@
                 <li><a class="dropdown-item" href="/question1/17">17 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/18">18 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/19">19 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/20">20 Arrondissement</a></li> -->
+                <li><a class="dropdown-item" href="/question1/20">20 Arrondissement</a></li>
               </ul>
             </li>
             <!-- drop down three -->
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Years
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
@@ -94,14 +97,25 @@
 
 <!-- page body -->
 {% block Content%} 
+<div class="modelImage h-100" style="z-index: 999;">
+  <div class="container d-flex align-items-center justify-content-center">
+      <div class="fullImage text-white w-50 h-50 p-5">
+        <img src="" class="imgShow" alt="">
+      </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="containerHead">
     <h4>DATA</h4>
-    <p>page .{{ context.pk }}.</p>
+    <p>Quantité d'anomalies pour l'arrondissement {{ context.pk }}.</p>
+    <!-- <p>Quantité d'anomalies pour l'arrondissement {{ list_anomalie }}.</p> -->
+    <p>
+    </p>
   </div>
   <div class="contentOne mt-5">
     <div class="row">
-      <div class="col-lg-4 h-50 mx-auto mt-3 bg-secondary bg-opacity-50 rounded">
+      <div class="col-lg-4 h-50 mx-auto mt-3 bg-secondary bg-opacity-50 rounded" data-aos="zoom-in" data-aos-duration="1000">
         <table class="table my-2 p-2 text-white">
           <thead>
             <th>Annee_declaration</th>
@@ -127,18 +141,18 @@
         </table>
       </div>
       {% if context.id == 0 %}
-      <div class="col-md-6 rounded">
+      <div class="col-md-6 rounded" id="image_bg" data-aos="zoom-in" data-aos-duration="1000">
         <img src = '{{ context.img_type.0 | safe}}' class="img-thumbnail" alt=raté>
       </div>
-      <div class="col-md-6 rounded my-5">
+      <div class="col-md-6 rounded my-5" id="image_bg" data-aos="zoom-out" data-aos-duration="1000">
         <img src = '{{ context.img_type.1 | safe }}' class="img-thumbnail" alt=raté>
       </div>
       {% elif context.id == 1 %}
-      <div class="col-md-6 rounded">
+      <div class="col-md-6 rounded" id="image_bg" data-aos="zoom-in" data-aos-duration="1000">
         <img src = '{{ context.img.0 | safe}}' class="img-thumbnail" alt=raté>
       </div>
 
-      <div class="col-lg-6 h-50 mx-auto my-5 rounded h-75">
+      <div class="col-lg-6 h-50 mx-auto my-5 rounded h-75" id="image_bg" data-aos="zoom-out" data-aos-duration="1000">
         <img src = '{{ context.img.1 | safe }}' class="img-thumbnail" alt=raté>
       </div>
       {% endif %}
@@ -148,6 +162,8 @@
     <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
   </div>
 </div>
+
+  <script src="../static/js/script_q1.js"></script>
 {%endblock%}
 
 

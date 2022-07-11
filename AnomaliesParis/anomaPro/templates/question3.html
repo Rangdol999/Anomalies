@@ -26,7 +26,7 @@
 
 <!-- page header content -->
 {%block headerContent%}
-  <div class="container bg-secondary mb-4 p-2 bounce-in-top bg-opacity-75">
+  <div class="container sticky-top bg-secondary mb-4 p-2 bounce-in-top bg-dark bg-opacity-50">
     <div class="navbar navbar-expand-lg rounded">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@
           <!-- drop down one -->
           <ul class="navbar-nav my-2 navbar-nav-scroll mx-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Anomalie
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
@@ -58,11 +58,11 @@
             </li>
             <!-- dropdown two -->
             <li class="nav-item dropdown mx-5">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Arrondissement
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item active" href="/question2/Janvier"> Janvier </a></li>
+                <li><a class="dropdown-item" href="/question2/Janvier"> Janvier </a></li>
                 <li><a class="dropdown-item" href="/question2/Février"> Février</a></li>
                 <li><a class="dropdown-item" href="/question2/Mars"> Mars </a></li>
                 <li><a class="dropdown-item" href="/question2/Avril"> Avril </a></li>
@@ -78,7 +78,7 @@
             </li>
             <!-- drop down three -->
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Years
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
@@ -96,28 +96,36 @@
 
 <!-- body content -->
 {%block Content%}
+<div class="modelImage h-100" style="z-index: 999;">
+  <div class="container d-flex align-items-center justify-content-center">
+      <div class="fullImage text-white w-50 h-50 p-5">
+        <img src="" class="imgShow" alt="">
+      </div>
+  </div>
+</div>
+
 <div class="container">
   <div class="mainContent">
     <div class="row">
-      <div class="col1 col-md-7 my-2 py-3 rounded">
-        <table class="table fs-6 fw-lighter">
+      <div class="col1 col-lg-7 my-2 py-3 rounded mx-auto" data-aos="zoom-in-left" data-aos-duration="1000">
+        <table class="table fs-6 fw-semibold text-white">
           <thead>
-            <th> Arrondissement </th>
+            <td> Arrondissement </td>
             <!-- {% if data %}
                 {% for i in data.items %}
                 <th class="p-3">{{ key.i }}</th>
                 {% endfor %}
             {% endif %} -->
-            <th> Activités commerciales et professionnelles </th>
-            <th> Arbres, végétaux et animaux </th>
-            <th> Autos, motos, vélos... </th>
-            <th> Eau </th>
-            <th> Graffitis, tags, affiches et autocollants </th>
-            <th> Mobiliers urbains </th>
-            <th> Objets abandonnés </th>
-            <th> Propreté </th>
-            <th> Voirie et espace public </th>
-            <th> Éclairage, Électricité </th>
+            <td> Activités commerciales et professionnelles </td>
+            <td> Arbres, végétaux et animaux </td>
+            <td> Autos, motos, vélos... </td>
+            <td> Eau </td>
+            <td> Graffitis, tags, affiches et autocollants </td>
+            <td> Mobiliers urbains </td>
+            <td> Objets abandonnés </td>
+            <td> Propreté </td>
+            <td> Voirie et espace public </td>
+            <td> Éclairage, Électricité </td>
           </thead>
           <tbody class="bg-ligth">
             {% if data %}
@@ -133,9 +141,9 @@
           </tbody>
         </table>
       </div>
-      <div class="col2 col-md-5 my-2 py-3 text-center">
+      <div class="col2 col-lg-4 my-2 py-3 text-center mx-auto" data-aos="zoom-in-right" data-aos-duration="1000">
         <h4 class="mb-4">Graph(pie) </h4>
-            <div class="imageContent shadow-lg">
+            <div class="imageContent shadow-lg" id="image_bg">
               <img src = '{{ img.0 }}' alt=raté>
             </div>
       </div>
@@ -143,15 +151,15 @@
     
      <!-- second row -->
     <div class="row my-5">
-      <div class="col-md-7 my-2 py-3 rounded text-center">
+      <div class="col-md-7 my-2 py-3 rounded text-center" data-aos="zoom-out-right" data-aos-duration="1000">
         <h4>Cart</h4>
         <div id="map" data-my_data="" class="imageContent border-1 my-3">
           <!-- displaying map -->
         </div>
       </div>
-      <div class="col2 col-md-5 my-2 py-3 text-center">
+      <div class="col2 col-md-5 my-2 py-3 text-center" data-aos="zoom-out-left" data-aos-duration="1000">
         <h4 class="mb-4">Graph(hist)</h4>
-          <div class="imageContent shadow-lg">
+          <div class="imageContent shadow-lg" id="image_bg">
             <img src="{{ img.1 }}" class="sshadow-lg border-3 border-success" alt="rate">
           </div>
       </div>
@@ -168,7 +176,10 @@
 <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6lyRej85oh6sIiC_xmwx9jjhLdXj9OEk&callback=initMap&v=weekly"
       defer>
-    </script>
-<script src="../static/js/script_q1.js"></script> -->
+    </script> -->
+
+<script src="../static/js/script_q1.js"></script>
+
+
 {%endblock%}
 

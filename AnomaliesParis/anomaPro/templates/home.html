@@ -6,13 +6,13 @@
 {%block headerTitle%}
 <div class="container-fluid contentHead">
   <div class="logoTab">
-    <div class="container">
+    <div class="container" data-aos="zoom-out-right" data-aos-duration="1000">
       <div class="logo">
-        <a href="/">
+        <a href="/" >
           <img src="../static/image/paris.png" alt="">
         </a>
       </div>
-      <h1 class="bounce-in-top">BONJOUR TOUT LE MONDE</h1> 
+      <h1 class="bounce-in-top">Anomalie Paris</h1> 
     </div>
   </div>
 </div>
@@ -47,7 +47,7 @@
 
       <!-- image -->
       <div class="row mt-5 pt-5">
-        <div class="col-md-6 col-lg-8 mx-auto mt-3 mt-3 text-dark">
+        <div class="col-md-6 col-lg-8 mx-auto mt-3 mt-3 text-dark" data-aos="fade-right" data-aos-duration="1000">
           <h5 class="text-center m-3 fs-4">A propose de Nous</h5>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt laborum perferendis, voluptatibus explicabo est earum, dicta voluptates repellat cum vero facere sunt! Odio consequatur vitae culpa aut, modi minima unde voluptatibus, quas, obcaecati nam rem? Aperiam, vel aliquid non totam architecto exercitationem mollitia, doloribus laudantium impedit, in temporibus asperiores consectetur!
@@ -55,12 +55,16 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam non porro neque. Eum facilis aliquid repellendus dicta, sapiente repellat harum veniam distinctio quaerat quisquam, magnam odio. Pariatur laborum iusto delectus, architecto, veniam reiciendis impedit, omnis quos quo aliquid modi ab repellat dolorem voluptatem eaque magnam ipsam illo vel sapiente nobis.
           </p>
         </div>
-        <div class="col-md-6 col-lg-4 mx-auto mt-3 mt-3 h-50" >
+        <div class="col-md-6 col-lg-4 mx-auto mt-3 mt-3 h-50" data-aos="fade-left" data-aos-duration="1000">
           <img src="https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=1600" class="w-100 h-100" alt="">
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    AOS.init();
+  </script>
 {% endblock %}
 
 
@@ -68,7 +72,8 @@
 
 {%block Footer %}
 {% load bootstrap_icons %}
-<footer class="text-center text-lg-start text-white" style="background: rgba(0, 0, 0, 0.2)" >
+<footer class="text-center text-lg-start text-white" style="background: rgba(0, 0, 0, 0.2)" data-aos="fade-up"
+data-aos-duration="1000">
   <!-- Grid container -->
   <div class="container p-4 pb-0">
     <!-- Section: Links -->
