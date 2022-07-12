@@ -12,8 +12,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 ####################### PATH CONFIGURATION ################################
 import os  
-from django.conf.global_settings import STATICFILES_DIRS
+#from django.conf.global_settings import STATICFILES_DIRS
 from pathlib import Path 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# BASE_DIR = Path(__file__).resolve().parent.parent
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print("BASE_DIR = " + BASE_DIR)
 STATIC_URL = '/static/'

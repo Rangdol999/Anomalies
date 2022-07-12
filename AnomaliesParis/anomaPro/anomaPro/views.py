@@ -34,11 +34,12 @@ df2 = df.drop(['ID DECLARATION','SOUS TYPE DECLARATION','ADRESSE','CODE POSTAL',
 df2.columns = df2.columns.str.lower()
 # remplacer espaces par _ :
 df2.columns = df2.columns.str.replace(" ","_") # remplacer espaces dans les noms de colonnes par _
+df2['type_declaration'] = df2['type_declaration'].replace(['Éclairage / Électricité'],'Éclairage, Électricité')
 
 #Liste des Types d'Anomalies pour crée les menu déroulants
 list_anomalie= ['Objets abandonnés', 'Graffitis, tags, affiches et autocollants',
        'Autos, motos, vélos...', 'Mobiliers urbains', 'Propreté',
-       'Éclairage / Électricité', 'Voirie et espace public',
+       'Éclairage, Électricité', 'Voirie et espace public',
        'Activités commerciales et professionnelles', 'Eau',
        'Arbres, végétaux et animaux']
 
@@ -98,10 +99,14 @@ def question1(request):
   ########################################################################
   #DATA - commande pour générer la tableau de données (global)
   df3 = pandas.crosstab(df2['arrondissement'],df2['annee_declaration'])
+  print("df3", df3)
+  max = df3.to_numpy().max()
+  min = df3.to_numpy().min()
   json_records = df3.to_json(orient ='index')
   data = []
   data = json.loads(json_records)
-  context = {'img': [Q1_Niv0_Bar2, Q1_Niv0_Pie2], 'data': data} 
+  print("max et min", max, min)
+  context = {'img': [Q1_Niv0_Bar2, Q1_Niv0_Pie2], 'data': data, 'max' : max, 'min' : min} 
 
   return render(request, 'question1.html', context)
 
@@ -168,6 +173,8 @@ def question3(request):
     #on sélectionne dans le QueryDict 'Objets abandonnés'
     #exemple : <QueryDict: {'anomalie': ['Objets abandonnés']}>
     op = request_get["anomalie"].encode('utf8')
+
+    print("op", str(op.decode()))
 
     
     ########################################################################
@@ -284,29 +291,26 @@ def Q1_ParAnnée(request, pk):
     ####################################################################################
     #PIE GRAPH - Nb d'Anomalies sur l'arrondissement et par type selectionné par le client 
     df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie()
-    Q1_Niv1_Pie = './static/img/Q1_Niv1{}_{}_Pie.png'.format(str(op.decode()),pk)
-    Q1_Niv1_Pie2 ='/static/img/Q1_Niv1{}_{}_Pie.png'.format(str(op.decode()),pk)
-    plt.savefig(str(Q1_Niv1_Pie))
+    Q1_Niv2_Pie = './static/img/Q1_Niv2_{}_{}_Pie.png'.format(str(op.decode()),pk)
+    Q1_Niv2_Pie2 ='/static/img/Q1_Niv2_{}_{}_Pie.png'.format(str(op.decode()),pk)
+    plt.savefig(str(Q1_Niv2_Pie))
     plt.close()
 
     ####################################################################################    
     #BAR GRAPH - Nb d'Anomalies sur l'arrondissement et par type selectionné par le client 
     df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.bar()
-    Q1_Niv1_Bar = './static/img/Q1_Niv1{}_{}_Bar.png'.format(str(op.decode()),pk)
-    Q1_Niv1_Bar2 ='/static/img/Q1_Niv1{}_{}_Bar.png'.format(str(op.decode()),pk)
-    plt.savefig(str(Q1_Niv1_Bar))
+    Q1_Niv2_Bar = './static/img/Q1_Niv2_{}_{}_Bar.png'.format(str(op.decode()),pk)
+    Q1_Niv2_Bar2 ='/static/img/Q1_Niv2_{}_{}_Bar.png'.format(str(op.decode()),pk)
+    plt.savefig(str(Q1_Niv2_Bar))
     plt.close()
 
     ####################################################################################
     #DATAFRAME - Nb d'Anomalies sur l'arrondissement et par type selectionné par le client 
     df4 = df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:].groupby(['annee_declaration'])['type_declaration'].count().reset_index(name="count")
-  
-    print("df4", df4)
+
     json_records2 = df4.to_json(orient = 'records')
-    print("js in try", json_records2)
     data_type = []
     data_type = json.loads(json_records2)
-    print("data in try", data_type)
   
     ####################################################################################
     # Data for mapping
@@ -328,10 +332,10 @@ def Q1_ParAnnée(request, pk):
 
     ####################################################################################
     #PIE CHART - Nb d'Anomalies par type dans l'arrondissement selectionné par le client  
-    Q1_Niv2_Pie = "./static/img/Q1_Niv2{}_Pie.png".format(pk)
-    Q1_Niv2_Pie2 = "/static/img/Q1_Niv2{}_Pie.png".format(pk)
+    Q1_Niv1_Pie = "./static/img/Q1_Niv1_{}_Pie.png".format(pk)
+    Q1_Niv1_Pie2 = "/static/img/Q1_Niv1_{}_Pie.png".format(pk)
     df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['annee_declaration'].count().plot.pie(autopct=absolute_value)
-    plt.savefig(str(Q1_Niv2_Pie))
+    plt.savefig(str(Q1_Niv1_Pie))
     plt.close()
 
 
@@ -339,23 +343,20 @@ def Q1_ParAnnée(request, pk):
     #BAR CHART -  Nb d'Anomalies par type dans l'arrondissement selectionné par le client
     df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].value_counts().unstack().plot.bar(stacked=True)
     #plt.legend(bbox_to_anchor =(-0.2, 1))    
-    Q1_Niv2_Bar = './static/img/Q1_Niv2{}_Bar.png'.format(pk)
-    Q1_Niv2_Bar2 ='/static/img/Q1_Niv2{}_Bar.png'.format(pk)
-    plt.savefig(str(Q1_Niv2_Bar))
+    Q1_Niv1_Bar = './static/img/Q1_Niv1_{}_Bar.png'.format(pk)
+    Q1_Niv1_Bar2 ='/static/img/Q1_Niv1_{}_Bar.png'.format(pk)
+    plt.savefig(str(Q1_Niv1_Bar))
     plt.close()
     
     ####################################################################################
     ##DATAFRAME - Nb d'Anomalies par type dans l'arrondissement selectionné par le client  
     df3 = df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].count().reset_index(name="count")
-    print("df3:", df3)
     json_records = df3.reset_index().to_json(orient ='records')
-    print("js", json_records)
     data = []
     data = json.loads(json_records)
-    print("print test", data)
 
     #Dict à renvoyer 
-    context = {'img' : [Q1_Niv2_Bar2, Q1_Niv2_Pie2], 'data': data,'pk':pk, 'id': 1} 
+    context = {'img' : [Q1_Niv1_Bar2, Q1_Niv1_Pie2], 'data': data,'pk':pk, 'id': 1} 
  
   
   return render(request, 'Q1_ParAnnée.html', {'context' : context, 'list_anomalie' : list_anomalie})
@@ -420,12 +421,9 @@ def Q2_ParMois(request, pk):
     ## DATA - Nombre d'anoamlie pour un arrondissement et un type d'ano selectionnée
     df4 = pandas.crosstab(df3['mois_declaration'],df3['annee_declaration'])
     
-    print("df4 type Q2", df4)
     json_records2 = df4.to_json(orient = 'index')
-    print("json type q2 ", json_records2)
     data_type = []
     data_type = json.loads(json_records2)
-    print("data in q2 try", data_type)
 
     context = {'img' : [Q2_Niv2_Bar2, Q2_Niv2_Pie2], 'data_type' : data_type, 'id' : 0, 'list_anomalie' : list_anomalie}
 
@@ -472,7 +470,6 @@ def Q2_ParMois(request, pk):
     df3 = df2.loc[df2['arrondissement']==pk,:]
     df4 = pandas.crosstab(df3['mois_declaration'],df3['annee_declaration'])
     json_records = df4.reset_index().to_json(orient ='records')
-    print("js", json_records)
     data = []
     data = json.loads(json_records)
 
