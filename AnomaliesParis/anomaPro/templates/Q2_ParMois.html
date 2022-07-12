@@ -4,9 +4,18 @@
 {% block pageTitle%} Anomalie and Arrondissement {%endblock%}
 
 <!-- page header -->
-<!-- {% block headerTitle%}
+{% block headerTitle%}
+<div class="logoTab">
+  <div class="container d-flex justify-content-center align-items-center flex-row">
 
-{%endblock%} -->
+    <div class="logo mx-3">
+      <a href="/">
+        <img src="https://cdn.dribbble.com/users/2524031/screenshots/13961394/media/fe0cbee48954b7335a47e539c3e2579a.png?compress=1&resize=1000x750&vertical=top"  alt="">
+      </a>
+    </div>
+  </div>
+</div>
+{%endblock%}
 
 
 <!-- page header Content -->
@@ -25,8 +34,8 @@
                 Anomalie
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                {% for pouet in list_anomalie %}
-                <li><a class="dropdown-item" href="?anomalie={{ pouet }}"> {{ pouet }} </a></li>
+                {% for type in list_anomalie %}
+                <li><a class="dropdown-item" href="?anomalie={{ type }}"> {{ type }} </a></li>
                 {% endfor %}
                   <!-- <li><a class="dropdown-item" href="#">Graffitis, tags, affiches et autocollants</a></li>
                   <li><a class="dropdown-item" href="#">Affiches et Autocollants</a></li>
@@ -89,8 +98,8 @@
   </div>
   <div class="contentOne">
     <div class="row">
-      <div class="col col-md-5 mx-2 rounded">
-        <table class="table my-2 p-2 text-white">
+      <div class="col col-md-5 mx-2 my-5 rounded bg-dark bg-opacity-50 mx-auto">
+        <table class="table my-2 p-2 text-white table-hover">
           <thead>
             <th>mois de declaration</th>
             <th>2021</th>
@@ -119,27 +128,32 @@
         </table>
       </div>
       {% if id == 0 %}
-      <div class="col col-md-6 rounded">
+      <div class="col col-md-5 rounded mx-auto" id="image_bg">
         <img src = '{{ img.0 | safe}}' class="img-thumbnail" alt=raté>
       </div>
-      <div class="col col-md-4 rounded my-3">
+      <div class="col col-md-5 rounded my-3 mx-auto" id="image_bg">
         <img src = '{{ img.1 | safe }}' class="img-thumbnail" alt=raté>
       </div>
       {% elif id == 1 %}
-      <div class="col col-md-6 rounded">
+      <div class="col col-md-5 rounded my-5 mx-auto" id="image_bg">
         <img src = '{{ img.0 | safe}}' class="img-thumbnail" alt=raté>
       </div>
-      <div class="col col-md-4 rounded my-3">
+      <div class="col col-md-5 rounded my-3 mx-auto" id="image_bg">
         <img src = '{{ img.1 | safe }}' class="img-thumbnail" alt=raté>
       </div>
       {% endif %}
     </div>
   </div>
-  <div class="clickBtn">
+  <div class="clickBtn text-center">
     <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
   </div>
 </div>
+
+<!-- js -->
+<script src="../static/js/script_q1.js"></script>
+
 {%endblock%}
+
 <!-- 
 {% if context.id == 0 %}
   <img src = '{{ context.img_type.0 | safe}}' alt=raté>

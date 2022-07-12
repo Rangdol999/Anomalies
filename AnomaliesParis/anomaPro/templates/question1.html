@@ -1,4 +1,15 @@
 {% extends 'base.html' %}
+
+<style>
+  .gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    height:500px;
+    width:600px;
+  }
+</style>
+
+
 <!-- page title -->
 {%block pageTitle%} Information {%endblock%}
 
@@ -8,7 +19,7 @@
   <div class="container d-flex justify-content-center flex-row">
 
     <div class="img1">
-      <img src="../static/image/pngegg (1).png" alt="">
+      <img src="../static/image/dic.png" alt="">
     </div>
 
     <div class="logo">
@@ -18,7 +29,7 @@
     </div>
 
     <div class="img2">
-      <img src="../static/image/pngegg (1).png" alt="">
+      <img src="../static/image/dic.png" alt="">
     </div>
   </div>
 </div>
@@ -26,89 +37,88 @@
 
 <!-- page header content -->
 {%block headerContent%}
-  <div class="container bg-secondary mb-4 p-2 bounce-in-top bg-opacity-75">
-    <div class="navbar navbar-expand-lg rounded">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <!-- drop down one -->
-          <ul class="navbar-nav my-2 navbar-nav-scroll mx-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Anomalie
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item" href="/anomalie">Objets abondonnes</a></li>
-                <li><a class="dropdown-item" href="#">Graffitis</a></li>
-                <li><a class="dropdown-item" href="#">Affiches et Autocollants</a></li>
-                <li><a class="dropdown-item" href="#">Autos</a></li>
-                <li><a class="dropdown-item" href="#">Mots</a></li>
-                <li><a class="dropdown-item" href="#">Velos</a></li>
-                <li><a class="dropdown-item" href="#">Mobiliers urbains</a></li>
-                <li><a class="dropdown-item" href="#">Proprete</a></li>
-                <li><a class="dropdown-item" href="#">Eclairage/Electricite</a></li>
-                <li><a class="dropdown-item" href="#">Voirie et espace public</a></li>
-                <li><a class="dropdown-item" href="#">Activities commerciales et Professionnelles</a></li>
-                <li><a class="dropdown-item" href="#">Eau</a></li>
-                <li><a class="dropdown-item" href="#">Arbres</a></li>
-                <li><a class="dropdown-item" href="#">Vegetaux et animaux</a></li>
-              </ul>
-            </li>
-            <!-- dropdown two -->
-            <li class="nav-item dropdown mx-5">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Arrondissement
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item active" href="/question1/1"></a></li>
-                <li><a class="dropdown-item" href="/question1/2">2 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/3">3 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/4">4 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/5">5 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/6">6 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/7">7 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/8">8 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/9">9 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/10">10 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/11">11 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/12">12 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/13">13 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/14">14 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/15">15 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/16">16 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/17">17 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/18">18 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/19">19 Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question1/20">20 Arrondissement</a></li>
-              </ul>
-            </li>
-            <!-- drop down three -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Years
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item" href="#">2021</a></li>
-                <li><a class="dropdown-item" href="#">2022</a></li>
-              </ul>
-            </li>
+
+<div class="navbar navbar-expand-sm sticky-top rounded bounce-in-top" style="z-index: 90;">
+  <div class="container bg-dark bg-opacity-50 p-3">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <!-- drop down one -->
+      <ul class="navbar-nav my-2 navbar-nav-scroll mx-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Anomalie
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <!-- {%for key in list_anomalie%}
+            <li><a class="dropdown-item" href="/anomalie">{{ key }}</a></li>
+            {%endfor%} -->
+            <li><a class="dropdown-item" href="#">Graffitis</a></li>
+            <li><a class="dropdown-item" href="#">Affiches et Autocollants</a></li>
+            <li><a class="dropdown-item" href="#">Autos</a></li>
+            <li><a class="dropdown-item" href="#">Mots</a></li>
+            <li><a class="dropdown-item" href="#">Velos</a></li>
+            <li><a class="dropdown-item" href="#">Mobiliers urbains</a></li>
+            <li><a class="dropdown-item" href="#">Proprete</a></li>
+            <li><a class="dropdown-item" href="#">Eclairage/Electricite</a></li>
+            <li><a class="dropdown-item" href="#">Voirie et espace public</a></li>
+            <li><a class="dropdown-item" href="#">Activities commerciales et Professionnelles</a></li>
+            <li><a class="dropdown-item" href="#">Eau</a></li>
+            <li><a class="dropdown-item" href="#">Arbres</a></li>
+            <li><a class="dropdown-item" href="#">Vegetaux et animaux</a></li>
           </ul>
-        </div>
-      </div>
+        </li>
+        <!-- dropdown two -->
+        <li class="nav-item dropdown mx-5">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Arrondissement
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            {% for key, value in data.items %} 
+            <li><a class="dropdown-item" href="/question1/{{key}}"> {{key}} Arrondissement</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+        <!-- drop down three -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Years
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="#">2021</a></li>
+            <li><a class="dropdown-item" href="#">2022</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
+</div>
 {%endblock%}
 
 
 <!-- body content -->
 {%block Content%}
+<div class="modelImage h-100" style="z-index: 100;">
+  <div class="container d-flex align-items-center justify-content-center">
+      <div class="fullImage text-white p-5 w-50 h-50">
+        <img src="" class="imgShow" alt="">
+      </div>
+  </div>
+</div>
+
 <div class="container">
-  <div class="mainContent">
+  <div class="questionHead mt-5 fs-6 fw-semibold">
+    <div class="container">
+      <p>
+        Quantité d'anomalies par arrondissement et par année.
+      </p>
+    </div>
+  </div>
+  <div class="mainContent text-center position-relative">
     <div class="row">
-      <div class="col1 col-md-7 my-2 py-3 rounded">
-        <table class="table fs-6 fw-lighter">
+      <div class="col1 col-lg-6  mx-auto py-3 rounded text-center bg-secondary bg-opacity-50" data-aos="fade-right" data-aos-duration="1000">
+        <table class="table fs-6 fw-lighter text-white table-hover">
           <thead>
             <th>Arrondissement</th>
             <th>2021</th>
@@ -119,20 +129,20 @@
             <tbody class="bg-ligth">
               {% if data %}
               {% for key, value in data.items %} 
-              <tr class="text-center text-white">
-              <td class="p-3 ">{{key}}</td>
-              {% for year,qty in value.items %}
-              <td class="p-3">{{qty}}</td>
-                  {% endfor %}      
+                <tr class="text-center text-white">
+                    <td class="p-3 ">{{key}}</td>
+                    {% for year,qty in value.items %}
+                    <td class="p-3">{{qty}}</td>
+                    {% endfor %}      
                 </tr>
               {% endfor %}
             {% endif %}           
           </tbody>
         </table>
       </div>
-      <div class="col2 col-md-5 my-2 py-3 text-center">
-        <h4 class="mb-4">Graph(pie) </h4>
-            <div class="imageContent shadow-lg">
+      <div class="col2 col-lg-5  mx-auto my-2 py-3 text-center" data-aos="fade-left" data-aos-duration="1000">
+        <h4 class="mb-4 text-dark">Graph(pie) </h4>
+            <div class="imageContent shadow-lg" id="image_bg" >
               <img src = '{{ img.0 }}' alt=raté>
             </div>
       </div>
@@ -140,26 +150,32 @@
     
      <!-- second row -->
     <div class="row my-5">
-      <div class="col-md-7 my-2 py-3 rounded text-center">
-        <h4>Cart</h4>
-        <div id="map" data-my_data="" class="imageContent border-1 my-3">
-          <!-- displaying map -->
+      <div class="col-lg-6  mx-auto py-3 rounded text-center" data-aos="flip-up" data-aos-duration="1000">
+        <h4 class="mb-4">Map</h4>
+        <!-- <div id="map" data-my_data="" class="imageContent border-1 my-3">
+          displaying map
+        </div> -->
+        <div class="mapouter imagContent">
+          <div class="gmap_canvas overflow-auto h-50">
+            <iframe width="600" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+            </iframe><a href="https://123movies-to.org"></a>
+          </div>
         </div>
       </div>
-      <div class="col2 col-md-5 my-2 py-3 text-center">
-        <h4 class="mb-4">Graph(hist)</h4>
-          <div class="imageContent shadow-lg">
+      <div class="col-lg-5  mx-auto my-2 py-3 text-center text-white" data-aos="flip-down" data-aos-duration="1000">
+        <h4 class="mb-4 text-dark">Graph(hist)</h4>
+          <div class="imageContent shadow-lg" id="image_bg" >
             <img src="{{ img.1 }}" class="sshadow-lg border-3 border-success" alt="rate">
           </div>
       </div>
     </div>
   </div>
+
+  <div class="clickBtn text-center">
+    <a href="/home" class="btn btn-secondary mb-5 btn-lg" role="button">Go Back</a>
+  </div>
 </div>
 
-
-  <div class="clickBtn">
-    <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
-  </div>
 
 </div>
 <script>
@@ -171,3 +187,130 @@
 <script src="../static/js/script_q1.js"></script>
 {%endblock%}
 
+
+
+{%block Footer %}
+{% load bootstrap_icons %}
+<footer class="text-center text-lg-start text-white" style="background: rgba(0, 0, 0, 0.2)" >
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Links -->
+    <section>
+      <!--Grid row-->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
+          <h6 class="text-uppercase mb-4 font-weight-bold">
+            GRETA PROJECT
+          </h6>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus molestias et fuga aspernatur. Fuga officia ipsum accusamus.
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 text-white foot-p">
+          <h6 class="text-uppercase mb-4 font-weight-bold ">TASKS</h6>
+          <p>Extraction/nettoyage des donnees</p>
+          <p>Cartographie</p>
+          <p>Exploitation des donnees</p>
+          <p>Front(Django)</p>
+        </div>
+        <!-- Grid column -->
+
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
+          <h6 class="text-uppercase mb-4 font-weight-bold">TEAM MEMBER</h6>
+          <p> Nicolas.C(chef de projet) <br> et Damien</p>
+          <p>Frantz et Djensen</p>
+          <p> Nicolas.T</p>
+          <br>
+          <p>Gabriel et Rangdol</p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 foot-p">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+
+          <!-- Facebook -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #3b5998"
+              href="#!"
+              role="button"
+              ><i class="bi bi-facebook"></i
+            ></a>
+
+          <!-- Twitter -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #55acee"
+              href="#!"
+              role="button"
+              ><i class="bi bi-twitter"></i
+            ></a>
+
+          <!-- Google -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #dd4b39"
+              href="#!"
+              role="button"
+              ><i class="bi bi-google"></i
+            ></a>
+
+          <!-- Instagram -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #ac2bac"
+              href="#!"
+              role="button"
+              ><i class="bi bi-instagram"></i
+            ></a>
+
+          <!-- Linkedin -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #0082ca"
+              href="#!"
+              role="button"
+              ><i class="bi bi-linkedin"></i
+            ></a>
+          <!-- Github -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #333333"
+              href="#!"
+              role="button"
+              ><i class="bi bi-github"></i
+            ></a>
+        </div>
+      </div>
+      <!--Grid row-->
+    </section>
+    <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div
+        class="text-center p-3"
+        style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+    © 2022 Copyright:
+    <a class="text-white" href="/home"
+        >Projet Anomalie Paris </a
+      >
+  </div>
+  <!-- Copyright -->
+</footer>
+{%endblock%}

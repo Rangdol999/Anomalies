@@ -69,3 +69,29 @@ function initMap() {
   }
 } 
  
+
+
+
+
+
+const imagesPie = document.querySelectorAll("#image_bg img")
+const model = document.querySelector(".modelImage")
+const fullImg = document.querySelector(".imgShow")
+
+imagesPie.forEach(image => {
+  image.addEventListener('click', ()=> {
+    model.classList.add("open");
+
+    fullImg.src = image.src
+  })
+})
+
+model.addEventListener("click", e=> {
+  if(e.target != this.target) {
+    model.classList.remove("open");
+  }
+})
+
+
+
+
