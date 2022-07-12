@@ -30,5 +30,3 @@ urlpatterns = [
     path("question3/<str:type>", views.question3, name="question3"),
     path('admin/', admin.site.urls),
 ]
-
-

@@ -26,7 +26,11 @@ class FilePath():
 ################################ Filtrage de la DATABASE ##########################################################################################################*
 
 # lecture du CSV et gestion des caractères spéciaux
+<<<<<<< HEAD
 df = pandas.read_csv(r"dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8") 
+=======
+df = pandas.read_csv(r"static/dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8") 
+>>>>>>> refs/remotes/origin/main
 # on retire les colonnes inutiles :
 df2 = df.drop(['ID DECLARATION','SOUS TYPE DECLARATION','ADRESSE','CODE POSTAL', 'VILLE',
   'CONSEIL DE QUARTIER','DATE DECLARATION','OUTIL SOURCE','INTERVENANT','ID_DMR','geo_shape'], axis=1)
@@ -453,6 +457,10 @@ def Q2_ParMois(request, pk):
     df3 = df2.loc[df2['arrondissement']==pk,:]
     df4 = pandas.crosstab(df3['mois_declaration'],df3['annee_declaration'])
     json_records = df4.reset_index().to_json(orient ='records')
+<<<<<<< HEAD
+=======
+    print("js", json_records)
+>>>>>>> refs/remotes/origin/main
     data = []
     data = json.loads(json_records)
 
