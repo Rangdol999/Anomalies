@@ -40,20 +40,9 @@
                 Anomalie
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item" href="/anomalie">Objets abondonnes</a></li>
-                <li><a class="dropdown-item" href="#">Graffitis</a></li>
-                <li><a class="dropdown-item" href="#">Affiches et Autocollants</a></li>
-                <li><a class="dropdown-item" href="#">Autos</a></li>
-                <li><a class="dropdown-item" href="#">Mots</a></li>
-                <li><a class="dropdown-item" href="#">Velos</a></li>
-                <li><a class="dropdown-item" href="#">Mobiliers urbains</a></li>
-                <li><a class="dropdown-item" href="#">Proprete</a></li>
-                <li><a class="dropdown-item" href="#">Eclairage/Electricite</a></li>
-                <li><a class="dropdown-item" href="#">Voirie et espace public</a></li>
-                <li><a class="dropdown-item" href="#">Activities commerciales et Professionnelles</a></li>
-                <li><a class="dropdown-item" href="#">Eau</a></li>
-                <li><a class="dropdown-item" href="#">Arbres</a></li>
-                <li><a class="dropdown-item" href="#">Vegetaux et animaux</a></li>
+                {% for type in list_anomalie %}
+                <li><a class="dropdown-item" href="?anomalie={{ type }}"> {{ type }} </a></li>
+                {% endfor %}
               </ul>
             </li>
             <!-- dropdown two -->
@@ -62,28 +51,26 @@
                 Arrondissement
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item active" href="/question2/Janvier"> Janvier </a></li>
-                <li><a class="dropdown-item" href="/question2/Février"> Février</a></li>
-                <li><a class="dropdown-item" href="/question2/Mars"> Mars </a></li>
-                <li><a class="dropdown-item" href="/question2/Avril"> Avril </a></li>
-                <li><a class="dropdown-item" href="/question1/Mai"> Mai </a></li>
-                <li><a class="dropdown-item" href="/question1/Juin"> Juin </a></li>
-                <li><a class="dropdown-item" href="/question1/Juillet"> Juillet </a></li>
-                <li><a class="dropdown-item" href="/question1/Août"> Août </a></li>
-                <li><a class="dropdown-item" href="/question1/Septembre"> Septembre </a></li>
-                <li><a class="dropdown-item" href="/question1/Octobre"> Octobre </a></li>
-                <li><a class="dropdown-item" href="/question1/Novembre"> Novembre </a></li>
-                <li><a class="dropdown-item" href="/question1/Décembre"> Décembre </a></li>
-              </ul>
-            </li>
-            <!-- drop down three -->
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Years
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item" href="#">2021</a></li>
-                <li><a class="dropdown-item" href="#">2022</a></li>
+                <li><a class="dropdown-item active" href="/question2/1"></a></li>
+                <li><a class="dropdown-item" href="/question2/2">2 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/3">3 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/4">4 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/5">5 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/6">6 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/7">7 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/8">8 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/9">9 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/10">10 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/11">11 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/12">12 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/13">13 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/14">14 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/15">15 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/16">16 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/17">17 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/18">18 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/19">19 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/20">20 Arrondissement</a></li>
               </ul>
             </li>
           </ul>
@@ -101,13 +88,9 @@
     <div class="row">
       <div class="col1 col-md-7 my-2 py-3 rounded">
         <table class="table fs-6 fw-lighter">
+          {% if id == 1 %}
           <thead>
             <th> Arrondissement </th>
-            <!-- {% if data %}
-                {% for i in data.items %}
-                <th class="p-3">{{ key.i }}</th>
-                {% endfor %}
-            {% endif %} -->
             <th> Activités commerciales et professionnelles </th>
             <th> Arbres, végétaux et animaux </th>
             <th> Autos, motos, vélos... </th>
@@ -120,7 +103,6 @@
             <th> Éclairage, Électricité </th>
           </thead>
           <tbody class="bg-ligth">
-            {% if data %}
                 {% for key, value in data.items %} 
                     <tr class="text-center text-white">
                     <td class="p-3">{{ key }}</th>
@@ -128,7 +110,20 @@
                         <td class="p-3">{{ qty }}</th>
                     {% endfor %}  
                     </tr>
-                {% endfor %}           
+                {% endfor %} 
+              {% elif id == 0 %}
+              <thead>
+              <th> Arrondissement </th>
+              <th> 2021 </th>
+              <th> 2022 </th>
+            </thead>
+            <tbody class="bg-ligth">
+                {% for i in data %}
+                <tr class="text-center text-white">
+                  <td class="p-3">{{ i.arrondissement }} </th>
+                  <td class="p-3">{{ i.2021 }}  </th>
+                    <td class="p-3">{{ i.2022 }} </th>
+                  {% endfor %}            
             {% endif %}           
           </tbody>
         </table>
