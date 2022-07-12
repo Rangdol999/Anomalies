@@ -303,7 +303,11 @@ def Q1_ParAnnée(request, pk):
     data_to_map = data_to_map.to_json()
     data_to_map = json.loads(data_to_map)
     #Dict à retourner si le client à selectionné le détails de niveau 2
+<<<<<<< HEAD
     context = {'img_type' : [Q1_Niv2_Bar2, Q1_Niv2_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'data_to_map':data_to_map} 
+=======
+    context = {'img_type' : [Q1_Niv1_Bar2, Q1_Niv1_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'data_to_map':data_to_map} 
+>>>>>>> rang
 
 
   else:
