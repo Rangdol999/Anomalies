@@ -58,7 +58,7 @@
             <li><a class="dropdown-item" href="/question3/?anomalie=Autos,%20motos,%20vélos..."> Autos, motos, vélos... </a></li>
             <li><a class="dropdown-item" href="/question3/?anomalie=Mobiliers%20urbains"> Mobiliers urbains </a></li>
             <li><a class="dropdown-item" href="/question3/?anomalie=Propreté"> Propreté </a></li>
-            <li><a class="dropdown-item" href="/?anomalie=Éclairage%20/%20Électricité"> Éclairage / Électricité </a></li>
+            <li><a class="dropdown-item" href="/question3/?anomalie=Éclairage,%20Électricité"> Éclairage / Électricité </a></li>
             <li><a class="dropdown-item" href="/?anomalie=Voirie%20et%20espace%20public"> Voirie et espace public </a></li>
             <li><a class="dropdown-item" href="/question3/?anomalie=Activités%20commerciales%20et%20professionnelles"> Activités commerciales et professionnelles </a></li>
             <li><a class="dropdown-item" href="/question3/?anomalie=Eau"> Eau </a></li>
@@ -85,6 +85,14 @@
 
 <!-- body content -->
 {%block Content%}
+<div class="container">
+  <div class="containerHead">
+    <h4>Recensement</h4>
+    <p>Le Projet dans ma rue a été mis à disposition des parisiens à partir de Mars 2021.</p></br>
+    <p>L'arrondissement du 11ème est l'arrondissement avec le plus d'anoamalies avec un nombre de {{ max }} anomalies détectés.</p></br>
+    <p>Le 7ème arrondissement est celui avec le moins d'anomalie avec {{ min }} anomalies détectés .</p>
+    </p>
+  </div>
 <div class="modelImage h-100" style="z-index: 100;">
   <div class="container d-flex align-items-center justify-content-center">
       <div class="fullImage text-white p-5 w-50 h-50">

@@ -34,11 +34,12 @@ df2 = df.drop(['ID DECLARATION','SOUS TYPE DECLARATION','ADRESSE','CODE POSTAL',
 df2.columns = df2.columns.str.lower()
 # remplacer espaces par _ :
 df2.columns = df2.columns.str.replace(" ","_") # remplacer espaces dans les noms de colonnes par _
+df2['type_declaration'] = df2['type_declaration'].replace(['Éclairage / Électricité'],'Éclairage, Électricité')
 
 #Liste des Types d'Anomalies pour crée les menu déroulants
 list_anomalie= ['Objets abandonnés', 'Graffitis, tags, affiches et autocollants',
        'Autos, motos, vélos...', 'Mobiliers urbains', 'Propreté',
-       'Éclairage / Électricité', 'Voirie et espace public',
+       'Éclairage, Électricité', 'Voirie et espace public',
        'Activités commerciales et professionnelles', 'Eau',
        'Arbres, végétaux et animaux']
 
@@ -98,10 +99,14 @@ def question1(request):
   ########################################################################
   #DATA - commande pour générer la tableau de données (global)
   df3 = pandas.crosstab(df2['arrondissement'],df2['annee_declaration'])
+  print("df3", df3)
+  max = df3.to_numpy().max()
+  min = df3.to_numpy().min()
   json_records = df3.to_json(orient ='index')
   data = []
   data = json.loads(json_records)
-  context = {'img': [Q1_Niv0_Bar2, Q1_Niv0_Pie2], 'data': data} 
+  print("max et min", max, min)
+  context = {'img': [Q1_Niv0_Bar2, Q1_Niv0_Pie2], 'data': data, 'max' : max, 'min' : min} 
 
   return render(request, 'question1.html', context)
 
@@ -168,6 +173,8 @@ def question3(request):
     #on sélectionne dans le QueryDict 'Objets abandonnés'
     #exemple : <QueryDict: {'anomalie': ['Objets abandonnés']}>
     op = request_get["anomalie"].encode('utf8')
+
+    print("op", str(op.decode()))
 
     
     ########################################################################
