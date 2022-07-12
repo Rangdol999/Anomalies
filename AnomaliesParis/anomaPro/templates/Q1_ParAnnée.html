@@ -25,8 +25,8 @@
                 Anomalie
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                {% for pouet in list_anomalie %}
-                <li><a class="dropdown-item" href="?anomalie={{ pouet }}"> {{ pouet }} </a></li>
+                {% for type in list_anomalie %}
+                <li><a class="dropdown-item" href="?anomalie={{ type }}"> {{ type }} </a></li>
                 {% endfor %}
                   <!-- <li><a class="dropdown-item" href="#">Graffitis, tags, affiches et autocollants</a></li>
                   <li><a class="dropdown-item" href="#">Affiches et Autocollants</a></li>
