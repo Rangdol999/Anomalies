@@ -89,7 +89,7 @@ def question1(request):
 
   ########################################################################
   #BAR GRAPH - commande pour crée l'histogramme par arr et type anomalies
-  pandas.crosstab(df2['arrondissement'],df2['annee_declaration']).plot.bar()
+  pandas.crosstab(df2['arrondissement'],df2['annee_declaration']).plot.bar(title="Anomalies par arrondissement, par année.")
   Q1_Niv0_Bar = './static/img/Q1_Niv0_Bar.png'
   Q1_Niv0_Bar2 ='/static/img/Q1_Niv0_Bar.png'
   plt.savefig(str(Q1_Niv0_Bar))
@@ -177,14 +177,14 @@ def question3(request):
   
     df3 = df2.loc[df2['type_declaration']==str(op.decode()), :]
     fig, ax = plt.subplots()
-    ax.pie(df3.groupby(['arrondissement'])['arrondissement'].value_counts(),
+    pie = ax.pie(df3.groupby(['arrondissement'])['arrondissement'].value_counts(),
           labels=df3['arrondissement'].unique(),
           radius=1, wedgeprops=dict(width=1, edgecolor='w'),
           # colors = outer_colors,
-          labeldistance = 0.5)
+          labeldistance = 0.7)
             # , explode=[0.3,0])
             # , autopct='%1.1f%%'
-
+    
     ax.set(aspect="equal")
     plt.savefig(Q3_Niv1_Pie)
     plt.close()
@@ -228,15 +228,20 @@ def question3(request):
           # , explode=[0.3,0])
           # , autopct='%1.1f%%'
 
-    ax.pie(df2.groupby(['annee_declaration','type_declaration'])['type_declaration'].value_counts(),
-        labels=df2.groupby(['annee_declaration','type_declaration'])['type_declaration'].unique(),
+    pie = ax.pie(df2.groupby(['annee_declaration','type_declaration'])['type_declaration'].value_counts(),
+        # labels=df2.groupby(['annee_declaration','type_declaration'])['type_declaration'].unique(),
         radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
         # colors = inner_colors,
         labeldistance = 0.9)
           # , autopct='%1.1f%%'
-
+    
+    # add lines below to create and move legend out of chart, + bbox_inches="tight" in savefig() method.
+    labels_outer = df2.groupby(['type_declaration'])['type_declaration'].unique()
+    plt.legend(pie[0],labels_outer, bbox_to_anchor=(1.45,0.5), loc="center right", fontsize=10, 
+           bbox_transform=plt.gcf().transFigure)
+    
     ax.set(aspect="equal")
-    plt.savefig(Q3_Niv0_Pie)
+    plt.savefig(Q3_Niv0_Pie, bbox_inches="tight")
     plt.close()
   
 
@@ -303,8 +308,14 @@ def Q1_ParAnnée(request, pk):
     data_type = json.loads(json_records2)
     print("data in try", data_type)
   
+    ####################################################################################
+    # Data for mapping
+    # data_to_map = df
+    data_to_map = df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:]['geo_point_2d']
+    data_to_map = data_to_map.to_json()
+    data_to_map = json.loads(data_to_map)
     #Dict à retourner si le client à selectionné le détails de niveau 2
-    context = {'img_type' : [Q1_Niv1_Bar2, Q1_Niv1_Pie2], 'data_type': data_type , 'pk':pk, 'id':0} 
+    context = {'img_type' : [Q1_Niv1_Bar2, Q1_Niv1_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'data_to_map':data_to_map} 
 
 
   else:
@@ -314,7 +325,6 @@ def Q1_ParAnnée(request, pk):
 
     def absolute_value(val):
       a  = numpy.round(val/100.*df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['annee_declaration'].count().sum(), 0)
-      return a
 
     ####################################################################################
     #PIE CHART - Nb d'Anomalies par type dans l'arrondissement selectionné par le client  
