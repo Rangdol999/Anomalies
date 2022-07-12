@@ -11,8 +11,7 @@ body {
   position: relative;
   height: 50vh;
   background-color: #0000;
-  /* background: url('https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=1600')no-repeat center center/cover; */
-    background: url('https://images.unsplash.com/photo-1619794578892-cbdd3ff81c95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHBhcmlzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60')no-repeat center center/cover;
+  background: url('https://images.unsplash.com/photo-1619794578892-cbdd3ff81c95?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjZ8fHBhcmlzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60')no-repeat center center/cover;
 }
 /* .container {
   text-align: left;
@@ -195,7 +194,7 @@ td ul li {
   justify-content: center;
   align-items:center;
   pointer-events: none;
-  transition: all .5 ease;
+  transition: all .5s ease;
 }
 .modelImage.open{
   pointer-events: all;
