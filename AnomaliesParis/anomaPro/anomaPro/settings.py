@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-##########################################################################
+####################### PATH CONFIGURATION ################################
 import os  
 #from django.conf.global_settings import STATICFILES_DIRS
 from pathlib import Path 
