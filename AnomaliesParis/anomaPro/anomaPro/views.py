@@ -74,15 +74,12 @@ def question1(request):
         radius=1, wedgeprops=dict(width=1, edgecolor='w'),
         colors = outer_colors,
         labeldistance = 0.5)
-          # , explode=[0.3,0])
-          # , autopct='%1.1f%%'
 
   ax.pie(df2.groupby(['annee_declaration','arrondissement'])['arrondissement'].value_counts(),
         labels=df2.groupby(['annee_declaration','arrondissement'])['arrondissement'].unique(),
         radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
         colors = inner_colors,
         labeldistance = 0.9)
-          # , autopct='%1.1f%%'
 
   ax.set(aspect="equal")
   plt.savefig(Q1_Niv0_Pie)
@@ -126,17 +123,12 @@ def question2(request):
   ax.pie(df2.groupby(['annee_declaration'])['annee_declaration'].value_counts(),
         labels=df2['annee_declaration'].unique(),
         radius=1, wedgeprops=dict(width=1, edgecolor='w'),
-        # colors = outer_colors,
         labeldistance = 0.5)
-          # , explode=[0.3,0])
-          # , autopct='%1.1f%%'
 
   ax.pie(df2.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].value_counts(),
         labels=df2.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].unique(),
         radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
-        # colors = inner_colors,
         labeldistance = 0.9)
-          # , autopct='%1.1f%%'
 
   ax.set(aspect="equal")
   plt.savefig(Q2_Niv0_Pie)
