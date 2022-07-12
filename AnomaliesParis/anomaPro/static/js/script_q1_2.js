@@ -1,4 +1,4 @@
-console.log("Question 1 niveau 0")
+console.log("Question 1 niveau 2")
 
 arrondissements = {
   1:{ lat: 48.863221, lng: 2.335483 },
@@ -33,39 +33,39 @@ function initMap() {
 
   console.log(data_to_map)
 
-  for (let arr in data_to_map){
-    //loop through ARRONDISSEMENTS
+  // for (let arr in data_to_map){
+  //   //loop through ARRONDISSEMENTS
 
-    new google.maps.Marker({
-      position: arrondissements[arr],
-      map: map,
-      label: "Arr"+arr
-    })
+  //   new google.maps.Marker({
+  //     position: arrondissements[arr],
+  //     map: map,
+  //     label: "Arr"+arr
+  //   })
 
-    for (let year in data_to_map[arr]){
-      // loop through YEARS
+  //   for (let year in data_to_map[arr]){
+  //     // loop through YEARS
       
-      // define color based on YEAR
-      if (year == 2022){
-        var color_fill = "#e75c31" 
-        var color_line = "#e75c31"
-      }
-      else if (year == 2021){
-        var color_fill = "#41c5b8" 
-        var color_line = "#41c5b8"
-      }
+  //     // define color based on YEAR
+  //     if (year == 2022){
+  //       var color_fill = "#e75c31" 
+  //       var color_line = "#e75c31"
+  //     }
+  //     else if (year == 2021){
+  //       var color_fill = "#41c5b8" 
+  //       var color_line = "#41c5b8"
+  //     }
 
-      // put a circle which radius is linked to quantity, centered on the ARRONDISSEMENT
-      new google.maps.Circle({
-        center : arrondissements[arr],
-        map: map,
-        radius : data_to_map[arr][year]/100,
-        strokeColor: color_line,
-        StrokeOpacity: 0.8,
-        fillColor: color_fill,
-        fillOpacity: 0.5,
-      })
-    }
-  }
+  //     // put a circle which radius is linked to quantity, centered on the ARRONDISSEMENT
+  //     new google.maps.Circle({
+  //       center : arrondissements[arr],
+  //       map: map,
+  //       radius : data_to_map[arr][year]/100,
+  //       strokeColor: color_line,
+  //       StrokeOpacity: 0.8,
+  //       fillColor: color_fill,
+  //       fillOpacity: 0.5,
+  //     })
+  //   }
+  // }
 } 
  

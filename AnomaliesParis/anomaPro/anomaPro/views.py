@@ -24,7 +24,7 @@ class FilePath():
 
 
 # df = pandas.read_csv(r"static/dans-ma-rue.csv", sep=';',header = 0,encoding="unicode_escape")
-df = pandas.read_csv(r"dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8") # gestion caractères spéciaux
+df = pandas.read_csv(r"static/dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8") # gestion caractères spéciaux
 
 # df2 = df.drop(['ID DECLARATION','SOUS TYPE DECLARATION','ADRESSE','CODE POSTAL', 'VILLE',
 #   'CONSEIL DE QUARTIER','DATE DECLARATION', 'MOIS DECLARATION','OUTIL SOURCE','INTERVENANT','ID_DMR','geo_shape'], axis=1)
