@@ -179,10 +179,7 @@ def question3(request):
     pie = ax.pie(df3.groupby(['arrondissement'])['arrondissement'].value_counts(),
           labels=df3['arrondissement'].unique(),
           radius=1, wedgeprops=dict(width=1, edgecolor='w'),
-          # colors = outer_colors,
           labeldistance = 0.7)
-            # , explode=[0.3,0])
-            # , autopct='%1.1f%%'
     
     ax.set(aspect="equal")
     plt.savefig(Q3_Niv1_Pie)
@@ -222,17 +219,12 @@ def question3(request):
     ax.pie(df2.groupby(['annee_declaration'])['annee_declaration'].value_counts(),
         labels=df2['annee_declaration'].unique(),
         radius=1, wedgeprops=dict(width=1, edgecolor='w'),
-        # colors = outer_colors,
         labeldistance = 0.5)
-          # , explode=[0.3,0])
-          # , autopct='%1.1f%%'
+
 
     pie = ax.pie(df2.groupby(['annee_declaration','type_declaration'])['type_declaration'].value_counts(),
-        # labels=df2.groupby(['annee_declaration','type_declaration'])['type_declaration'].unique(),
         radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
-        # colors = inner_colors,
         labeldistance = 0.9)
-          # , autopct='%1.1f%%'
     
     # add lines below to create and move legend out of chart, + bbox_inches="tight" in savefig() method.
     labels_outer = df2.groupby(['type_declaration'])['type_declaration'].unique()
@@ -386,8 +378,6 @@ def Q2_ParMois(request, pk):
         radius=1, wedgeprops=dict(width=1, edgecolor='w'),
         # colors = outer_colors,
         labeldistance = 0.5)
-        # , explode=[0.3,0])
-        # , autopct='%1.1f%%'
 
     ax.pie(df3.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].value_counts(),
         labels=df3.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].unique(),
@@ -439,9 +429,7 @@ def Q2_ParMois(request, pk):
     ax.pie(df2.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].value_counts(),
           labels=df2.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].unique(),
           radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
-          # colors = inner_colors,
           labeldistance = 0.9)
-            # , autopct='%1.1f%%'
       
     ax.set(aspect="equal")
     plt.savefig(str(Q2_Niv1_Pie))
