@@ -143,6 +143,9 @@
       {% endif %}
     </div>
   </div>
+  <div id="map" data-my_data="" class="imageContent border-1 my-3">
+    displaying map
+  </div>
   <div class="clickBtn text-center mb-5">
     <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
   </div>
@@ -151,12 +154,12 @@
   
 {% if context.id == 0 %}
 <script>
-  //var data_to_map = {{data|safe}};
+  var data_to_map = {{context.data_to_map|safe}};
   var lat_a = 48.856615;
   var long_a = 2.342324;
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6lyRej85oh6sIiC_xmwx9jjhLdXj9OEk&callback=initMap&v=weekly" defer></script>
-<script src="../static/js/script_q1_2.js"></script>
+<script src="/static/js/script_q1_2.js"></script>
 {% endif %}
 <script src="../static/js/script_q1.js"></script>
 <script>
