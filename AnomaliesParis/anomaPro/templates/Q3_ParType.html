@@ -4,18 +4,9 @@
 {% block pageTitle%} Anomalie and Arrondissement {%endblock%}
 
 <!-- page header -->
-{% block headerTitle%}
-<div class="logoTab">
-  <div class="container d-flex justify-content-center align-items-center flex-row">
+<!-- {% block headerTitle%}
 
-    <div class="logo mx-3">
-      <a href="/">
-        <img src="https://cdn.dribbble.com/users/2524031/screenshots/13961394/media/fe0cbee48954b7335a47e539c3e2579a.png?compress=1&resize=1000x750&vertical=top"  alt="">
-      </a>
-    </div>
-  </div>
-</div>
-{%endblock%}
+{%endblock%} -->
 
 
 <!-- page header Content -->
@@ -98,8 +89,8 @@
   </div>
   <div class="contentOne">
     <div class="row">
-      <div class="col col-md-5 mx-2 my-5 rounded bg-dark bg-opacity-50 mx-auto">
-        <table class="table my-2 p-2 text-white table-hover">
+      <div class="col col-md-5 mx-2 rounded">
+        <table class="table my-2 p-2 text-white">
           <thead>
             <th>mois de declaration</th>
             <th>2021</th>
@@ -128,32 +119,27 @@
         </table>
       </div>
       {% if id == 0 %}
-      <div class="col col-md-5 rounded mx-auto" id="image_bg">
+      <div class="col col-md-6 rounded">
         <img src = '{{ img.0 | safe}}' class="img-thumbnail" alt=raté>
       </div>
-      <div class="col col-md-5 rounded my-3 mx-auto" id="image_bg">
+      <div class="col col-md-4 rounded my-3">
         <img src = '{{ img.1 | safe }}' class="img-thumbnail" alt=raté>
       </div>
       {% elif id == 1 %}
-      <div class="col col-md-5 rounded my-5 mx-auto" id="image_bg">
+      <div class="col col-md-6 rounded">
         <img src = '{{ img.0 | safe}}' class="img-thumbnail" alt=raté>
       </div>
-      <div class="col col-md-5 rounded my-3 mx-auto" id="image_bg">
+      <div class="col col-md-4 rounded my-3">
         <img src = '{{ img.1 | safe }}' class="img-thumbnail" alt=raté>
       </div>
       {% endif %}
     </div>
   </div>
-  <div class="clickBtn text-center">
+  <div class="clickBtn">
     <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
   </div>
 </div>
-
-<!-- js -->
-<script src="../static/js/script_q1.js"></script>
-
 {%endblock%}
-
 <!-- 
 {% if context.id == 0 %}
   <img src = '{{ context.img_type.0 | safe}}' alt=raté>
