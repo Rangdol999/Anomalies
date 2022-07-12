@@ -26,7 +26,7 @@ class FilePath():
 ################################ Filtrage de la DATABASE ##########################################################################################################*
 
 # lecture du CSV et gestion des caractères spéciaux
-df = pandas.read_csv(r"static/dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8") 
+df = pandas.read_csv(r"dans-ma-rue.csv", sep=';',header = 0,encoding="utf-8") 
 # on retire les colonnes inutiles :
 df2 = df.drop(['ID DECLARATION','SOUS TYPE DECLARATION','ADRESSE','CODE POSTAL', 'VILLE',
   'CONSEIL DE QUARTIER','DATE DECLARATION','OUTIL SOURCE','INTERVENANT','ID_DMR','geo_shape'], axis=1)
@@ -319,7 +319,11 @@ def Q1_ParAnnée(request, pk):
     data_to_map = data_to_map.to_json()
     data_to_map = json.loads(data_to_map)
     #Dict à retourner si le client à selectionné le détails de niveau 2
+<<<<<<< HEAD
     context = {'img_type' : [Q1_Niv1_Bar2, Q1_Niv1_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'data_to_map':data_to_map} 
+=======
+    context = {'img_type' : [Q1_Niv2_Bar2, Q1_Niv2_Pie2], 'data_type': data_type , 'pk':pk, 'id':0} 
+>>>>>>> b4199bbbe1e19597aed80da1c48ea18cf04a13eb
 
 
   else:
