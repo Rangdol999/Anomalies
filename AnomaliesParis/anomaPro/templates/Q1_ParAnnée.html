@@ -52,11 +52,8 @@
               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Arrondissement
               </a>
-              <ul class="dropdown-menu " aria-labelledby="navbarScrollingDropdown">
-                <!-- {%for key, value in context.items %}
-                <li><a class="dropdown-item active" href="/question1/1">{{ pk.key }} Arrondissement</a></li>
-                {% endfor %} -->
-                <li><a class="dropdown-item" href="/question1/2">1 Arrondissement</a></li>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><a class="dropdown-item" href="question1/1">1 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/2">2 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/3">3 Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question1/4">4 Arrondissement</a></li>
@@ -110,13 +107,11 @@
     <h4>DATA</h4>
     <p>Quantité d'anomalies pour l'arrondissement {{ context.pk }}.</p>
     <!-- <p>Quantité d'anomalies pour l'arrondissement {{ list_anomalie }}.</p> -->
-    <p>
-    </p>
   </div>
   <div class="contentOne mt-5">
     <div class="row">
       <div class="col-lg-4 h-50 mx-auto mt-3 bg-secondary bg-opacity-50 rounded" data-aos="zoom-in" data-aos-duration="1000">
-        <table class="table my-2 p-2 text-white">
+        <table class="table my-2 p-2 text-white table-hover">
           <thead>
             <th>Annee_declaration</th>
             <th>Quantité</th>
@@ -176,8 +171,8 @@
     <section>
       <!--Grid row-->
       <div class="row">
-        <!-- Grid column -->
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+        <!-- Grid column --> 
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
           <h6 class="text-uppercase mb-4 font-weight-bold">
             GRETA PROJECT
           </h6>
@@ -190,7 +185,7 @@
         <hr class="w-100 clearfix d-md-none" />
 
         <!-- Grid column -->
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 text-white">
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 text-white foot-p">
           <h6 class="text-uppercase mb-4 font-weight-bold ">TASKS</h6>
           <p>Extraction/nettoyage des donnees</p>
           <p>Cartographie</p>
@@ -205,7 +200,7 @@
         <hr class="w-100 clearfix d-md-none" />
 
         <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
           <h6 class="text-uppercase mb-4 font-weight-bold">TEAM MEMBER</h6>
           <p> Nicolas.C(chef de projet) <br> et Damien</p>
           <p>Frantz et Djensen</p>

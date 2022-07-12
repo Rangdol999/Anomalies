@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+<style>
+  .gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    height:500px;
+    width:600px;
+  }
+</style>
 <!-- page title -->
 {%block pageTitle%} Information {%endblock%}
 
@@ -8,7 +16,7 @@
   <div class="container d-flex justify-content-center flex-row">
 
     <div class="img1">
-      <img src="../static/image/pngegg (1).png" alt="">
+      <img src="../static/image/dic.png" alt="">
     </div>
 
     <div class="logo">
@@ -18,7 +26,7 @@
     </div>
 
     <div class="img2">
-      <img src="../static/image/pngegg (1).png" alt="">
+      <img src="../static/image/dic.png" alt="">
     </div>
   </div>
 </div>
@@ -104,11 +112,11 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container mt-5 p-0">
   <div class="mainContent">
     <div class="row">
-      <div class="col1 col-lg-7 my-2 py-3 rounded mx-auto" data-aos="zoom-in-left" data-aos-duration="1000">
-        <table class="table fs-6 fw-semibold text-white">
+      <div class="col1 col-lg-6 my-2 rounded mx-auto p-0 " data-aos="zoom-in-left" data-aos-duration="1000">
+        <table class="table fs-6 fw-semibold text-white h-50 table-hover">
           <thead>
             <td> Arrondissement </td>
             <!-- {% if data %}
@@ -141,26 +149,34 @@
           </tbody>
         </table>
       </div>
-      <div class="col2 col-lg-4 my-2 py-3 text-center mx-auto" data-aos="zoom-in-right" data-aos-duration="1000">
-        <h4 class="mb-4">Graph(pie) </h4>
+      <div class="col-lg-5 my-2 py-3 text-center mx-auto" data-aos="zoom-in-right" data-aos-duration="1000">
+        <h4 class="mb-4 text-dark">Graph(pie) </h4>
             <div class="imageContent shadow-lg" id="image_bg">
-              <img src = '{{ img.0 }}' alt=raté>
+              <img src = '{{ img.1 }}' alt=raté>
             </div>
       </div>
     </div>
     
      <!-- second row -->
     <div class="row my-5">
-      <div class="col-md-7 my-2 py-3 rounded text-center" data-aos="zoom-out-right" data-aos-duration="1000">
-        <h4>Cart</h4>
-        <div id="map" data-my_data="" class="imageContent border-1 my-3">
+      <div class="col-lg-6  mx-auto py-3 rounded text-center" data-aos="zoom-out-right" data-aos-duration="1000">
+        <h4 class="text-dark mb-4">Map</h4>
+        <!-- <div id="map" data-my_data="" class="imageContent border-1 my-3"> -->
           <!-- displaying map -->
+        <!-- </div> -->
+
+        <div class="mapouter imagContent">
+          <div class="gmap_canvas overflow-auto">
+            <iframe width="600" height="450" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+            </iframe><a href="https://123movies-to.org"></a>
+          </div>
         </div>
+
       </div>
-      <div class="col2 col-md-5 my-2 py-3 text-center" data-aos="zoom-out-left" data-aos-duration="1000">
-        <h4 class="mb-4">Graph(hist)</h4>
+      <div class="col-lg-5  mx-auto my-2 py-3 text-center text-white" data-aos="zoom-out-left" data-aos-duration="1000">
+        <h4 class="mb-4 text-dark">Graph(hist)</h4>
           <div class="imageContent shadow-lg" id="image_bg">
-            <img src="{{ img.1 }}" class="sshadow-lg border-3 border-success" alt="rate">
+            <img src="{{ img.0 }}" class="sshadow-lg border-3 border-success" alt="rate">
           </div>
       </div>
     </div>
@@ -168,7 +184,7 @@
 </div>
 
 
-  <div class="clickBtn">
+  <div class="clickBtn text-center mb-4">
     <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
   </div>
 
@@ -183,3 +199,129 @@
 
 {%endblock%}
 
+{%block Footer %}
+{% load bootstrap_icons %}
+<footer class="text-center text-lg-start text-white" style="background: rgba(0, 0, 0, 0.2)" data-aos="fade-up"
+data-aos-duration="1000">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Links -->
+    <section>
+      <!--Grid row-->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
+          <h6 class="text-uppercase mb-4 font-weight-bold">
+            GRETA PROJECT
+          </h6>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus molestias et fuga aspernatur. Fuga officia ipsum accusamus.
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 text-white foot-p">
+          <h6 class="text-uppercase mb-4 font-weight-bold ">TASKS</h6>
+          <p>Extraction/nettoyage des donnees</p>
+          <p>Cartographie</p>
+          <p>Exploitation des donnees</p>
+          <p>Front(Django)</p>
+        </div>
+        <!-- Grid column -->
+
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
+          <h6 class="text-uppercase mb-4 font-weight-bold">TEAM MEMBER</h6>
+          <p> Nicolas.C(chef de projet) <br> et Damien</p>
+          <p>Frantz et Djensen</p>
+          <p> Nicolas.T</p>
+          <br>
+          <p>Gabriel et Rangdol</p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+
+          <!-- Facebook -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #3b5998"
+              href="#!"
+              role="button"
+              ><i class="bi bi-facebook"></i
+            ></a>
+
+          <!-- Twitter -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #55acee"
+              href="#!"
+              role="button"
+              ><i class="bi bi-twitter"></i
+            ></a>
+
+          <!-- Google -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #dd4b39"
+              href="#!"
+              role="button"
+              ><i class="bi bi-google"></i
+            ></a>
+
+          <!-- Instagram -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #ac2bac"
+              href="#!"
+              role="button"
+              ><i class="bi bi-instagram"></i
+            ></a>
+
+          <!-- Linkedin -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #0082ca"
+              href="#!"
+              role="button"
+              ><i class="bi bi-linkedin"></i
+            ></a>
+          <!-- Github -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #333333"
+              href="#!"
+              role="button"
+              ><i class="bi bi-github"></i
+            ></a>
+        </div>
+      </div>
+      <!--Grid row-->
+    </section>
+    <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div
+        class="text-center p-3"
+        style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+    © 2022 Copyright:
+    <a class="text-white" href="/home"
+        >Projet Anomalie Paris </a
+      >
+  </div>
+  <!-- Copyright -->
+</footer>
+{%endblock%}

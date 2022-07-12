@@ -117,8 +117,8 @@
   </div>
   <div class="mainContent text-center position-relative">
     <div class="row">
-      <div class="col1 col-lg-6  mx-auto py-3 rounded text-center" data-aos="fade-right" data-aos-duration="1000">
-        <table class="table fs-6 fw-lighter text-white">
+      <div class="col1 col-lg-6  mx-auto py-3 rounded text-center bg-secondary bg-opacity-50" data-aos="fade-right" data-aos-duration="1000">
+        <table class="table fs-6 fw-lighter text-white table-hover">
           <thead>
             <th>Arrondissement</th>
             <th>2021</th>
@@ -129,11 +129,11 @@
             <tbody class="bg-ligth">
               {% if data %}
               {% for key, value in data.items %} 
-              <tr class="text-center text-white">
-              <td class="p-3 ">{{key}}</td>
-              {% for year,qty in value.items %}
-              <td class="p-3">{{qty}}</td>
-                  {% endfor %}      
+                <tr class="text-center text-white">
+                    <td class="p-3 ">{{key}}</td>
+                    {% for year,qty in value.items %}
+                    <td class="p-3">{{qty}}</td>
+                    {% endfor %}      
                 </tr>
               {% endfor %}
             {% endif %}           
@@ -151,13 +151,13 @@
      <!-- second row -->
     <div class="row my-5">
       <div class="col-lg-6  mx-auto py-3 rounded text-center" data-aos="flip-up" data-aos-duration="1000">
-        <h4>Cart</h4>
+        <h4 class="mb-4">Map</h4>
         <!-- <div id="map" data-my_data="" class="imageContent border-1 my-3">
           displaying map
         </div> -->
         <div class="mapouter imagContent">
           <div class="gmap_canvas overflow-auto h-50">
-            <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+            <iframe width="600" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
             </iframe><a href="https://123movies-to.org"></a>
           </div>
         </div>
@@ -204,7 +204,7 @@
       <!--Grid row-->
       <div class="row">
         <!-- Grid column -->
-        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
           <h6 class="text-uppercase mb-4 font-weight-bold">
             GRETA PROJECT
           </h6>
@@ -217,7 +217,7 @@
         <hr class="w-100 clearfix d-md-none" />
 
         <!-- Grid column -->
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 text-white">
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 text-white foot-p">
           <h6 class="text-uppercase mb-4 font-weight-bold ">TASKS</h6>
           <p>Extraction/nettoyage des donnees</p>
           <p>Cartographie</p>
@@ -232,7 +232,7 @@
         <hr class="w-100 clearfix d-md-none" />
 
         <!-- Grid column -->
-        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
           <h6 class="text-uppercase mb-4 font-weight-bold">TEAM MEMBER</h6>
           <p> Nicolas.C(chef de projet) <br> et Damien</p>
           <p>Frantz et Djensen</p>
@@ -243,7 +243,7 @@
         <!-- Grid column -->
 
         <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 foot-p">
           <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
 
           <!-- Facebook -->

@@ -16,7 +16,7 @@
   <div class="container d-flex justify-content-center flex-row">
 
     <div class="img1">
-      <img src="../static/image/pngegg (1).png" alt="">
+      <img src="../static/image/dic.png" alt="">
     </div>
 
     <div class="logo">
@@ -26,7 +26,7 @@
     </div>
 
     <div class="img2">
-      <img src="../static/image/pngegg (1).png" alt="">
+      <img src="../static/image/dic.png" alt="">
     </div>
   </div>
 </div>
@@ -67,21 +67,29 @@
             <!-- dropdown two -->
             <li class="nav-item dropdown mx-5">
               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Arrondissement
+                Arrondissement 
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item" href="/question2/Janvier"> Janvier </a></li>
-                <li><a class="dropdown-item" href="/question2/Février"> Février</a></li>
-                <li><a class="dropdown-item" href="/question2/Mars"> Mars </a></li>
-                <li><a class="dropdown-item" href="/question2/Avril"> Avril </a></li>
-                <li><a class="dropdown-item" href="/question2/Mai"> Mai </a></li>
-                <li><a class="dropdown-item" href="/question2/Juin"> Juin </a></li>
-                <li><a class="dropdown-item" href="/question2/Juillet"> Juillet </a></li>
-                <li><a class="dropdown-item" href="/question2/Août"> Août </a></li>
-                <li><a class="dropdown-item" href="/question2/Septembre"> Septembre </a></li>
-                <li><a class="dropdown-item" href="/question2/Octobre"> Octobre </a></li>
-                <li><a class="dropdown-item" href="/question2/Novembre"> Novembre </a></li>
-                <li><a class="dropdown-item" href="/question2/Décembre"> Décembre </a></li>
+                <li><a class="dropdown-item" href="/question2/1">1 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/2">2 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/3">3 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/4">4 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/5">5 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/6">6 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/7">7 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/8">8 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/9">9 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/10">10 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/11">11 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/12">12 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/13">13 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/14">14 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/15">15 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/16">16 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/17">17 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/18">18 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/19">19 Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/20">20 Arrondissement</a></li>
               </ul>
             </li>
             <!-- drop down three -->
@@ -115,8 +123,8 @@
 <div class="container">
   <div class="mainContent">
     <div class="row">
-      <div class="col1 col-lg-6 my-5 py-3 rounded mx-auto" data-aos="fade-up-right" data-aos-duration="1000">
-        <table class="table fs-6 fw-lighter text-white">
+      <div class="col1 col-lg-6 my-5 py-3 rounded mx-auto bg-secondary bg-opacity-50" data-aos="fade-up-right" data-aos-duration="1000">
+        <table class="table fs-6 fw-lighter text-white table-hover text-center">
           <thead>
             <th> Mois de déclaration </th>
             <!-- Si on veut avoir un tableau dynamique afin d'acutaliser et créer une colonne pour 2023, 2024 .. 
@@ -128,7 +136,7 @@
             <th> 2021 </th>
             <th> 2022 </th>
           </thead>
-          <tbody class="bg-ligth">
+          <tbody >
             {% if data %}
                 {% for key, value in data.items %} 
                     <tr class="text-center text-white">
@@ -142,8 +150,8 @@
           </tbody>
         </table>
       </div>
-      <div class="col2 col-lg-4 my-2 py-3 text-center mx-auto" data-aos="fade-up-left" data-aos-duration="1000">
-        <h4 class="mb-4">Graph(pie) </h4>
+      <div class="col2 col-lg-5 my-2 py-3 text-center mx-auto" data-aos="fade-up-left" data-aos-duration="1000">
+        <h4 class="mb-4 text-dark">Graph(pie) </h4>
             <div class="imageContent shadow-lg" id="image_bg">
               <img src = '{{ img.0 }}' alt=raté>
             </div>
@@ -152,14 +160,21 @@
     
      <!-- second row -->
     <div class="row my-5">
-      <div class="col-lg-6 mb-4 py-3 rounded text-center mx-auto" data-aos="fade-down-right" data-aos-duration="1000">
-        <h4>Cart</h4>
-        <div id="map" data-my_data="" class="imageContent border-1 my-3" >
+      <div class="col-lg-6  mx-auto py-3 rounded text-center" data-aos="fade-down-right" data-aos-duration="1000">
+        <h4 class="text-dark mb-2">Map</h4>
+        <!-- <div id="map" data-my_data="" class="imageContent border-1 my-3" > -->
           <!-- displaying map -->
+        <!-- </div> -->
+        <div class="mapouter imagContent mt-2">
+          <div class="gmap_canvas overflow-auto h-50">
+            <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+            </iframe><a href="https://123movies-to.org"></a>
+          </div>
         </div>
+
       </div>
-      <div class="col-lg-4 my-2 py-3 text-center mx-auto" data-aos="fade-down-left" data-aos-duration="1000">
-        <h4 class="mb-4">Graph(hist)</h4>
+      <div class="col-lg-5  mx-auto my-2 py-3 text-center text-white" data-aos="fade-down-left" data-aos-duration="1000">
+        <h4 class="mb-4 text-dark">Graph(hist)</h4>
           <div class="imageContent shadow-lg" id="image_bg">
             <img src="{{ img.1 }}" class="sshadow-lg border-3 border-success" alt="rate">
           </div>
@@ -182,3 +197,130 @@
   <script src="../static/js/script_q1.js"></script>
 {%endblock%}
 
+
+{%block Footer %}
+{% load bootstrap_icons %}
+<footer class="text-center text-lg-start text-white" style="background: rgba(0, 0, 0, 0.2)" data-aos="fade-up"
+data-aos-duration="1000">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Links -->
+    <section>
+      <!--Grid row-->
+      <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
+          <h6 class="text-uppercase mb-4 font-weight-bold">
+            GRETA PROJECT
+          </h6>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus molestias et fuga aspernatur. Fuga officia ipsum accusamus.
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3 text-white foot-p">
+          <h6 class="text-uppercase mb-4 font-weight-bold ">TASKS</h6>
+          <p>Extraction/nettoyage des donnees</p>
+          <p>Cartographie</p>
+          <p>Exploitation des donnees</p>
+          <p>Front(Django)</p>
+        </div>
+        <!-- Grid column -->
+
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <hr class="w-100 clearfix d-md-none" />
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
+          <h6 class="text-uppercase mb-4 font-weight-bold">TEAM MEMBER</h6>
+          <p> Nicolas.C(chef de projet) <br> et Damien</p>
+          <p>Frantz et Djensen</p>
+          <p> Nicolas.T</p>
+          <br>
+          <p>Gabriel et Rangdol</p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+
+          <!-- Facebook -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #3b5998"
+              href="#!"
+              role="button"
+              ><i class="bi bi-facebook"></i
+            ></a>
+
+          <!-- Twitter -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #55acee"
+              href="#!"
+              role="button"
+              ><i class="bi bi-twitter"></i
+            ></a>
+
+          <!-- Google -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #dd4b39"
+              href="#!"
+              role="button"
+              ><i class="bi bi-google"></i
+            ></a>
+
+          <!-- Instagram -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #ac2bac"
+              href="#!"
+              role="button"
+              ><i class="bi bi-instagram"></i
+            ></a>
+
+          <!-- Linkedin -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #0082ca"
+              href="#!"
+              role="button"
+              ><i class="bi bi-linkedin"></i
+            ></a>
+          <!-- Github -->
+          <a
+              class="btn btn-primary btn-floating m-1"
+              style="background-color: #333333"
+              href="#!"
+              role="button"
+              ><i class="bi bi-github"></i
+            ></a>
+        </div>
+      </div>
+      <!--Grid row-->
+    </section>
+    <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div
+        class="text-center p-3"
+        style="background-color: rgba(0, 0, 0, 0.2)"
+        >
+    © 2022 Copyright:
+    <a class="text-white" href="/home"
+        >Projet Anomalie Paris </a
+      >
+  </div>
+  <!-- Copyright -->
+</footer>
+{%endblock%}
