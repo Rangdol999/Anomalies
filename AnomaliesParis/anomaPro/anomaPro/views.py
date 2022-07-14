@@ -255,52 +255,52 @@ def question3(request):
     df3 = df2.loc[df2['type_declaration']==str(op.decode())]
     
     ########################################################################
-    ## PIE - Nombre d'anomalies par type d'anomalie pour tout les arrondissement
+    ## PIE - Nombre d'anomalies pour le type d'anomalie selectionne pour tout les arrondissement
     Q3_Niv1_Pie = "./static/img/Q3_Niv1_Pie.png"
     Q3_Niv1_Pie2 = "/static/img/Q3_Niv1_Pie.png"
   
-    df_q3_1 = pandas.crosstab(df3['type_declaration'],df3['annee_declaration'])
+    # croiser par arrondissement et année :
+    # résultat : 1 df dont l'index correspond aux arrondissements, avec 1 colonne par année
+    df_q1 = pandas.crosstab(df3['arrondissement'],df3['annee_declaration'])
 
-    # manage data to plot and explode parameter :
-    years = []
-    years_values = []
-    type_declaration = []
-    type_decalaration_values = []
-    type_declaration_max = []
-    explode_factor=0.1
+    # préparer données pour graph : 
+    years=[]
+    years_values=[]
+    arrondissements = []
+    arrondissements_values = []
+    arrondissements_max = [] #liste de booléen : true pour la valeur max, false pour les autres
+    explode = []
+    explode_factor=0.2
 
-    for column in df_q3_1.columns:
-        years_values.append(df_q3_1[column].sum())
+    for column in df_q1.columns:
+        # 1. années et valeurs totales par année
+        years_values.append(df_q1[column].sum())
         years.append(column)
-        for index, row in df_q3_1.iterrows():
-            type_declaration.append(index)
-            type_decalaration_values.append(row[column])
-            type_declaration_max.append(1 if (row[column] == np.max(df_q3_1[column])) else 0)
+        
+        # 2. arrondissements et valeurs par arrondissement 
+        
+        for index, row in df_q1.iterrows():
+            arrondissements.append(index)
+            arrondissements_values.append(row[column])
+            arrondissements_max.append(1 if (row[column] == np.max(df_q1[column])) else 0)
 
     # paramètre explode du graph pie pour gérer identification de l'arrondissement max:
-    explode = [explode_factor * i for i in type_declaration_max]
+    explode = [explode_factor * i for i in arrondissements_max]
 
-    # Definir les couleurs 
-    # couleurs annee_declaration :
+    # Definir les couleurs avec la map tab20 : 
+    # couleur principale (indexes pairs) pour les annees
+    # couleurs secondaires (indexes impairs ) pour les arrondissements correspondants.
+
     cmap = plt.get_cmap("tab20c")
     inner_colors = cmap(np.arange(10)*4)
+    outer_colors = cmap(np.array([1 + 4 * j for j in range(0,len(years)) for i in range(0,20)]))
 
-    # couleurs type_declaration : 
-    categories = df3['type_declaration'].unique()
-    n = len(categories)
-    cmap = plt.get_cmap('twilight')
-    # cmap = plt.get_cmap('winter')
-    outer_colors = [cmap(i/n) for i in range(0,n)]
-
-    # graph :
     fig1, ax1 = plt.subplots()
-    pie  = ax1.pie(type_decalaration_values
+    ax1.pie(arrondissements_values
         ,colors = outer_colors
-        # raccourcir les etiquettes aux premiers caractères uniquement, afficher seulement pour les max
-        ,labels = [(f"{label[:7]}..." if type_declaration_max[i] else "") for i , label in enumerate(type_declaration)]
-        ,rotatelabels =True
         ,explode= explode
-        ,labeldistance = 0.6
+        ,labels = arrondissements
+        ,labeldistance = 0.9
         ,radius = 1.5
         ,wedgeprops=dict(width=0.8, edgecolor='w')
         )
@@ -309,12 +309,10 @@ def question3(request):
         ,labeldistance = 0.5
         ,colors = inner_colors
         ,labels = years
-        ,wedgeprops=dict(width=1, edgecolor='w')
         ,radius = 1)
 
-    ax1.legend(pie[0],categories, bbox_to_anchor=(1.45,0.5), loc="center right", fontsize=10, 
-              bbox_transform=plt.gcf().transFigure)
-    
+    ax1.axis()
+    plt.title(f"{request_get['anomalie']} par année et arrondissement.", pad = 50)
     # ax1.set(aspect="equal")
     plt.savefig(Q3_Niv1_Pie, bbox_inches="tight")
     plt.close()
@@ -550,7 +548,7 @@ def Q1_ParAnnée(request, pk):
 
     ax1.legend(pie[0],categories, bbox_to_anchor=(1.45,0.5), loc="center right", fontsize=10, 
               bbox_transform=plt.gcf().transFigure)
-    ax1.set(title=f"Anomalies dans l'arrondissement n°{pk}")
+    plt.title(f"Anomalies dans l'arrondissement n°{pk}")
 
     ax1.axis()  
     plt.savefig(str(Q1_Niv1_Pie),bbox_inches='tight')
@@ -673,7 +671,7 @@ def Q2_ParMois(request, pk):
         ,radius = 1)
 
     ax1.axis()
-    ax1.set(title=f"{request_get['anomalie']} dans l'arrondissement n°{pk}")
+    plt.title(f"{request_get['anomalie']} dans l'arrondissement n°{pk}")
     ax1.set(aspect="equal")
 
 
@@ -767,7 +765,7 @@ def Q2_ParMois(request, pk):
 
     ax1.axis()
 
-    ax1.set(title=f"Anomalies dans l'arrondissement n°{pk}")
+    plt.title(f"Anomalies dans l'arrondissement n°{pk}")
     plt.savefig(str(Q2_Niv1_Pie),bbox_inches='tight')
     plt.close()
 
