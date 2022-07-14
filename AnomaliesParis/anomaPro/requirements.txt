@@ -1,7 +1,7 @@
-pandas==1.4.2
-django==2.2.12
-csv==1.0
-numpy==1.22.4
-json==2.0.9
-matplotlib==3.5.2
-django_bootstrap_icons==0.7.9
+pandas
+django
+numpy
+json
+matplotlib
+django_bootstrap_icons
+csv
