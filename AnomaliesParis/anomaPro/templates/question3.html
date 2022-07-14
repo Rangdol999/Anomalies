@@ -102,22 +102,22 @@
 <div class="container mt-5 p-0">
   <div class="mainContent">
     <div class="row">
-      <div class="col1 col-lg-6 my-2 rounded mx-auto p-0"  data-aos="zoom-in-left" data-aos-duration="1000">
+      <div class="col1 col-lg-6 my-2 rounded mx-auto p-0 bg-black bg-opacity-50"  data-aos="zoom-in-left" data-aos-duration="1000">
         <table class="table fs-6 fw-semibold text-white h-50 table-hover">
           {% if id == 1 %}
           <thead>
-            <th> Arrondissement </th>
-            <th> Activités commerciales et professionnelles </th>
-            <th> Arbres, végétaux et animaux </th>
-            <th> Autos, motos, vélos... </th>
-            <th> Eau </th>
-            <th> Graffitis, tags, affiches et autocollants </th>
-            <th> Mobiliers urbains </th>
-            <th> Objets abandonnés </th>
-            <th> Propreté </th>
-            <th> Voirie et espace public </th>
-            <th> Éclairage, Électricité </th>
-          </thead>
+            <td> Arrondissement </td>
+            <td> Activités commerciales et professionnelles </td>
+            <td> Arbres, végétaux et animaux </td>
+            <td> Autos, motos, vélos... </td>
+            <td> Eau </td>
+            <td> Graffitis, tags, affiches et autocollants </td>
+            <td> Mobiliers urbains </td>
+            <td> Objets abandonnés </td>
+            <td> Propreté </td>
+            <td> Voirie et espace public </td>
+            <td> Éclairage, Électricité </td>
+          </tdead>
           <tbody class="bg-ligth">
                 {% for key, value in data.items %} 
                     <tr class="text-center text-white">
@@ -196,8 +196,7 @@
 
 {%block Footer %}
 {% load bootstrap_icons %}
-<footer class="text-center text-lg-start text-white" style="background: rgba(0, 0, 0, 0.2)" data-aos="fade-up"
-data-aos-duration="1000">
+<footer class="text-center text-lg-start text-white" style="background: rgba(0, 0, 0, 0.2)" >
   <!-- Grid container -->
   <div class="container p-4 pb-0">
     <!-- Section: Links -->
@@ -207,11 +206,10 @@ data-aos-duration="1000">
         <!-- Grid column -->
         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 foot-p">
           <h6 class="text-uppercase mb-4 font-weight-bold">
-            GRETA PROJECT
+            NOTRE CLIENT: 
           </h6>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus molestias et fuga aspernatur. Fuga officia ipsum accusamus.
-          </p>
+          <P>GRETA YVELINES</P>
+          <p>Gilles Veronie</p>
         </div>
         <!-- Grid column -->
 
@@ -244,7 +242,7 @@ data-aos-duration="1000">
         <!-- Grid column -->
 
         <!-- Grid column -->
-        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3 foot-p">
           <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
 
           <!-- Facebook -->
@@ -314,7 +312,7 @@ data-aos-duration="1000">
         >
     © 2022 Copyright:
     <a class="text-white" href="/home"
-        >Projet Anomalie Paris </a
+        > <span class="foot-p">Anomalie Paris Project and All right Reserved </span></a
       >
   </div>
   <!-- Copyright -->
