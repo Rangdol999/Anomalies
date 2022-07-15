@@ -59,7 +59,7 @@
             <li><a class="dropdown-item" href="/question3/?anomalie=Mobiliers%20urbains"> Mobiliers urbains </a></li>
             <li><a class="dropdown-item" href="/question3/?anomalie=Propreté"> Propreté </a></li>
             <li><a class="dropdown-item" href="/question3/?anomalie=Éclairage,%20Électricité"> Éclairage / Électricité </a></li>
-            <li><a class="dropdown-item" href="/?anomalie=Voirie%20et%20espace%20public"> Voirie et espace public </a></li>
+            <li><a class="dropdown-item" href="/question3/?anomalie=Voirie%20et%20espace%20public"> Voirie et espace public </a></li>
             <li><a class="dropdown-item" href="/question3/?anomalie=Activités%20commerciales%20et%20professionnelles"> Activités commerciales et professionnelles </a></li>
             <li><a class="dropdown-item" href="/question3/?anomalie=Eau"> Eau </a></li>
             <li><a class="dropdown-item" href="/question3/?anomalie=Arbres,%20végétaux%20et%20animaux"> Arbres, végétaux et animaux </a></li>
@@ -72,7 +72,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
             {% for key, value in data.items %} 
-            <li><a class="dropdown-item" href="/question1/{{key}}"> {{key}} Arrondissement</a></li>
+            <li><a class="dropdown-item" href="/question1/{{key}}"> {{key}}e Arrondissement</a></li>
             {% endfor %}
           </ul>
         </li>
@@ -89,8 +89,9 @@
   <div class="containerHead">
     <h4>Recensement</h4>
     <p>Le Projet dans ma rue a été mis à disposition des parisiens à partir de Mars 2021.</p></br>
-    <p>L'arrondissement du 11ème est l'arrondissement avec le plus d'anoamalies avec un nombre de {{ max }} anomalies détectés.</p></br>
-    <p>Le 7ème arrondissement est celui avec le moins d'anomalie avec {{ min }} anomalies détectés .</p>
+
+    <p>Depuis, l'arrondissement ayant détecté le plus d'anomalies est le {{ max_val.1 }}ème avec près de {{ max_val.0 }} anomalies en {{ max_key }}.</p></br>
+    <p>Tandis que le {{ min_val.1 }}ème arrondissement est celui avec le moins d'anomalie avec {{ min_val.0 }}  détectés en {{ min_key }}.</p>
     </p>
   </div>
 <div class="modelImage h-100" style="z-index: 100;">

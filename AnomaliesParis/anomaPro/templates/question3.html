@@ -91,6 +91,36 @@
 
 <!-- body content -->
 {%block Content%}
+<div class="container">
+  <div class="containerHead">
+    {% if id == 1 %}
+    Plus grand nombre d'anomalie signalé pour :</br>
+    {% for key, value in max_dict.items %}
+      {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
+    {% endfor %}
+
+  
+
+  Plus petit nombre d'anomalie signalé pour :</br>
+    {% for key, value in min_dict.items %}
+    {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
+  {% endfor %}
+
+  </div>
+  {% elif id == 0 %}
+  <div class="containerHead">
+    Plus grand nombre d'anomalie signalé pour {{anomalie}}:</br>
+    {% for key, value in max_dict.items %}
+      {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
+    {% endfor %}
+
+
+
+  Plus petit nombre d'anomalie signalé pour {{ anomalie }}:</br>
+    {% for key, value in min_dict.items %}
+    {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
+  {% endfor %}
+  {% endif %}   
 <div class="modelImage h-100" style="z-index: 999;">
   <div class="container d-flex align-items-center justify-content-center">
       <div class="fullImage text-white w-50 h-50 p-5">
