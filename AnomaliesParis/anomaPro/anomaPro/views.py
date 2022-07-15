@@ -118,26 +118,62 @@ def question1(request):
   Q1_Niv0_Pie = "./static/img/Q1_Niv0_Pie.png"
   Q1_Niv0_Pie2 = "/static/img/Q1_Niv0_Pie.png"
   
-  fig, ax = plt.subplots()
+  # croiser par arrondissement et année :
+  # résultat : 1 df dont l'index correspond aux arrondissements, avec 1 colonne par année
+  df_q1 = pandas.crosstab(df2['arrondissement'],df2['annee_declaration'])
+
+  # préparer données pour graph : 
+  years=[]
+  years_values=[]
+  arrondissements = []
+  arrondissements_values = []
+  arrondissements_max = [] #liste de booléen : true pour la valeur max, false pour les autres
+  explode = []
+  explode_factor=0.2
+
+  for column in df_q1.columns:
+      # 1. années et valeurs totales par année
+      years_values.append(df_q1[column].sum())
+      years.append(column)
+      
+      # 2. arrondissements et valeurs par arrondissement 
+      
+      for index, row in df_q1.iterrows():
+          arrondissements.append(index)
+          arrondissements_values.append(row[column])
+          arrondissements_max.append(1 if (row[column] == np.max(df_q1[column])) else 0)
+
+  # paramètre explode du graph pie pour gérer identification de l'arrondissement max:
+  explode = [explode_factor * i for i in arrondissements_max]
+
+  # Definir les couleurs avec la map tab20 : 
+  # couleur principale (indexes pairs) pour les annees
+  # couleurs secondaires (indexes impairs ) pour les arrondissements correspondants.
+
   cmap = plt.get_cmap("tab20c")
-  outer_colors = cmap(np.arange(2)*4)
-  inner_colors = plt.get_cmap('Greys')(np.array([i*3 for i in range(10,30)]))
-  # inner_colors = cmap(np.array([i for i in range(1,21)]))
+  inner_colors = cmap(np.arange(10)*4)
+  outer_colors = cmap(np.array([1 + 4 * j for j in range(0,len(years)) for i in range(0,20)]))
 
-  ax.pie(df2.groupby(['annee_declaration'])['annee_declaration'].value_counts(),
-        labels=df2['annee_declaration'].unique(),
-        radius=1, wedgeprops=dict(width=1, edgecolor='w'),
-        colors = outer_colors,
-        labeldistance = 0.5)
+  fig1, ax1 = plt.subplots()
+  ax1.pie(arrondissements_values
+      ,colors = outer_colors
+      ,explode= explode
+      ,labels = arrondissements
+      ,labeldistance = 0.9
+      ,radius = 1.5
+      ,wedgeprops=dict(width=0.8, edgecolor='w')
+      )
+  ax1.pie(years_values
+      ,textprops={'fontsize': 14}
+      ,labeldistance = 0.5
+      ,colors = inner_colors
+      ,labels = years
+      ,radius = 1)
 
-  ax.pie(df2.groupby(['annee_declaration','arrondissement'])['arrondissement'].value_counts(),
-        labels=df2.groupby(['annee_declaration','arrondissement'])['arrondissement'].unique(),
-        radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
-        colors = inner_colors,
-        labeldistance = 0.9)
+  ax1.axis()
 
-  ax.set(aspect="equal")
-  plt.savefig(Q1_Niv0_Pie)
+  ax1.set(aspect="equal")
+  plt.savefig(Q1_Niv0_Pie,bbox_inches="tight")
   plt.close()
 
   ########################################################################
@@ -145,7 +181,7 @@ def question1(request):
   pandas.crosstab(df2['arrondissement'],df2['annee_declaration']).plot.bar(title="Anomalies par arrondissement, par année.")
   Q1_Niv0_Bar = './static/img/Q1_Niv0_Bar.png'
   Q1_Niv0_Bar2 ='/static/img/Q1_Niv0_Bar.png'
-  plt.savefig(str(Q1_Niv0_Bar))
+  plt.savefig(str(Q1_Niv0_Bar),bbox_inches="tight")
   plt.close()
 
   ########################################################################
@@ -174,20 +210,68 @@ def question2(request):
   ##PIE GRAPH - Nombre d'anomalies par mois et par années
   Q2_Niv0_Pie = "./static/img/Q2_Niv0_Pie.png"
   Q2_Niv0_Pie2 = "/static/img/Q2_Niv0_Pie.png"
-  fig, ax = plt.subplots()
+  
+  # croiser par mois et année :
+  # résultat : 1 df dont l'index correspond aux mois, avec 1 colonne par année
+  df_q2 = pandas.crosstab(df2['mois_declaration'],df2['annee_declaration'])
 
-  ax.pie(df2.groupby(['annee_declaration'])['annee_declaration'].value_counts(),
-        labels=df2['annee_declaration'].unique(),
-        radius=1, wedgeprops=dict(width=1, edgecolor='w'),
-        labeldistance = 0.5)
+  # préparer données pour graph : 
+  years=[]
+  years_values=[]
+  mois = []
+  mois_values = []
+  mois_max = [] #liste de booléen : true pour la valeur max, false pour les autres
+  explode = []
+  explode_factor=0.2
 
-  ax.pie(df2.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].value_counts(),
-        labels=df2.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].unique(),
-        radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
-        labeldistance = 0.9)
+  for column in df_q2.columns:
+      # 1. années et valeurs totales par année
+      years_values.append(df_q2[column].sum())
+      years.append(column)
+      
+      # 2. arrondissements et valeurs par arrondissement 
+      
+      for index, row in df_q2.iterrows():
+          mois.append(index)
+          mois_values.append(row[column])
+          mois_max.append(1 if (row[column] == np.max(df_q2[column])) else 0)
 
-  ax.set(aspect="equal")
-  plt.savefig(Q2_Niv0_Pie)
+  # replace months with 0 data with empty str "" and other months with complete months name in labels list
+  mois_dict = {1:"janvier",2:"fevrier",3:"mars",4:"avril",5:"mai",6:"juin",7:"juillet",8:"août",9:"septembre",10:"octobre",11:"novembre",12:"décembre"}
+  mois = [mois_dict[mois] if (mois_values[i]!=0) else "" for i,mois in enumerate(mois) ]
+
+
+  # paramètre explode du graph pie pour gérer identification de l'arrondissement max:
+  explode = [explode_factor * i for i in mois_max]
+
+  # Definir les couleurs avec la map tab20 : 
+  # couleur principale (indexes pairs) pour les annees
+  # couleurs secondaires (indexes impairs ) pour les arrondissements correspondants.
+
+  cmap = plt.get_cmap("tab20c")
+  inner_colors = cmap(np.arange(10)*4)
+  outer_colors = cmap(np.array([1 + 4 * j for j in range(0,len(years)) for i in range(0,12)]))
+
+  fig1, ax1 = plt.subplots()
+  ax1.pie(mois_values
+      ,colors = outer_colors
+      ,explode= explode
+      ,labels = mois
+      ,rotatelabels = True
+      ,labeldistance = 0.7
+      ,radius = 1.5
+      ,wedgeprops=dict(width=0.8, edgecolor='w')
+      )
+  ax1.pie(years_values
+      ,textprops={'fontsize': 14}
+      ,labeldistance = 0.5
+      ,colors = inner_colors
+      ,labels = years
+      ,radius = 1)
+
+  ax1.axis()
+  ax1.set(aspect="equal")
+  plt.savefig(Q2_Niv0_Pie,bbox_inches="tight")
   plt.close()
 
   ########################################################################
@@ -195,7 +279,7 @@ def question2(request):
   Q2_Niv0_Bar = "./static/img/Q2_Niv0_Bar.png"
   Q2_Niv0_Bar2 = "/static/img/Q2_Niv0_Bar.png"
   pandas.crosstab(df2['mois_declaration'],df2['annee_declaration']).plot.bar()
-  plt.savefig(Q2_Niv0_Bar)
+  plt.savefig(Q2_Niv0_Bar,bbox_inches="tight")
   plt.close()
 
   ########################################################################
@@ -229,21 +313,69 @@ def question3(request):
 
     print("op", str(op.decode()))
 
+    df3 = df2.loc[df2['type_declaration']==str(op.decode())]
     
     ########################################################################
-    ## PIE - Nombre d'anomalies par type d'anomalie pour tout les arrondissement
+    ## PIE - Nombre d'anomalies pour le type d'anomalie selectionne pour tout les arrondissement
     Q3_Niv1_Pie = "./static/img/Q3_Niv1_Pie.png"
     Q3_Niv1_Pie2 = "/static/img/Q3_Niv1_Pie.png"
   
-    df3 = df2.loc[df2['type_declaration']==str(op.decode()), :]
-    fig, ax = plt.subplots()
-    pie = ax.pie(df3.groupby(['arrondissement'])['arrondissement'].value_counts(),
-          labels=df3['arrondissement'].unique(),
-          radius=1, wedgeprops=dict(width=1, edgecolor='w'),
-          labeldistance = 0.7)
-    
-    ax.set(aspect="equal")
-    plt.savefig(Q3_Niv1_Pie)
+    # croiser par arrondissement et année :
+    # résultat : 1 df dont l'index correspond aux arrondissements, avec 1 colonne par année
+    df_q1 = pandas.crosstab(df3['arrondissement'],df3['annee_declaration'])
+
+    # préparer données pour graph : 
+    years=[]
+    years_values=[]
+    arrondissements = []
+    arrondissements_values = []
+    arrondissements_max = [] #liste de booléen : true pour la valeur max, false pour les autres
+    explode = []
+    explode_factor=0.2
+
+    for column in df_q1.columns:
+        # 1. années et valeurs totales par année
+        years_values.append(df_q1[column].sum())
+        years.append(column)
+        
+        # 2. arrondissements et valeurs par arrondissement 
+        
+        for index, row in df_q1.iterrows():
+            arrondissements.append(index)
+            arrondissements_values.append(row[column])
+            arrondissements_max.append(1 if (row[column] == np.max(df_q1[column])) else 0)
+
+    # paramètre explode du graph pie pour gérer identification de l'arrondissement max:
+    explode = [explode_factor * i for i in arrondissements_max]
+
+    # Definir les couleurs avec la map tab20 : 
+    # couleur principale (indexes pairs) pour les annees
+    # couleurs secondaires (indexes impairs ) pour les arrondissements correspondants.
+
+    cmap = plt.get_cmap("tab20c")
+    inner_colors = cmap(np.arange(10)*4)
+    outer_colors = cmap(np.array([1 + 4 * j for j in range(0,len(years)) for i in range(0,20)]))
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(arrondissements_values
+        ,colors = outer_colors
+        ,explode= explode
+        ,labels = arrondissements
+        ,labeldistance = 0.9
+        ,radius = 1.5
+        ,wedgeprops=dict(width=0.8, edgecolor='w')
+        )
+    ax1.pie(years_values
+        ,textprops={'fontsize': 14}
+        ,labeldistance = 0.5
+        ,colors = inner_colors
+        ,labels = years
+        ,radius = 1)
+
+    ax1.axis()
+    plt.title(f"{request_get['anomalie']} par année et arrondissement.", pad = 50)
+    # ax1.set(aspect="equal")
+    plt.savefig(Q3_Niv1_Pie, bbox_inches="tight")
     plt.close()
 
     ########################################################################
@@ -251,7 +383,7 @@ def question3(request):
     pandas.crosstab(df3['arrondissement'],df3['type_declaration']).plot.bar()
     Q3_Niv1_Bar = "./static/img/Q3_Niv1_Bar.png"
     Q3_Niv1_Bar2 = "/static/img/Q3_Niv1_Bar.png"
-    plt.savefig(Q3_Niv1_Bar)
+    plt.savefig(Q3_Niv1_Bar,bbox_inches="tight")
     plt.close()
 
     ########################################################################
@@ -297,25 +429,63 @@ def question3(request):
     ## PIE GRAPH - Nombre d'anomalies pour tout les arr et pour tout les types
     Q3_Niv0_Pie = "./static/img/Q3_Niv0_Pie.png"
     Q3_Niv0_Pie2 = "/static/img/Q3_Niv0_Pie.png"
-    fig, ax = plt.subplots()
-
-
-    ax.pie(df2.groupby(['annee_declaration'])['annee_declaration'].value_counts(),
-        labels=df2['annee_declaration'].unique(),
-        radius=1, wedgeprops=dict(width=1, edgecolor='w'),
-        labeldistance = 0.5)
-
-
-    pie = ax.pie(df2.groupby(['annee_declaration','type_declaration'])['type_declaration'].value_counts(),
-        radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
-        labeldistance = 0.9)
     
-    # add lines below to create and move legend out of chart, + bbox_inches="tight" in savefig() method.
-    labels_outer = df2.groupby(['type_declaration'])['type_declaration'].unique()
-    plt.legend(pie[0],labels_outer, bbox_to_anchor=(1.45,0.5), loc="center right", fontsize=10, 
-           bbox_transform=plt.gcf().transFigure)
-    
-    ax.set(aspect="equal")
+    df_q3 = pandas.crosstab(df2['type_declaration'],df2['annee_declaration'])
+
+    # manage data to plot and explode parameter :
+    years = []
+    years_values = []
+    type_declaration = []
+    type_decalaration_values = []
+    type_declaration_max = []
+    explode_factor=0.1
+
+    for column in df_q3.columns:
+        years_values.append(df_q3[column].sum())
+        years.append(column)
+        for index, row in df_q3.iterrows():
+            type_declaration.append(index)
+            type_decalaration_values.append(row[column])
+            type_declaration_max.append(1 if (row[column] == np.max(df_q3[column])) else 0)
+
+    # paramètre explode du graph pie pour gérer identification de l'arrondissement max:
+    explode = [explode_factor * i for i in type_declaration_max]
+
+    # Definir les couleurs 
+    # couleurs annee_declaration :
+    cmap = plt.get_cmap("tab20c")
+    inner_colors = cmap(np.arange(10)*4)
+
+    # couleurs type_declaration : 
+    categories = df2['type_declaration'].unique()
+    n = len(categories)
+    cmap = plt.get_cmap('twilight')
+    # cmap = plt.get_cmap('winter')
+    outer_colors = [cmap(i/n) for i in range(0,n)]
+
+    # graph :
+    fig1, ax1 = plt.subplots()
+    pie  = ax1.pie(type_decalaration_values
+        ,colors = outer_colors
+        # raccourcir les etiquettes aux premiers caractères uniquement, afficher seulement pour les max
+        ,labels = [(f"{label[:7]}..." if type_declaration_max[i] else "") for i , label in enumerate(type_declaration)]
+        ,rotatelabels =True
+        ,explode= explode
+        ,labeldistance = 0.6
+        ,radius = 1.5
+        ,wedgeprops=dict(width=0.8, edgecolor='w')
+        )
+    ax1.pie(years_values
+        ,textprops={'fontsize': 14}
+        ,labeldistance = 0.5
+        ,colors = inner_colors
+        ,labels = years
+        ,wedgeprops=dict(width=1, edgecolor='w')
+        ,radius = 1)
+
+    ax1.legend(pie[0],categories, bbox_to_anchor=(1.45,0.5), loc="center right", fontsize=10, 
+              bbox_transform=plt.gcf().transFigure)
+
     plt.savefig(Q3_Niv0_Pie, bbox_inches="tight")
     plt.close()
   
@@ -325,7 +495,7 @@ def question3(request):
     Q3_Niv0_Bar = "./static/img/Q3_Niv0_Bar.png"
     Q3_Niv0_Bar2 = "/static/img/Q3_Niv0_Bar.png"
     pandas.crosstab(df2['arrondissement'],df2['annee_declaration']).plot.bar()
-    plt.savefig(Q3_Niv0_Bar)
+    plt.savefig(Q3_Niv0_Bar,bbox_inches="tight")
     plt.close()
 
 
@@ -384,7 +554,7 @@ def Q1_ParAnnée(request, pk):
     df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie()
     Q1_Niv2_Pie = './static/img/Q1_Niv2_{}_{}_Pie.png'.format(str(op.decode()),pk)
     Q1_Niv2_Pie2 ='/static/img/Q1_Niv2_{}_{}_Pie.png'.format(str(op.decode()),pk)
-    plt.savefig(str(Q1_Niv2_Pie))
+    plt.savefig(str(Q1_Niv2_Pie),bbox_inches="tight")
     plt.close()
 
     ####################################################################################    
@@ -392,7 +562,7 @@ def Q1_ParAnnée(request, pk):
     df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.bar()
     Q1_Niv2_Bar = './static/img/Q1_Niv2_{}_{}_Bar.png'.format(str(op.decode()),pk)
     Q1_Niv2_Bar2 ='/static/img/Q1_Niv2_{}_{}_Bar.png'.format(str(op.decode()),pk)
-    plt.savefig(str(Q1_Niv2_Bar))
+    plt.savefig(str(Q1_Niv2_Bar),bbox_inches="tight")
     plt.close()
 
     ####################################################################################
@@ -430,6 +600,9 @@ def Q1_ParAnnée(request, pk):
     #Dict à retourner si le client à selectionné le détails de niveau 2
     context = {'img_type' : [Q1_Niv2_Bar2, Q1_Niv2_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'anomalie' : anomalie, 'data_to_map':data_to_map} 
 
+    context = {'img_type' : [Q1_Niv2_Bar2, Q1_Niv2_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'data_to_map':data_to_map} 
+
+
 
   else:
 
@@ -443,18 +616,90 @@ def Q1_ParAnnée(request, pk):
     #PIE CHART - Nb d'Anomalies par type dans l'arrondissement selectionné par le client  
     Q1_Niv1_Pie = "./static/img/Q1_Niv1_{}_Pie.png".format(pk)
     Q1_Niv1_Pie2 = "/static/img/Q1_Niv1_{}_Pie.png".format(pk)
-    df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['annee_declaration'].count().plot.pie(autopct=absolute_value)
-    plt.savefig(str(Q1_Niv1_Pie))
+    
+    df_q1_1 = df2.loc[df2['arrondissement']==pk,:]
+    df_q1_1 = pandas.crosstab(df_q1_1['type_declaration'],df_q1_1['annee_declaration'])
+
+    # manage data to plot and explode parameter :
+    years = []
+    years_values = []
+    type_declaration = []
+    type_decalaration_values = []
+    type_declaration_max = []
+    explode_factor=0.1
+
+    for column in df_q1_1.columns:
+        years_values.append(df_q1_1[column].sum())
+        years.append(column)
+        for index, row in df_q1_1.iterrows():
+            type_declaration.append(index)
+            type_decalaration_values.append(row[column])
+            type_declaration_max.append(1 if (row[column] == np.max(df_q1_1[column])) else 0)
+
+    # paramètre explode du graph pie pour gérer identification de l'arrondissement max:
+    explode = [explode_factor * i for i in type_declaration_max]
+
+    # Definir les couleurs 
+    # couleurs annee_declaration :
+    cmap = plt.get_cmap("tab20c")
+    inner_colors = cmap(np.arange(10)*4)
+
+    # couleurs type_declaration : 
+    categories = df2['type_declaration'].unique()
+    n = len(categories)
+    cmap = plt.get_cmap('twilight')
+    # cmap = plt.get_cmap('winter')
+    outer_colors = [cmap(i/n) for i in range(0,n)]
+
+    # graph :
+    fig1, ax1 = plt.subplots()
+    pie  = ax1.pie(type_decalaration_values
+        ,colors = outer_colors
+        # raccourcir les etiquettes aux premiers caractères uniquement, afficher seulement pour les max
+        ,labels = [(f"{label[:7]}..." if type_declaration_max[i] else "") for i , label in enumerate(type_declaration)]
+        ,rotatelabels =True
+        ,explode= explode
+        ,labeldistance = 0.6
+        ,radius = 1.5
+        ,wedgeprops=dict(width=0.8, edgecolor='w')
+        )
+    ax1.pie(years_values
+        ,textprops={'fontsize': 14}
+        ,labeldistance = 0.5
+        ,colors = inner_colors
+        ,labels = years
+        ,wedgeprops=dict(width=1, edgecolor='w')
+        ,radius = 1)
+
+    ax1.legend(pie[0],categories, bbox_to_anchor=(1.45,0.5), loc="center right", fontsize=10, 
+              bbox_transform=plt.gcf().transFigure)
+    plt.title(f"Anomalies dans l'arrondissement n°{pk}")
+
+    ax1.axis()  
+    plt.savefig(str(Q1_Niv1_Pie),bbox_inches='tight')
     plt.close()
 
 
     ####################################################################################
     #BAR CHART -  Nb d'Anomalies par type dans l'arrondissement selectionné par le client
-    df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].value_counts().unstack().plot.bar(stacked=True)
-    #plt.legend(bbox_to_anchor =(-0.2, 1))    
+    # Definir les couleurs 
+    # couleurs type_declaration : 
+    categories = df2['type_declaration'].unique()
+    n = len(categories)
+    cmap = plt.get_cmap('twilight')
+    # cmap = plt.get_cmap('winter')
+    outer_colors = [cmap(i/n) for i in range(0,n)]
+
+    ax = df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].value_counts().unstack().plot.bar(
+        stacked=True
+        ,color = outer_colors)
+
+    ax.legend(pie[0],categories, bbox_to_anchor=(1.45,0.5), loc="center right", fontsize=10, 
+           bbox_transform=plt.gcf().transFigure)    
+
     Q1_Niv1_Bar = './static/img/Q1_Niv1_{}_Bar.png'.format(pk)
     Q1_Niv1_Bar2 ='/static/img/Q1_Niv1_{}_Bar.png'.format(pk)
-    plt.savefig(str(Q1_Niv1_Bar))
+    plt.savefig(str(Q1_Niv1_Bar),bbox_inches='tight')
     plt.close()
     
     ####################################################################################
@@ -502,17 +747,16 @@ def Q2_ParMois(request, pk):
     op = request_get["anomalie"].encode('utf8')
     df3 = df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode())]
 
-    #on sélectionne dans le QueryDict 'Objets abandonnés'
-    #<QueryDict: {'anomalie': ['Objets abandonnés']}>
-    op = request_get["anomalie"].encode('utf8')
-
     ########################################################################
     ## PIE - Nombre d'anoamlie pour un arrondissement et un type d'ano selectionnée
     Q2_Niv2_Pie = './static/img/Q2_Niv2_{}_{}_Pie.png'.format(str(op.decode()), pk)
     Q2_Niv2_Pie2 = '/static/img/Q2_Niv2_{}_{}_Pie.png'.format(str(op.decode()), pk)
 
-    fig, ax = plt.subplots()
+    # croiser par mois et année :
+    # résultat : 1 df dont l'index correspond aux mois, avec 1 colonne par année
+    df_q2 = pandas.crosstab(df3['mois_declaration'],df3['annee_declaration'])
 
+<<<<<<< HEAD
     ax.pie(df3.groupby(['annee_declaration'])['annee_declaration'].value_counts(),
         labels=df3['annee_declaration'].unique(),
         radius=1, wedgeprops=dict(width=1, edgecolor='w'),
@@ -522,9 +766,68 @@ def Q2_ParMois(request, pk):
         labels=df3.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].unique(),
         radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
         labeldistance = 0.9)
+=======
+    # préparer données pour graph : 
+    years=[]
+    years_values=[]
+    mois = []
+    mois_values = []
+    mois_max = [] #liste de booléen : true pour la valeur max, false pour les autres
+    explode = []
+    explode_factor=0.2
+
+    for column in df_q2.columns:
+        # 1. années et valeurs totales par année
+        years_values.append(df_q2[column].sum())
+        years.append(column)
+        
+        # 2. arrondissements et valeurs par arrondissement 
+        
+        for index, row in df_q2.iterrows():
+            mois.append(index)
+            mois_values.append(row[column])
+            mois_max.append(1 if (row[column] == np.max(df_q2[column])) else 0)
+
+    # replace months with 0 data with empty str "" and other months with complete months name in labels list
+    mois_dict = {1:"janvier",2:"fevrier",3:"mars",4:"avril",5:"mai",6:"juin",7:"juillet",8:"août",9:"septembre",10:"octobre",11:"novembre",12:"décembre"}
+    mois = [mois_dict[mois] if (mois_values[i]!=0) else "" for i,mois in enumerate(mois) ]
+>>>>>>> refs/remotes/origin/main
 
 
-    plt.savefig(str(Q2_Niv2_Pie))
+    # paramètre explode du graph pie pour gérer identification de l'arrondissement max:
+    explode = [explode_factor * i for i in mois_max]
+
+    # Definir les couleurs avec la map tab20 : 
+    # couleur principale (indexes pairs) pour les annees
+    # couleurs secondaires (indexes impairs ) pour les arrondissements correspondants.
+
+    cmap = plt.get_cmap("tab20c")
+    inner_colors = cmap(np.arange(10)*4)
+    outer_colors = cmap(np.array([1 + 4 * j for j in range(0,len(years)) for i in range(0,12)]))
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(mois_values
+        ,colors = outer_colors
+        ,explode= explode
+        ,labels = mois
+        ,rotatelabels = True
+        ,labeldistance = 0.7
+        ,radius = 1.5
+        ,wedgeprops=dict(width=0.8, edgecolor='w')
+        )
+    ax1.pie(years_values
+        ,textprops={'fontsize': 14}
+        ,labeldistance = 0.5
+        ,colors = inner_colors
+        ,labels = years
+        ,radius = 1)
+
+    ax1.axis()
+    plt.title(f"{request_get['anomalie']} dans l'arrondissement n°{pk}")
+    ax1.set(aspect="equal")
+
+
+    plt.savefig(str(Q2_Niv2_Pie),bbox_inches='tight')
     plt.close()
 
     ########################################################################
@@ -533,7 +836,7 @@ def Q2_ParMois(request, pk):
     Q2_Niv2_Bar2 ='/static/img/Q2_Niv2_{}_{}_Bar.png'.format(str(op.decode()), pk)
 
     df4 = pandas.crosstab(df3['mois_declaration'],df3['annee_declaration']).plot.bar()
-    plt.savefig(str(Q2_Niv2_Bar))
+    plt.savefig(str(Q2_Niv2_Bar),bbox_inches='tight')
     plt.close()
 
     ########################################################################
@@ -557,8 +860,12 @@ def Q2_ParMois(request, pk):
     Q2_Niv1_Pie = './static/img/Q2_Niv1_{}_Pie.png'.format(pk)
     Q2_Niv1_Pie2 ='/static/img/Q2_Niv1_{}_Pie.png'.format(pk)
     
-    fig, ax = plt.subplots()
+    # croiser par mois et année :
+    # résultat : 1 df dont l'index correspond aux mois, avec 1 colonne par année
+    df_q2 = df2.loc[df2['arrondissement']==pk,:]
+    df_q2 = pandas.crosstab(df_q2['mois_declaration'],df_q2['annee_declaration'])
 
+<<<<<<< HEAD
     ax.pie(df3.groupby(['annee_declaration'])['annee_declaration'].value_counts(),
           labels=df3['annee_declaration'].unique(),
           radius=1, wedgeprops=dict(width=1, edgecolor='w'),
@@ -571,6 +878,66 @@ def Q2_ParMois(request, pk):
       
     ax.set(aspect="equal")
     plt.savefig(str(Q2_Niv1_Pie))
+=======
+    # préparer données pour graph : 
+    years=[]
+    years_values=[]
+    mois = []
+    mois_values = []
+    mois_max = [] #liste de booléen : true pour la valeur max, false pour les autres
+    explode = []
+    explode_factor=0.2
+
+    for column in df_q2.columns:
+        # 1. années et valeurs totales par année
+        years_values.append(df_q2[column].sum())
+        years.append(column)
+        
+        # 2. arrondissements et valeurs par arrondissement 
+        
+        for index, row in df_q2.iterrows():
+            mois.append(index)
+            mois_values.append(row[column])
+            mois_max.append(1 if (row[column] == np.max(df_q2[column])) else 0)
+
+    # replace months with 0 data with empty str "" and other months with complete months name in labels list
+    mois_dict = {1:"janvier",2:"fevrier",3:"mars",4:"avril",5:"mai",6:"juin",7:"juillet",8:"août",9:"septembre",10:"octobre",11:"novembre",12:"décembre"}
+    mois = [mois_dict[mois] if (mois_values[i]!=0) else "" for i,mois in enumerate(mois) ]
+
+
+    # paramètre explode du graph pie pour gérer identification de l'arrondissement max:
+    explode = [explode_factor * i for i in mois_max]
+
+    # Definir les couleurs avec la map tab20 : 
+    # couleur principale (indexes pairs) pour les annees
+    # couleurs secondaires (indexes impairs ) pour les arrondissements correspondants.
+
+    cmap = plt.get_cmap("tab20c")
+    inner_colors = cmap(np.arange(10)*4)
+    outer_colors = cmap(np.array([1 + 4 * j for j in range(0,len(years)) for i in range(0,12)]))
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(mois_values
+        ,colors = outer_colors
+        ,explode= explode
+        ,labels = mois
+        ,rotatelabels = True
+        ,labeldistance = 0.7
+        ,radius = 1.5
+        ,wedgeprops=dict(width=0.8, edgecolor='w')
+        )
+    ax1.pie(years_values
+        ,textprops={'fontsize': 14}
+        ,labeldistance = 0.5
+        ,colors = inner_colors
+        ,labels = years
+        ,radius = 1)
+
+    ax1.axis()
+
+    plt.title(f"Anomalies dans l'arrondissement n°{pk}")
+    plt.savefig(str(Q2_Niv1_Pie),bbox_inches='tight')
+>>>>>>> refs/remotes/origin/main
     plt.close()
 
     ########################################################################
@@ -578,8 +945,13 @@ def Q2_ParMois(request, pk):
     Q2_Niv1_Bar = './static/img/Q2_Niv1_{}_Hist.png'.format(pk)
     Q2_Niv1_Bar2 ='/static/img/Q2_Niv1_{}_Hist.png'.format(pk)
     
+<<<<<<< HEAD
     pandas.crosstab(df3['mois_declaration'],df3['annee_declaration']).plot.bar()
     plt.savefig(str(Q2_Niv1_Bar))
+=======
+    pandas.crosstab(df2['mois_declaration'],df2['annee_declaration']).plot.bar()
+    plt.savefig(str(Q2_Niv1_Bar),bbox_inches='tight')
+>>>>>>> refs/remotes/origin/main
     plt.close()
 
 
