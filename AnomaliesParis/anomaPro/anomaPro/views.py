@@ -756,17 +756,6 @@ def Q2_ParMois(request, pk):
     # résultat : 1 df dont l'index correspond aux mois, avec 1 colonne par année
     df_q2 = pandas.crosstab(df3['mois_declaration'],df3['annee_declaration'])
 
-<<<<<<< HEAD
-    ax.pie(df3.groupby(['annee_declaration'])['annee_declaration'].value_counts(),
-        labels=df3['annee_declaration'].unique(),
-        radius=1, wedgeprops=dict(width=1, edgecolor='w'),
-        labeldistance = 0.5)
-
-    ax.pie(df3.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].value_counts(),
-        labels=df3.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].unique(),
-        radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
-        labeldistance = 0.9)
-=======
     # préparer données pour graph : 
     years=[]
     years_values=[]
@@ -791,7 +780,6 @@ def Q2_ParMois(request, pk):
     # replace months with 0 data with empty str "" and other months with complete months name in labels list
     mois_dict = {1:"janvier",2:"fevrier",3:"mars",4:"avril",5:"mai",6:"juin",7:"juillet",8:"août",9:"septembre",10:"octobre",11:"novembre",12:"décembre"}
     mois = [mois_dict[mois] if (mois_values[i]!=0) else "" for i,mois in enumerate(mois) ]
->>>>>>> refs/remotes/origin/main
 
 
     # paramètre explode du graph pie pour gérer identification de l'arrondissement max:
@@ -865,20 +853,6 @@ def Q2_ParMois(request, pk):
     df_q2 = df2.loc[df2['arrondissement']==pk,:]
     df_q2 = pandas.crosstab(df_q2['mois_declaration'],df_q2['annee_declaration'])
 
-<<<<<<< HEAD
-    ax.pie(df3.groupby(['annee_declaration'])['annee_declaration'].value_counts(),
-          labels=df3['annee_declaration'].unique(),
-          radius=1, wedgeprops=dict(width=1, edgecolor='w'),
-          labeldistance = 0.5)
-
-    ax.pie(df3.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].value_counts(),
-          labels=df3.groupby(['annee_declaration','mois_declaration'])['mois_declaration'].unique(),
-          radius=1.5, wedgeprops=dict(width=0.5, edgecolor='w'),
-          labeldistance = 0.9)
-      
-    ax.set(aspect="equal")
-    plt.savefig(str(Q2_Niv1_Pie))
-=======
     # préparer données pour graph : 
     years=[]
     years_values=[]
@@ -937,7 +911,6 @@ def Q2_ParMois(request, pk):
 
     plt.title(f"Anomalies dans l'arrondissement n°{pk}")
     plt.savefig(str(Q2_Niv1_Pie),bbox_inches='tight')
->>>>>>> refs/remotes/origin/main
     plt.close()
 
     ########################################################################
@@ -945,13 +918,8 @@ def Q2_ParMois(request, pk):
     Q2_Niv1_Bar = './static/img/Q2_Niv1_{}_Hist.png'.format(pk)
     Q2_Niv1_Bar2 ='/static/img/Q2_Niv1_{}_Hist.png'.format(pk)
     
-<<<<<<< HEAD
-    pandas.crosstab(df3['mois_declaration'],df3['annee_declaration']).plot.bar()
-    plt.savefig(str(Q2_Niv1_Bar))
-=======
     pandas.crosstab(df2['mois_declaration'],df2['annee_declaration']).plot.bar()
     plt.savefig(str(Q2_Niv1_Bar),bbox_inches='tight')
->>>>>>> refs/remotes/origin/main
     plt.close()
 
 
