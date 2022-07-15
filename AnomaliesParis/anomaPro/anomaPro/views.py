@@ -600,8 +600,6 @@ def Q1_ParAnnée(request, pk):
     #Dict à retourner si le client à selectionné le détails de niveau 2
     context = {'img_type' : [Q1_Niv2_Bar2, Q1_Niv2_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'anomalie' : anomalie, 'data_to_map':data_to_map} 
 
-    context = {'img_type' : [Q1_Niv2_Bar2, Q1_Niv2_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'data_to_map':data_to_map} 
-
 
 
   else:
