@@ -34,6 +34,7 @@
 
 <!-- page header content -->
 {%block headerContent%}
+{% if id == 1 %}
   <div class="container sticky-top bg-secondary mb-4 p-2 bounce-in-top bg-dark bg-opacity-50">
     <div class="navbar navbar-expand-lg rounded">
       <div class="container-fluid">
@@ -79,6 +80,53 @@
                 <li><a class="dropdown-item" href="/question2/18">18e Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question2/19">19e Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question2/20">20e Arrondissement</a></li>
+                {% elif id == 0 %}
+  <div class="container sticky-top bg-secondary mb-4 p-2 bounce-in-top bg-dark bg-opacity-50">
+    <div class="navbar navbar-expand-lg rounded">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <!-- drop down one -->
+          <ul class="navbar-nav my-2 navbar-nav-scroll mx-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Anomalie
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                {% for type in list_anomalie %}
+                <li><a class="dropdown-item" href="?anomalie={{ type }}"> {{ type }} </a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            <!-- dropdown two -->
+            <li class="nav-item dropdown mx-5">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Arrondissement
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                <li><a class="dropdown-item" href="/question3/1/?anomalie={{ anomalie }}">1er Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/2/?anomalie={{ anomalie}}">2e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/3/?anomalie={{ anomalie}}">3e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/4/?anomalie={{ anomalie}}">4e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/5/?anomalie={{ anomalie}}">5e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/6/?anomalie={{ anomalie}}">6e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/7/?anomalie={{ anomalie}}">7e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/8/?anomalie={{ anomalie}}">8e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/9/?anomalie={{ anomalie}}">9e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/11/?anomalie={{ anomalie }}">11e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/12/?anomalie={{ anomalie }}">12e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/10/?anomalie={{ anomalie }}">10e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/13/?anomalie={{ anomalie }}">13e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/14/?anomalie={{ anomalie }}">14e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/15/?anomalie={{ anomalie }}">15e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/16/?anomalie={{ anomalie }}">16e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/17/?anomalie={{ anomalie }}">17e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/18/?anomalie={{ anomalie }}">18e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/19/?anomalie={{ anomalie ]]">19e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question3/20/?anomalie={{ anomalie }}">20e Arrondissement</a></li>
+                {% endif %}
               </ul>
             </li>
           </ul>
@@ -91,6 +139,36 @@
 
 <!-- body content -->
 {%block Content%}
+<div class="container">
+  <div class="containerHead">
+    {% if id == 1 %}
+    Plus grand nombre d'anomalie signalé pour :</br>
+    {% for key, value in max_dict.items %}
+      {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
+    {% endfor %}
+
+  
+
+  Plus petit nombre d'anomalie signalé pour :</br>
+    {% for key, value in min_dict.items %}
+    {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
+  {% endfor %}
+
+  </div>
+  {% elif id == 0 %}
+  <div class="containerHead">
+    Plus grand nombre d'anomalie signalé pour {{anomalie}}:</br>
+    {% for key, value in max_dict.items %}
+      {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
+    {% endfor %}
+
+
+
+  Plus petit nombre d'anomalie signalé pour {{ anomalie }}:</br>
+    {% for key, value in min_dict.items %}
+    {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
+  {% endfor %}
+  {% endif %}   
 <div class="modelImage h-100" style="z-index: 999;">
   <div class="container d-flex align-items-center justify-content-center">
       <div class="fullImage text-white w-50 h-50 p-5">

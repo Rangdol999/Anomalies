@@ -21,6 +21,57 @@ class FilePath():
         fchPath = os.path.join(pthDir2,self.fichier)
         return(fchPath)
 
+def createDic(max_dict, max_index):
+  temp = [max_dict, max_index]
+  new_dict = {}
+  for k in max_dict.keys():
+    new_dict[k] = tuple(new_dict[k] for new_dict in temp)
+  
+  return new_dict
+
+
+def getMax_Min(df3):
+    #Enfin, retourne la valeur maximale de la ligne >> 80575                        >> 
+
+    #Si il existe des zéros alors il se transform en NAN
+    #Un problème est que chaque colonne où il existe un NAN
+    #toute les colonne se transforme en float
+    df3 = df3.replace(0, np.nan)
+
+
+    #Récupère la ligne avec la valeur maximale      >> 2021: 80575.0, 2022: 19580.0     >> df3.max()
+    #Transforme la valeur en int                    >> 2021: 80575.0, 2022: 19580.0     >> df3.max().astype()
+    #Puis la transforme en dictionnaire             >> {2021: 80575, 2022: 19580}   >> df3.max().to_dict()
+    max_value = df3.max().astype('int64')
+    max_value = max_value.to_dict()
+
+    min_value = df3.min().astype('int64')
+    min_value = min_value.to_dict()
+
+    #Trouve l'index avec la valeur la plus grande   >> 18  
+
+    max_index = df3.idxmax()
+    min_index = df3.idxmin()
+    
+    #On fusionne les deux dico qui ont la meme clé   
+    max_dict = createDic(max_value, max_index)
+    min_dict = createDic(min_value, min_index)
+
+    print('max_dict', max_dict)
+    print('min_dict', min_dict)
+
+    min_key = min(min_dict, key=min_dict.get)
+    min_val = min(min_dict.values())
+
+    max_key = max(max_dict, key=max_dict.get)
+    max_val = max(max_dict.values())
+
+
+    print("min_key et min_val", min_key, min_val)
+    print("max_key et max_val", max_key, max_val)
+
+    return(min_key, min_val, max_key, max_val)
+
 
 ###################################################################################################################################################################
 ################################ Filtrage de la DATABASE ##########################################################################################################*
@@ -34,17 +85,21 @@ df2 = df.drop(['ID DECLARATION','SOUS TYPE DECLARATION','ADRESSE','CODE POSTAL',
 df2.columns = df2.columns.str.lower()
 # remplacer espaces par _ :
 df2.columns = df2.columns.str.replace(" ","_") # remplacer espaces dans les noms de colonnes par _
-df2['type_declaration'] = df2['type_declaration'].replace(['Éclairage / Électricité'],'Éclairage, Électricité')
+df2['type_declaration'] = df2['type_declaration'].replace(['Éclairage / Électricité'],'Éclairage ou Électricité')
 
 #Liste des Types d'Anomalies pour crée les menu déroulants
 list_anomalie= ['Objets abandonnés', 'Graffitis, tags, affiches et autocollants',
        'Autos, motos, vélos...', 'Mobiliers urbains', 'Propreté',
-       'Éclairage, Électricité', 'Voirie et espace public',
+       'Éclairage ou Électricité', 'Voirie et espace public',
        'Activités commerciales et professionnelles', 'Eau',
        'Arbres, végétaux et animaux']
 
 list_months = {'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 
         'Juillet','Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'}
+
+list_arr = { "1er arrondissement", "2ème arrondissement" ,"3ème arrondissement","4ème arrondissement","5ème arrondissement","6ème arrondissement","7ème arrondissement","8ème arrondissement",
+        "9ème arrondissement","10ème arrondissement","11ème arrondissement","12ème arrondissement","13ème arrondissement",
+        "14ème arrondissement","15ème arrondissement","16ème arrondissement","17ème arrondissement" ,"18ème arrondissement" ,"19ème arrondissement" ,"20ème arrondissement"}
 
 
 def home(request):
@@ -134,14 +189,15 @@ def question1(request):
   #DATA - commande pour générer la tableau de données (global)
   df3 = pandas.crosstab(df2['arrondissement'],df2['annee_declaration'])
   print("df3", df3)
-  max = df3.to_numpy().max()
-  min = df3.to_numpy().min()
+
   json_records = df3.to_json(orient ='index')
   data = []
   data = json.loads(json_records)
-  print("max et min", max, min)
-  context = {'img': [Q1_Niv0_Bar2, Q1_Niv0_Pie2], 'data': data, 'max' : max, 'min' : min} 
+  
+  min_key, min_val, max_key, max_val = getMax_Min(df3)
 
+  context = {'img': [Q1_Niv0_Bar2, Q1_Niv0_Pie2], 'data': data, 'min_val' : min_val, 'min_key' : min_key, 'max_key' : max_key, 'max_val' : max_val} 
+  
   return render(request, 'question1.html', context)
 
 
@@ -231,11 +287,16 @@ def question2(request):
   ########################################################################
   #DATA - Nombre d'anomalies par mois et par années
   df3 = pandas.crosstab(df2['mois_declaration'],df2['annee_declaration'])
+  df3 = df3.rename(index={ 1: 'Janvier', 2 : 'Février', 3: 'Mars', 4: 'Avril', 5: 'Mai', 6: 'Juin', 7: 'Juillet', 8: 'Août', 9: 'Septembre', 10: 'Octobre', 11: 'Novembre', 12: 'Décembre'})
   json_records = df3.to_json(orient ='index')
   data = []
   data = json.loads(json_records)
-  context = {'img': [Q2_Niv0_Pie2, Q2_Niv0_Bar2], 'data': data}
-  print("context in question 2 ", context)
+
+  min_key, min_val, max_key, max_val = getMax_Min(df3)
+
+
+
+  context = {'img': [Q2_Niv0_Pie2, Q2_Niv0_Bar2], 'data': data, 'min_val' : min_val, 'min_key' : min_key, 'max_key' : max_key, 'max_val' : max_val}
 
   return render(request, 'question2.html', context)
 
@@ -330,11 +391,35 @@ def question3(request):
     ########################################################################
     ### DATA - Nombre d'anomalies par type d'anomalie pour tout les arrondissement
     df4 = pandas.crosstab(df3['arrondissement'],df3['annee_declaration'])
+    df3 = df3.replace(0, np.nan)
+
+
+    #Récupère la ligne avec la valeur maximale      >> 2021: 80575.0, 2022: 19580.0     >> df3.max()
+    #Transforme la valeur en int                    >> 2021: 80575.0, 2022: 19580.0     >> df3.max().astype()
+    #Puis la transforme en dictionnaire             >> {2021: 80575, 2022: 19580}   >> df3.max().to_dict()
+    max_value = df4.max().astype('int64')
+    max_value = max_value.to_dict()
+
+    min_value = df4.min().astype('int64')
+    min_value = min_value.to_dict()
+
+    #Trouve l'index avec la valeur la plus grande   >> 18  
+
+    max_index = df4.idxmax()
+    min_index = df4.idxmin()
+    
+    #On fusionne les deux dico qui ont la meme clé   
+    max_dict = createDic(max_value, max_index)
+    min_dict = createDic(min_value, min_index)
+    print('max_dict', max_dict)
+    print('min_dict', min_dict)
+
+
     json_records = df4.reset_index().to_json(orient ='records')
     data = []
     data = json.loads(json_records)
-
-    context = {'img' : [Q3_Niv1_Bar2, Q3_Niv1_Pie2], 'data' : data, 'list_anomalie' : list_anomalie, 'id' : 0}
+    anomalie = str(op.decode())
+    context = {'img' : [Q3_Niv1_Bar2, Q3_Niv1_Pie2], 'data' : data, 'list_anomalie' : list_anomalie, 'id' : 0, 'anomalie' : anomalie, 'max_dict' : max_dict, 'min_dict' : min_dict}
 
     return render(request, 'question3.html', context)
 
@@ -423,7 +508,30 @@ def question3(request):
     json_records = df3.to_json(orient ='index')
     data = []
     data = json.loads(json_records)
-    context = {'img' : [Q3_Niv0_Bar2, Q3_Niv0_Pie2], 'data': data, 'list_anomalie' : list_anomalie, 'id' : 1}
+
+    df3 = df3.replace(0, np.nan)
+
+
+    #Récupère la ligne avec la valeur maximale      >> 2021: 80575.0, 2022: 19580.0     >> df3.max()
+    #Transforme la valeur en int                    >> 2021: 80575.0, 2022: 19580.0     >> df3.max().astype()
+    #Puis la transforme en dictionnaire             >> {2021: 80575, 2022: 19580}   >> df3.max().to_dict()
+    max_value = df3.max().astype('int64')
+    max_value = max_value.to_dict()
+
+    min_value = df3.min().astype('int64')
+    min_value = min_value.to_dict()
+
+    #Trouve l'index avec la valeur la plus grande   >> 18  
+
+    max_index = df3.idxmax()
+    min_index = df3.idxmin()
+    
+    #On fusionne les deux dico qui ont la meme clé   
+    max_dict = createDic(max_value, max_index)
+    min_dict = createDic(min_value, min_index)
+
+    
+    context = {'img' : [Q3_Niv0_Bar2, Q3_Niv0_Pie2], 'data': data, 'list_anomalie' : list_anomalie, 'id' : 1, 'max_dict' : max_dict, 'min_dict' : min_dict}
 
   return render(request, 'question3.html', context)
 
@@ -475,11 +583,26 @@ def Q1_ParAnnée(request, pk):
     data_to_map = df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:]['geo_point_2d']
     data_to_map = data_to_map.to_json()
     data_to_map = json.loads(data_to_map)
+
+
+    #####
+    df5 = df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:].groupby(['annee_declaration'])['type_declaration'].count()
+    anomalie = str(op.decode())
+
+
+    min_dict = df5.to_dict()
+    max_dict = df5.to_dict()
+
+    min_key = min(min_dict, key=min_dict.get)
+    max_key = max(max_dict, key=max_dict.get)
+
+    min_value = min_dict[min_key]
+    max_value = max_dict[max_key]
+    print('max_key in ', max_key)
+    print('min_key in ', min_key)
+    print("min dict", min_dict)
     #Dict à retourner si le client à selectionné le détails de niveau 2
-
-    context = {'img_type' : [Q1_Niv2_Bar2, Q1_Niv2_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'data_to_map':data_to_map} 
-
-    context = {'img_type' : [Q1_Niv2_Bar2, Q1_Niv2_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'data_to_map':data_to_map} 
+    context = {'img_type' : [Q1_Niv2_Bar2, Q1_Niv2_Pie2], 'data_type': data_type , 'pk':pk, 'id':0, 'anomalie' : anomalie, 'data_to_map':data_to_map} 
 
 
 
@@ -588,11 +711,26 @@ def Q1_ParAnnée(request, pk):
     data = []
     data = json.loads(json_records)
 
+    df4 = df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].count()
+
+    min_dict = df4.to_dict()
+    max_dict = df4.to_dict()
+
+    min_key = min(min_dict, key=min_dict.get)
+    max_key = max(max_dict, key=max_dict.get)
+
+    min_value = min_dict[min_key]
+    max_value = max_dict[max_key]
+    print('max_key in ', max_key)
+    print('min_key in ', min_key)
+    
     #Dict à renvoyer 
     context = {'img' : [Q1_Niv1_Bar2, Q1_Niv1_Pie2], 'data': data,'pk':pk, 'id': 1} 
  
-  
-  return render(request, 'Q1_ParAnnée.html', {'context' : context, 'list_anomalie' : list_anomalie})
+
+  print('max_key out', max_key)
+  print('min_key out ', min_key)
+  return render(request, 'Q1_ParAnnée.html', {'min_key' : min_key, 'max_key' : max_key, 'min_value' : min_value, 'max_value' : max_value , 'context' : context, 'list_anomalie' : list_anomalie})
 
 
 def Q2_ParMois(request, pk):
@@ -694,15 +832,19 @@ def Q2_ParMois(request, pk):
     ########################################################################
     ## DATA - Nombre d'anoamlie pour un arrondissement et un type d'ano selectionnée
     df4 = pandas.crosstab(df3['mois_declaration'],df3['annee_declaration'])
-    
+    df4 = df4.rename(index={ 1: 'Janvier', 2 : 'Février', 3: 'Mars', 4: 'Avril', 5: 'Mai', 6: 'Juin', 7: 'Juillet', 8: 'Août', 9: 'Septembre', 10: 'Octobre', 11: 'Novembre', 12: 'Décembre'})
+
     json_records2 = df4.to_json(orient = 'index')
     data_type = []
     data_type = json.loads(json_records2)
-
-    context = {'img' : [Q2_Niv2_Bar2, Q2_Niv2_Pie2], 'data_type' : data_type, 'id' : 0, 'list_anomalie' : list_anomalie}
+    anomalie = str(op.decode())
+    min_key, min_val, max_key, max_val = getMax_Min(df4)
+    print('list_arr', list_arr)
+    context = {'list_arr' : list_arr, 'min_key' : min_key, 'max_key' : max_key, 'min_val' : min_val, 'max_val' : max_val , 'pk' : pk, 'anomalie' : anomalie, 'img' : [Q2_Niv2_Bar2, Q2_Niv2_Pie2], 'data_type' : data_type, 'id' : 0, 'list_anomalie' : list_anomalie}
 
   else :
 
+    df3 = df2.loc[df2['arrondissement']==pk,:]
     ########################################################################
     # PIE  : Nombre total d'anomalie par mois dans un arrondissement
     Q2_Niv1_Pie = './static/img/Q2_Niv1_{}_Pie.png'.format(pk)
@@ -785,12 +927,14 @@ def Q2_ParMois(request, pk):
 
     ########################################################################
     #DATA : Nombre total d'anomalie par mois dans un arrondissement
-    df3 = df2.loc[df2['arrondissement']==pk,:]
     df4 = pandas.crosstab(df3['mois_declaration'],df3['annee_declaration'])
+    df4 = df4.rename(index={ 1: 'Janvier', 2 : 'Février', 3: 'Mars', 4: 'Avril', 5: 'Mai', 6: 'Juin', 7: 'Juillet', 8: 'Août', 9: 'Septembre', 10: 'Octobre', 11: 'Novembre', 12: 'Décembre'})
     json_records = df4.reset_index().to_json(orient ='records')
     data = []
     data = json.loads(json_records)
 
-    context = {'img' : [Q2_Niv1_Bar2, Q2_Niv1_Pie2], 'data' : data, 'id' : 1, 'list_anomalie' : list_anomalie}
+    min_key, min_val, max_key, max_val = getMax_Min(df4)
+
+    context = {'min_key' : min_key, 'max_key' : max_key, 'min_val' : min_val, 'max_val' : max_val , 'img' : [Q2_Niv1_Bar2, Q2_Niv1_Pie2], 'data' : data, 'pk' : pk, 'id' : 1, 'list_anomalie' : list_anomalie}
   
   return render(request, 'Q2_ParMois.html', context) 

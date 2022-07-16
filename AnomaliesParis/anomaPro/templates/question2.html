@@ -98,6 +98,23 @@
 
 <!-- body content -->
 {%block Content%}
+
+<div class="container">
+  <div class="containerHead">
+    <h4>Recensement</h4>
+    <p>Le Projet dans ma rue a été mis à disposition des parisiens à partir de Mars 2021.</p></br>
+
+    <p>Depuis, le mois ayant subit le plus d'anomalies est le mois de {{ max_val.1 }} avec près de {{ max_val.0 }} anomalies en {{ max_key }}.</p></br>
+    <p>Tandis que le mois de {{ min_val.1 }}celui avec le moins d'anomalie avec {{ min_val.0 }}  détectés en {{ min_key }}.</p>
+    </p>
+  </div>
+<div class="modelImage h-100" style="z-index: 100;">
+  <div class="container d-flex align-items-center justify-content-center">
+      <div class="fullImage text-white p-5 w-50 h-50">
+        <img src="" class="imgShow" alt="">
+      </div>
+  </div>
+</div>
 <div class="modelImage h-100" style="z-index: 999;">
   <div class="container d-flex align-items-center justify-content-center">
       <div class="fullImage text-white w-50 h-50 p-5">
