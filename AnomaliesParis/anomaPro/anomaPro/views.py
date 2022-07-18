@@ -175,6 +175,7 @@ def question1(request):
   ax1.axis()
 
   ax1.set(aspect="equal")
+  plt.title(f"anomalies par année et arrondissement.", pad = 50)
   plt.savefig(Q1_Niv0_Pie,bbox_inches="tight")
   plt.close()
 
@@ -273,6 +274,7 @@ def question2(request):
 
   ax1.axis()
   ax1.set(aspect="equal")
+  plt.title(f"anomalies par année et par mois.", pad = 50)
   plt.savefig(Q2_Niv0_Pie,bbox_inches="tight")
   plt.close()
 
@@ -488,6 +490,7 @@ def question3(request):
     ax1.legend(pie[0],categories, bbox_to_anchor=(1.45,0.5), loc="center right", fontsize=10, 
               bbox_transform=plt.gcf().transFigure)
 
+    plt.title(f"anomalies par année et arrondissement.", pad = 50)
     plt.savefig(Q3_Niv0_Pie, bbox_inches="tight")
     plt.close()
   
@@ -556,6 +559,7 @@ def Q1_ParAnnée(request, pk):
     df2.loc[df2['arrondissement']==pk,:].loc[df2['type_declaration']==str(op.decode()),:].groupby(['annee_declaration'])['type_declaration'].value_counts().plot.pie()
     Q1_Niv2_Pie = './static/img/Q1_Niv2_{}_{}_Pie.png'.format(str(op.decode()),pk)
     Q1_Niv2_Pie2 ='/static/img/Q1_Niv2_{}_{}_Pie.png'.format(str(op.decode()),pk)
+    plt.title(f"{request_get['anomalie']} dans l'arrondissement n°{pk}", pad = 50)
     plt.savefig(str(Q1_Niv2_Pie),bbox_inches="tight")
     plt.close()
 
@@ -673,8 +677,8 @@ def Q1_ParAnnée(request, pk):
 
     ax1.legend(pie[0],categories, bbox_to_anchor=(1.45,0.5), loc="center right", fontsize=10, 
               bbox_transform=plt.gcf().transFigure)
-    plt.title(f"Anomalies dans l'arrondissement n°{pk}")
-
+    plt.title(f"Anomalies dans l'arrondissement n°{pk}", pad = 50)
+    
     ax1.axis()  
     plt.savefig(str(Q1_Niv1_Pie),bbox_inches='tight')
     plt.close()
