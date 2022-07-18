@@ -29,6 +29,8 @@ def createDic(max_dict, max_index):
   
   return new_dict
 
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404)
 
 def getMax_Min(df3):
     #Enfin, retourne la valeur maximale de la ligne >> 80575                        >> 

@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from . import views
 
@@ -30,3 +32,5 @@ urlpatterns = [
     path("question3/<str:type>", views.question3, name="question3"),
     path('admin/', admin.site.urls),
 ]
+
+handler404 = "anomaPro.views.page_not_found_view"
