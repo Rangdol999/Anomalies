@@ -59,7 +59,7 @@ body {
   height: 100%;
   object-fit: cover;
 }
-.logoTab h1{
+/* .logoTab h1{
   position: relative;
   top: 30px;
   left: 190px;
@@ -68,7 +68,7 @@ body {
   letter-spacing: 1px;
   -webkit-text-stroke: 1px black;
   text-shadow: -10px 10px 10px black;
-}
+} */
 .logoTab h1 span {
   font-size: 100px;
   color: white ;
