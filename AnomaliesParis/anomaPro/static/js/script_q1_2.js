@@ -3,7 +3,7 @@ console.log("Question 1 niveau 2")
 
 function initMap() {
   console.log("function initMap!")
-  // carte centrÃ©e sur Paris : 
+  // carte centree sur Paris : 
   map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: lat_a, lng: long_a },
     zoom: 12,
@@ -14,7 +14,7 @@ function initMap() {
   markers = []
 
   for (let coord in data_to_map){
-    //itérer sur les anomalies (coordonnées)
+    // itérer sur les anomalies (coordonnées)
     // console.log(data_to_map[coord].split(",")[0])
     my_lat = parseFloat(data_to_map[coord].split(",")[0])
     my_long = parseFloat(data_to_map[coord].split(",")[1])
