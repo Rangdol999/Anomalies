@@ -16,7 +16,7 @@
 <!-- page header title -->
 {%block headerTitle%} 
 <div class="logoTab">
-  <div class="container d-flex justify-content-center flex-row">
+  <div class="container d-flex justify-content-center flex-row my-3">
 
     <div class="img1">
       <img src="../static/image/dic.png" alt="">
@@ -37,46 +37,48 @@
 
 <!-- page header content -->
 {%block headerContent%}
-<div class="navbar navbar-expand-sm sticky-top rounded bounce-in-top" style="z-index: 90;">
-  <div class="container bg-dark bg-opacity-50 p-3">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <!-- drop down one -->
-      <ul class="navbar-nav my-2 navbar-nav-scroll mx-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Anomalie
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <!-- {%for key in list_anomalie%}
-            <li><a class="dropdown-item" href="/anomalie">{{ key }}</a></li>
-            {%endfor%} -->
-            <li><a class="dropdown-item" href="/question3/?anomalie=Objets%20abandonnés"> Objets abandonnés </a></li>
-            <li><a class="dropdown-item" href="/question3/?anomalie=Graffitis,%20tags,%20affiches%20et%20autocollants"> Graffitis, tags, affiches et autocollants </a></li>
-            <li><a class="dropdown-item" href="/question3/?anomalie=Autos,%20motos,%20vélos..."> Autos, motos, vélos... </a></li>
-            <li><a class="dropdown-item" href="/question3/?anomalie=Mobiliers%20urbains"> Mobiliers urbains </a></li>
-            <li><a class="dropdown-item" href="/question3/?anomalie=Propreté"> Propreté </a></li>
-            <li><a class="dropdown-item" href="/question3/?anomalie=Éclairage,%20Électricité"> Éclairage / Électricité </a></li>
-            <li><a class="dropdown-item" href="/question3/?anomalie=Voirie%20et%20espace%20public"> Voirie et espace public </a></li>
-            <li><a class="dropdown-item" href="/question3/?anomalie=Activités%20commerciales%20et%20professionnelles"> Activités commerciales et professionnelles </a></li>
-            <li><a class="dropdown-item" href="/question3/?anomalie=Eau"> Eau </a></li>
-            <li><a class="dropdown-item" href="/question3/?anomalie=Arbres,%20végétaux%20et%20animaux"> Arbres, végétaux et animaux </a></li>
-          </ul>
-        </li>
-        <!-- dropdown two -->
-        <li class="nav-item dropdown mx-5">
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Arrondissement
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            {% for key, value in data.items %} 
-            <li><a class="dropdown-item" href="/question1/{{key}}"> {{key}}e Arrondissement</a></li>
-            {% endfor %}
-          </ul>
-        </li>
-      </ul>
+<div class="container sticky-top bounce-in-top">
+  <div class="navbar navbar-expand-sm rounded" style="z-index: 90;">
+    <div class="container-fluid">
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <!-- drop down one -->
+        <ul class="navbar-nav my-2 navbar-nav-scroll mx-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Anomalie
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <!-- {%for key in list_anomalie%}
+              <li><a class="dropdown-item" href="/anomalie">{{ key }}</a></li>
+              {%endfor%} -->
+              <li><a class="dropdown-item" href="/question3/?anomalie=Objets%20abandonnés"> Objets abandonnés </a></li>
+              <li><a class="dropdown-item" href="/question3/?anomalie=Graffitis,%20tags,%20affiches%20et%20autocollants"> Graffitis, tags, affiches et autocollants </a></li>
+              <li><a class="dropdown-item" href="/question3/?anomalie=Autos,%20motos,%20vélos..."> Autos, motos, vélos... </a></li>
+              <li><a class="dropdown-item" href="/question3/?anomalie=Mobiliers%20urbains"> Mobiliers urbains </a></li>
+              <li><a class="dropdown-item" href="/question3/?anomalie=Propreté"> Propreté </a></li>
+              <li><a class="dropdown-item" href="/question3/?anomalie=Éclairage,%20Électricité"> Éclairage / Électricité </a></li>
+              <li><a class="dropdown-item" href="/question3/?anomalie=Voirie%20et%20espace%20public"> Voirie et espace public </a></li>
+              <li><a class="dropdown-item" href="/question3/?anomalie=Activités%20commerciales%20et%20professionnelles"> Activités commerciales et professionnelles </a></li>
+              <li><a class="dropdown-item" href="/question3/?anomalie=Eau"> Eau </a></li>
+              <li><a class="dropdown-item" href="/question3/?anomalie=Arbres,%20végétaux%20et%20animaux"> Arbres, végétaux et animaux </a></li>
+            </ul>
+          </li>
+          <!-- dropdown two -->
+          <li class="nav-item dropdown mx-5">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Arrondissement
+            </a>
+            <ul class="dropdown-menu menu1" aria-labelledby="navbarScrollingDropdown">
+              {% for key, value in data.items %} 
+              <li><a class="dropdown-item" href="/question1/{{key}}"> {{key}}e Arrondissement</a></li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -86,14 +88,18 @@
 <!-- body content -->
 {%block Content%}
 <div class="container">
-  <div class="containerHead">
+  <div class="mt-5">
     <h4>Recensement</h4>
-    <p>Le Projet dans ma rue a été mis à disposition des parisiens à partir de Mars 2021.</p></br>
+    <div class=" ps-5 mt-3">
+      <p>Le Projet dans ma rue a été mis à disposition des parisiens à partir de Mars 2021.</p> 
 
-    <p>Depuis, l'arrondissement ayant détecté le plus d'anomalies est le {{ max_val.1 }}ème avec près de {{ max_val.0 }} anomalies en {{ max_key }}.</p></br>
-    <p>Tandis que le {{ min_val.1 }}ème arrondissement est celui avec le moins d'anomalie avec {{ min_val.0 }}  détectés en {{ min_key }}.</p>
-    </p>
+      <p>Depuis, l'arrondissement ayant détecté le plus d'anomalies est le <span class="text-danger">{{ max_val.1 }}ème</span>  avec près de <span class="text-primary">{{ max_val.0 }}</span> {{ max_val.0 }} anomalies en <span class="fw-semibold">{{ max_key }}</span>. </p>
+
+      <p>Tandis que le <span class="text-danger">{{ min_val.1 }}ème</span> arrondissement est celui avec le moins d'anomalie avec <span class="text-primary">{{ min_val.0 }}</span>  détectés en <span class="fw-semibold">{{ min_key }}</span>.</p>
+    </div>
   </div>
+</div>
+
 <div class="modelImage h-100" style="z-index: 100;">
   <div class="container d-flex align-items-center justify-content-center">
       <div class="fullImage text-white p-5 w-50 h-50">
@@ -112,19 +118,19 @@
   </div>
   <div class="mainContent text-center position-relative">
     <div class="row">
-      <div class="col1 col-lg-6  mx-auto py-3 rounded text-center bg-secondary bg-opacity-50" data-aos="fade-right" data-aos-duration="1000">
+      <div class="col1 col-lg-6  mx-auto rounded text-center p-0 bg-white" data-aos="fade-right" data-aos-duration="1000">
         <table class="table fs-6 fw-lighter text-white table-hover">
-          <thead>
-            <th>Arrondissement</th>
-            <th>2021</th>
-            <th>2022</th>
+          <thead class="text-center bg-success sticky-top">
+              <th class="pb-3">Arrondissement</th>
+              <th class="pb-3">2021</th>
+              <th class="pb-3">2022</th>
             <!-- <tr>Arrondissement</tr>
               <tr>Nombre_anomalies</tr> -->
             </thead>
-            <tbody class="bg-ligth">
+            <tbody>
               {% if data %}
               {% for key, value in data.items %} 
-                <tr class="text-center text-white">
+                <tr class="text-center text-dark my-3">
                     <td class="p-3 ">{{key}}</td>
                     {% for year,qty in value.items %}
                     <td class="p-3">{{qty}}</td>
@@ -138,7 +144,7 @@
       <div class="col2 col-lg-5  mx-auto my-2 py-3 text-center" data-aos="fade-left" data-aos-duration="1000">
         <h4 class="mb-4 text-dark">Graph(pie) </h4>
             <div class="imageContent shadow-lg" id="image_bg" >
-              <img src = '{{ img.1 }}' alt=raté>
+              <img src = '{{ img.0 }}' alt=raté>
             </div>
       </div>
     </div>
@@ -160,19 +166,17 @@
       <div class="col-lg-5  mx-auto my-2 py-3 text-center text-white" data-aos="flip-down" data-aos-duration="1000">
         <h4 class="mb-4 text-dark">Graph(hist)</h4>
           <div class="imageContent shadow-lg" id="image_bg" >
-            <img src="{{ img.0 }}" class="sshadow-lg border-3 border-success" alt="rate">
+            <img src="{{ img.1 }}" class="sshadow-lg" alt="rate">
           </div>
       </div>
     </div>
   </div>
 
   <div class="clickBtn text-center">
-    <a href="/home" class="btn btn-secondary mb-5 btn-lg" role="button">Go Back</a>
+    <a href="/home" class="btn btn-outline-success mb-5 btn-lg" role="button">Go Back</a>
   </div>
 </div>
 
-
-</div>
 <script>
   var data_to_map = {{data|safe}};
   var lat_a = 48.856615;

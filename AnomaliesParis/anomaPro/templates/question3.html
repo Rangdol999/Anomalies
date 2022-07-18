@@ -13,7 +13,7 @@
 <!-- page header title -->
 {%block headerTitle%} 
 <div class="logoTab">
-  <div class="container d-flex justify-content-center flex-row">
+  <div class="container d-flex justify-content-center flex-row my-4">
 
     <div class="img1">
       <img src="../static/image/dic.png" alt="">
@@ -35,16 +35,16 @@
 <!-- page header content -->
 {%block headerContent%}
 {% if id == 1 %}
-  <div class="container sticky-top bg-secondary mb-4 p-2 bounce-in-top bg-dark bg-opacity-50">
+  <div class="container sticky-top mb-4 p-2 bounce-in-top">
     <div class="navbar navbar-expand-lg rounded">
       <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <!-- drop down one -->
           <ul class="navbar-nav my-2 navbar-nav-scroll mx-auto">
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown mx-2">
               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Anomalie
               </a>
@@ -55,11 +55,11 @@
               </ul>
             </li>
             <!-- dropdown two -->
-            <li class="nav-item dropdown mx-5">
+            <li class="nav-item dropdown mx-2">
               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Arrondissement
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+              <ul class="dropdown-menu menu1" aria-labelledby="navbarScrollingDropdown">
                 <li><a class="dropdown-item" href="/question2/1">1er Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question2/2">2e Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question2/3">3e Arrondissement</a></li>
@@ -80,8 +80,15 @@
                 <li><a class="dropdown-item" href="/question2/18">18e Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question2/19">19e Arrondissement</a></li>
                 <li><a class="dropdown-item" href="/question2/20">20e Arrondissement</a></li>
-                {% elif id == 0 %}
-  <div class="container sticky-top bg-secondary mb-4 p-2 bounce-in-top bg-dark bg-opacity-50">
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% elif id == 0 %}
+  <div class="container sticky-top mb-4 p-2 bounce-in-top">
     <div class="navbar navbar-expand-lg rounded">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,26 +113,26 @@
                 Arrondissement
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                <li><a class="dropdown-item" href="/question3/1/?anomalie={{ anomalie }}">1er Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/2/?anomalie={{ anomalie}}">2e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/3/?anomalie={{ anomalie}}">3e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/4/?anomalie={{ anomalie}}">4e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/5/?anomalie={{ anomalie}}">5e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/6/?anomalie={{ anomalie}}">6e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/7/?anomalie={{ anomalie}}">7e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/8/?anomalie={{ anomalie}}">8e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/9/?anomalie={{ anomalie}}">9e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/11/?anomalie={{ anomalie }}">11e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/12/?anomalie={{ anomalie }}">12e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/10/?anomalie={{ anomalie }}">10e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/13/?anomalie={{ anomalie }}">13e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/14/?anomalie={{ anomalie }}">14e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/15/?anomalie={{ anomalie }}">15e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/16/?anomalie={{ anomalie }}">16e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/17/?anomalie={{ anomalie }}">17e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/18/?anomalie={{ anomalie }}">18e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/19/?anomalie={{ anomalie ]]">19e Arrondissement</a></li>
-                <li><a class="dropdown-item" href="/question3/20/?anomalie={{ anomalie }}">20e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/1/?anomalie={{ anomalie }}">1er Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/2/?anomalie={{ anomalie}}">2e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/3/?anomalie={{ anomalie}}">3e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/4/?anomalie={{ anomalie}}">4e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/5/?anomalie={{ anomalie}}">5e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/6/?anomalie={{ anomalie}}">6e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/7/?anomalie={{ anomalie}}">7e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/8/?anomalie={{ anomalie}}">8e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/9/?anomalie={{ anomalie}}">9e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/11/?anomalie={{ anomalie }}">11e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/12/?anomalie={{ anomalie }}">12e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/10/?anomalie={{ anomalie }}">10e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/13/?anomalie={{ anomalie }}">13e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/14/?anomalie={{ anomalie }}">14e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/15/?anomalie={{ anomalie }}">15e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/16/?anomalie={{ anomalie }}">16e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/17/?anomalie={{ anomalie }}">17e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/18/?anomalie={{ anomalie }}">18e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/19/?anomalie={{ anomalie ]]">19e Arrondissement</a></li>
+                <li><a class="dropdown-item" href="/question2/20/?anomalie={{ anomalie }}">20e Arrondissement</a></li>
                 {% endif %}
               </ul>
             </li>
@@ -140,35 +147,54 @@
 <!-- body content -->
 {%block Content%}
 <div class="container">
-  <div class="containerHead">
+  <div class="p-2">
     {% if id == 1 %}
-    Plus grand nombre d'anomalie signalé pour :</br>
-    {% for key, value in max_dict.items %}
-      {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
-    {% endfor %}
+    <div class="infoAnoma bg-secondary bg-opacity-10 p-3">
+      <h6 class="text-dark fw-bold my-3">Plus grand nombre d'anomalie signalé pour :</h6>
+      {% for key, value in max_dict.items %}
+      <div class="anoma lh-1 ps-3">
+        <p class="fw-lighter"> 
+          <span class="fw-normal">{{ key }} : </span>  <span class="fw-light text-primary"> {{ value.0 }}</span> anomalies signalées dans le <span class="fw-light text-danger">{{value.1}}</span>ème arrondissement
+        </p>
+      </div>
+      {% endfor %}  
+    </div>
 
-  
-
-  Plus petit nombre d'anomalie signalé pour :</br>
-    {% for key, value in min_dict.items %}
-    {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
-  {% endfor %}
-
+    <div class="infoAnoma bg-dark bg-opacity-10 mt-3 p-3">
+      <h6 class="text-dark fw-bold my-3">Plus petit nombre d'anomalie signalé pour :</h6>
+      {% for key, value in min_dict.items %}
+      <div class="anoma lh-1 ps-3">
+        <p class="lh-1  fw-lighter">
+         <span class="fw-normal">{{ key }} : </span> <span class="fw-light text-primary">{{ value.0 }}</span>  anomalies signalées dans le <span class="text-danger">{{ value.1 }}ème</span> arrondissement.
+        </p>
+      </div>
+      {% endfor %}
+    </div>
   </div>
+
   {% elif id == 0 %}
-  <div class="containerHead">
-    Plus grand nombre d'anomalie signalé pour {{anomalie}}:</br>
-    {% for key, value in max_dict.items %}
-      {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
-    {% endfor %}
+  <div class="p-2 mt-3">
+    <div class="infoAnoma">
+      <h6 class="fw-semibold">Plus grand nombre d'anomalie signalé pour {{anomalie}}:</h6>
+      <div class=" ps-3">
+        {% for key, value in max_dict.items %}
+          <span class="fw-semibold"> {{ key }} :</span> <span class="text-primary fw-light ps-3">{{ value.0 }}</span>  anomalies signalées dans le <span class="text-danger fw-light">{{ value.1 }}ème</span> arrondissement </br>
+        {% endfor %}
+      </div>
+    </div>
 
+    <div class="infoAnoma mt-4">
+      <h6 class="fw-semibold">Plus petit nombre d'anomalie signalé pour {{ anomalie }}:</h6>
+      {% for key, value in min_dict.items %}
+        <div class="ps-3">
+          <span class="fw-semibold" >{{ key }} :</span> <span class="text-primary fw-light ps-3"> {{ value.0 }} </span> anomalies signalées dans le <span class="text-danger fw-light">{{ value.1 }}ème </span> arrondissement </br>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}  
+</div>
 
-
-  Plus petit nombre d'anomalie signalé pour {{ anomalie }}:</br>
-    {% for key, value in min_dict.items %}
-    {{ key }} : {{ value.0 }} anomalies signalées dans le {{ value.1 }}ème arrondissement </br>
-  {% endfor %}
-  {% endif %}   
 <div class="modelImage h-100" style="z-index: 999;">
   <div class="container d-flex align-items-center justify-content-center">
       <div class="fullImage text-white w-50 h-50 p-5">
@@ -178,91 +204,103 @@
 </div>
 
 <div class="container mt-5 p-0">
-  <div class="mainContent">
+  <div class="mainContent ">
+    <h3 class="mb-2">Tout les anomalies par l'arrondissement:</h3>
     <div class="row">
-      <div class="col1 col-lg-6 my-2 rounded mx-auto p-0 bg-black bg-opacity-50"  data-aos="zoom-in-left" data-aos-duration="1000">
-        <table class="table fs-6 fw-semibold text-white h-50 table-hover">
-          {% if id == 1 %}
-          <thead>
-            <td> Arrondissement </td>
-            <td> Activités commerciales et professionnelles </td>
-            <td> Arbres, végétaux et animaux </td>
-            <td> Autos, motos, vélos... </td>
-            <td> Eau </td>
-            <td> Graffitis, tags, affiches et autocollants </td>
-            <td> Mobiliers urbains </td>
-            <td> Objets abandonnés </td>
-            <td> Propreté </td>
-            <td> Voirie et espace public </td>
-            <td> Éclairage, Électricité </td>
-          </tdead>
-          <tbody class="bg-ligth">
-                {% for key, value in data.items %} 
-                    <tr class="text-center text-white">
-                    <td class="p-3">{{ key }}</th>
-                    {% for year, qty in value.items %}
-                        <td class="p-3">{{ qty }}</th>
-                    {% endfor %}  
-                    </tr>
-                {% endfor %} 
-              {% elif id == 0 %}
-              <thead>
-              <th> Arrondissement </th>
-              <th> 2021 </th>
-              <th> 2022 </th>
-            </thead>
-            <tbody class="bg-ligth">
+      <div class="col1 col-md-10 my-2 rounded mx-auto p-0"  data-aos="zoom-in-left" data-aos-duration="1000">
+        <div class="">
+          <table class="table text-white table-hover p-0 bg-white">
+            {% if id == 1 %}
+            <thead class="bg-success sticky-top">
+              <td class="pb-4 "> Arrondissement </td>
+              <td> Activités commerciales et professionnelles </td>
+              <td> Arbres, végétaux et animaux </td>
+              <td> Autos, motos, vélos... </td>
+              <td> Eau </td>
+              <td> Graffitis, tags, affiches et autocollants </td>
+              <td> Mobiliers urbains </td>
+              <td> Objets abandonnés </td>
+              <td> Propreté </td>
+              <td> Voirie et espace public </td>
+              <td> Éclairage, Électricité </td>
+            </tdead>
+            <tbody>
+                  {% for key, value in data.items %} 
+                      <tr class="text-center text-dark">
+                      <td class="p-3">{{ key }}</th>
+                      {% for year, qty in value.items %}
+                          <td class="p-3">{{ qty }}</th>
+                      {% endfor %}  
+                      </tr>
+                  {% endfor %} 
+            </tbody>
+                {% elif id == 0 %}
+              <thead class="bg-success sticky-top">
+                <th> Arrondissement </th>
+                <th> 2021 </th>
+                <th> 2022 </th>
+              </thead>
+              <tbody class="bg-ligth">
                 {% for i in data %}
-                <tr class="text-center text-white">
+                <tr class="text-center text-dark">
                   <td class="p-3">{{ i.arrondissement }} </th>
                   <td class="p-3">{{ i.2021 }}  </th>
                     <td class="p-3">{{ i.2022 }} </th>
                   {% endfor %}            
-            {% endif %}           
-          </tbody>
-        </table>
-      </div>
-      <div class="col-lg-5 my-2 py-3 text-center mx-auto" data-aos="zoom-in-right" data-aos-duration="1000">
-        <h4 class="mb-4 text-dark">Graph(pie) </h4>
-            <div class="imageContent shadow-lg" id="image_bg">
-              <img src = '{{ img.1 }}' alt=raté>
-            </div>
+              </tbody>
+              {% endif %}           
+          </table>
+        </div>
       </div>
     </div>
     
      <!-- second row -->
     <div class="row my-5">
-      <div class="col-lg-6  mx-auto py-3 rounded text-center" data-aos="zoom-out-right" data-aos-duration="1000">
-        <h4 class="text-dark mb-4">Map</h4>
-        <!-- <div id="map" data-my_data="" class="imageContent border-1 my-3"> -->
-          <!-- displaying map -->
-        <!-- </div> -->
-
-        <div class="mapouter imagContent">
-          <div class="gmap_canvas overflow-auto">
-            <iframe width="600" height="450" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
-            </iframe><a href="https://123movies-to.org"></a>
+      <div class="col-lg-5 my-2 py-3 text-center mx-auto" data-aos="zoom-in-right" data-aos-duration="1000">
+        <div class="p-2">
+          <h4 class="mb-4 text-dark">Graph(pie) </h4>
+          <div class="imageContent shadow-lg" id="image_bg">
+            <img src = '{{ img.1 }}' alt=raté>
           </div>
         </div>
-
       </div>
       <div class="col-lg-5  mx-auto my-2 py-3 text-center text-white" data-aos="zoom-out-left" data-aos-duration="1000">
-        <h4 class="mb-4 text-dark">Graph(hist)</h4>
+        <div class="p-2">
+          <h4 class="mb-4 text-dark">Graph(hist)</h4>
           <div class="imageContent shadow-lg" id="image_bg">
             <img src="{{ img.0 }}" class="sshadow-lg border-3 border-success" alt="rate">
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- map -->
+    <div class="row">
+      <div class="col mx-0 py-3 rounded" data-aos="zoom-out-right" data-aos-duration="1000">
+        <div class="p-2">
+          <h4 class="text-dark mb-4">Map</h4>
+          <!-- <div id="map" data-my_data="" class="imageContent border-1 my-3"> -->
+            <!-- displaying map -->
+          <!-- </div> -->
+  
+          <div class="mapouter imagContent">
+            <div class="gmap_canvas overflow-auto">
+              <iframe width="600" height="450" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+              </iframe><a href="https://123movies-to.org"></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-
-  <div class="clickBtn text-center mb-4">
-    <a href="/home" class="btn btn-secondary my-3 btn-lg" role="button">Go Back</a>
+  <div class="clickBtn text-center my-5">
+    <a href="/home" class="btn btn-outline-success my-3 btn-lg" role="button">Go Back</a>
   </div>
 
-<!-- </div>
-<script
+</div>
+<!-- <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6lyRej85oh6sIiC_xmwx9jjhLdXj9OEk&callback=initMap&v=weekly"
       defer>
     </script> -->

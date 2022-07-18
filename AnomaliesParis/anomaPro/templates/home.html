@@ -4,16 +4,20 @@
 
 <!-- page header -->
 {%block headerTitle%}
-<div class="container-fluid contentHead">
-  <div class="logoTab">
-    <div class="container" data-aos="zoom-out-right" data-aos-duration="1000">
-      <div class="logo">
-        <a href="/" >
-          <img src="../static/image/paris.png" alt="">
-        </a>
+<div class="logoTab contentHead">
+  <div class="container" data-aos="zoom-out-right" data-aos-duration="1000">
+    <div class="row">
+      <div class="d-flex flex-row text-center justify-content-center align-items-center">
+        <div class="logo bg-danger">
+          <a href="/" >
+            <img src="../static/image/paris.png" alt="">
+          </a>
+        </div>
+        <div class="text-center">
+          <h1 class="bounce-in-top fw-bolder"><span>A</span>nomalie Paris</h1>
+        </div>
       </div>
-      <h1 class="bounce-in-top">Anomalie Paris</h1> 
-    </div>
+    </div> 
   </div>
 </div>
 {%endblock%}
@@ -23,23 +27,23 @@
   <div class="homeContent">
     <div class="container">
       <div class="row">
-        <div class="colHome col-md-3 col-lg-3 mx-auto mt-5 p-3 rounded  slide-in-elliptic-top-fwd bg-success bg-opacity-75 text-white text-center">
+        <div class="colHome col-md-3 col-lg-3 mx-auto mt-5 p-3 rounded  slide-in-elliptic-top-fwd bg-opacity-75 text-bg-dark text-center">
           <p>
-            Quelles sont les années pour lesquelles il y a le plus / le moins d'anomalies signalées par arrondissement ?
+            Quelles sont les années pour lesquelles il y a le plus / le moins d’anomalies signalées par arrondissement ?
           </p>
           <a href="/question1" class="btn btn-outline-light" role="button">One</a>
         </div>
   
-        <div class="colHome col-md-3 col-lg-3 mx-auto mt-5 p-3 rounded slide-in-elliptic-top-fwd bg-success bg-opacity-75 text-white text-center">
+        <div class="colHome col-md-3 col-lg-3 mx-auto mt-5 p-3 rounded slide-in-elliptic-top-fwd bg-opacity-75 text-bg-dark text-center">
           <p>
-            Quels sont les mois pour lesquels il y a le plus / le moins d'anomalies signalées, par type d'anomalie ?
+            Quels sont les mois pour lesquels il y a le plus / le moins d’anomalies signalées, par type d’anomalie ?
           </p>
           <a href="/question2" class="btn btn-outline-light" role="button">Two</a>
         </div>
   
-        <div class="colHome col-md-3 col-lg-3 mx-auto mt-3 mt-5 p-3 rounded slide-in-elliptic-top-fwd bg-success bg-opacity-75 text-white text-center">
+        <div class="colHome col-md-3 col-lg-3 mx-auto mt-3 mt-5 p-3 rounded slide-in-elliptic-top-fwd bg-opacity-75  text-bg-dark text-center">
           <p>
-            Quel(s) arrondissement(s) comportent le plus / le moins d'anomalies signalées, par type d'anomalies ?
+            Quel(s) arrondissement(s) comportent le plus / le moins d’anomalies signalées, par type d’anomalies ?
           </p>
           <a href="/question3" class="btn btn-outline-light" role="button">Three</a>
         </div>
