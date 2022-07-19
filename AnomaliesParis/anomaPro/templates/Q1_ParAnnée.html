@@ -7,7 +7,7 @@
 {% block headerTitle%}
 <div class="logoTab">
   <div class="container d-flex align-items-center justify-content-center flex-row my-3">
-    <h2>Aomalie</h2>
+    <h2>Anomalie</h2>
     <div class="logo mx-3 border-5 border-white">
       <a href="/">
         <img src="https://cdn.dribbble.com/users/2524031/screenshots/13961394/media/fe0cbee48954b7335a47e539c3e2579a.png?compress=1&resize=1000x750&vertical=top"  alt="">
@@ -230,10 +230,12 @@
       </div>
       <div class="row mt-5">
         <div class="col-lg-9 mx-auto text-center">
+          {% if context.id == 0 %}
           <h4 class="mb-3 fw-semibold">Map</h4>
           <div id="map" data-my_data="" class="imageContent my-3 shadow-lg">
             displaying map
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -245,16 +247,16 @@
 </div>
 
   
-{% if context.id == 0 %}
 <script>
   var data_to_map = {{context.data_to_map|safe}};
-  var lat_a = 48.856615;
-  var long_a = 2.342324;
 </script>
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6lyRej85oh6sIiC_xmwx9jjhLdXj9OEk&callback=initMap&v=weekly" defer></script> -->
+<script src="/static/js/arrondissements.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6lyRej85oh6sIiC_xmwx9jjhLdXj9OEk&callback=initMap&v=weekly" defer></script>
+{% if context.id == 0 %}
 <script src="/static/js/script_q1_2.js"></script>
+{% else %}
+<script src="/static/js/script_q1_1.js"></script>
 {% endif %}
-<script src="/static/js/script_q1.js"></script>
 
 {%endblock%}
 

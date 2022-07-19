@@ -461,7 +461,7 @@ def question3(request):
     inner_colors = cmap(np.arange(10)*4)
 
     # couleurs type_declaration : 
-    categories = df2['type_declaration'].unique()
+    categories = df_q3.index
     n = len(categories)
     cmap = plt.get_cmap('twilight')
     # cmap = plt.get_cmap('winter')
@@ -649,7 +649,7 @@ def Q1_ParAnnée(request, pk):
     inner_colors = cmap(np.arange(10)*4)
 
     # couleurs type_declaration : 
-    categories = df2['type_declaration'].unique()
+    categories = df_q1_1.index
     n = len(categories)
     cmap = plt.get_cmap('twilight')
     # cmap = plt.get_cmap('winter')
@@ -660,7 +660,7 @@ def Q1_ParAnnée(request, pk):
     pie  = ax1.pie(type_decalaration_values
         ,colors = outer_colors
         # raccourcir les etiquettes aux premiers caractères uniquement, afficher seulement pour les max
-        ,labels = [(f"{label[:7]}..." if type_declaration_max[i] else "") for i , label in enumerate(type_declaration)]
+        ,labels = [(f"{label[:15]}..." if type_declaration_max[i] else "") for i , label in enumerate(type_declaration)]
         ,rotatelabels =True
         ,explode= explode
         ,labeldistance = 0.6
@@ -685,14 +685,9 @@ def Q1_ParAnnée(request, pk):
 
 
     ####################################################################################
-    #BAR CHART -  Nb d'Anomalies par type dans l'arrondissement selectionné par le client
-    # Definir les couleurs 
-    # couleurs type_declaration : 
-    categories = df2['type_declaration'].unique()
-    n = len(categories)
-    cmap = plt.get_cmap('twilight')
-    # cmap = plt.get_cmap('winter')
-    outer_colors = [cmap(i/n) for i in range(0,n)]
+    # BAR CHART -  Nb d'Anomalies par type dans l'arrondissement selectionné par le client
+    # Definir les couleurs : idem pie chart.
+    #
 
     ax = df2.loc[df2['arrondissement']==pk,:].groupby(['annee_declaration'])['type_declaration'].value_counts().unstack().plot.bar(
         stacked=True
