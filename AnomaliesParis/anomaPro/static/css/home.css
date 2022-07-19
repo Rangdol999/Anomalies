@@ -25,12 +25,6 @@ body {
   opacity: 0.5;
   z-index: -1;
 }
-.logoTab .container{
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  padding: 20px;
-}
 .logoTab .logo {
   width: 70px;
   height: 70px;
@@ -50,9 +44,11 @@ body {
   height: 100%;
   border-radius: 50%;
 }
-.logoTab .img1, .logoTab .img2 {
+/* .logoTab .img1, .logoTab .img2 {
   height: 50px;
-  width: 300px;
+} */
+.col-sm-2 {
+  height: 50px;
 }
 .logoTab .img1 img, .logoTab .img2 img {
   width: 100%;
@@ -164,11 +160,6 @@ thead {
 tr {
   line-height: 1rem;
 }
-/* tbody tr th {
-  color: white;
-  position: relative;
-  top:30px;
-} */
 td ul li {
   color: white;
   padding: 5px;
@@ -206,7 +197,6 @@ td ul li {
 .containerHead p {
   margin: 20px;
 }
-
 
 /* full Image */
 .modelImage {
